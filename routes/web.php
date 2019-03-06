@@ -20,4 +20,6 @@ Route::post('promotions/suppPromo','PromotionController@suppPromo');
 Route::post('promotions/editPromo','PromotionController@editPromo');
 Route::get('promotions/{id}','PromotionController@getGroupes');
 Route::post('promotions/groupes/ajoutGroupe','GroupeController@import');
+Route::post('promotions/groupes/suppGroupe','GroupeController@suppGroupe');
+Route::post('promotions/groupes/editGroupe','GroupeController@editGroupe');
 
