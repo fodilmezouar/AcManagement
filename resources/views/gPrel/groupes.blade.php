@@ -3,6 +3,7 @@
 <!--------------------
           START - Breadcrumbs
           -------------------->
+          <input type="hidden" name="" id="promoId" value="{{$idPromo}}">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="index.html">Home</a>
@@ -30,20 +31,26 @@
                   <div class="form-desc">
                   </div>
                   <!-- promotions -->
-                  <div class="row" id="contentPromos">
+                  <div class="row" id="contentGroupes">
+                      @foreach($groupes as $groupe)
                         <div class="col-sm-3 col-xxxl-3">
                           <a class="element-box el-tablo" href="" style="background-color: #e1e1e1;">
+                            <!--
                             <div class="label" id="annee">
                                  zea
                             </div>
+                             -->
                             <div class="value" id="libelle">
-                              coco
+                              {{$groupe->libelle}}
                             </div>
+                            <!--
                             <div class="trending trending-down-basic">
                               <span id="filiere">bombof</span>
                             </div>
+                             -->
                           </a>
                         </div>
+                        @endforeach
                    </div>
                    <!-- promotions -->
                 </div>
@@ -66,10 +73,10 @@
        <form id="formGroupes" method="POST" enctype="multipart/form-data">
           <div class="modal-body">
               <div class="form-group">
-                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModal">
+                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModal" name="libelleModal">
               </div>
               <div class="form-group">
-                <label for="libelleModal"> Fichier Excel</label><input class="form-control" type="file" id="fichier">
+                <label for="libelleModal"> Fichier Excel</label><input class="form-control" type="file" id="fichier" name="fichier">
               </div>
           </div>
           <div class="modal-footer">
@@ -88,5 +95,8 @@
       </div>
       <div class="display-type"></div>
     </div>
+@endsection
+@section('scripts')
+    <script src="{{asset('js/groupes.js')}}"></script>
 @endsection
     
