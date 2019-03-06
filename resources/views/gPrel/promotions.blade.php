@@ -32,7 +32,10 @@
                   <!-- promotions -->
                   <div class="row" id="contentPromos">
                     @foreach($promos as $promo)
+
                         <div class="col-sm-3 col-xxxl-3 block" role="{{$promo->id}}">
+                          <input type="hidden" id="{{$promo->id}}" value="{{$promo->filiere_id}}">
+                    <input type="hidden" id="{{$promo->id}}5" value="{{$promo->niveau}}">
                           <div>
                             <button aria-label="Close" class="close supp" type="button" data-target="#suppModal" data-toggle="modal" role="{{$promo->id}}"><i class="os-icon os-icon-ui-15"></i></button>
                             <button aria-label="Close" class="close edit" type="button" data-target="#editModal" data-toggle="modal" role="{{$promo->id}}"><i class="os-icon os-icon-ui-49"></i></button>
@@ -105,7 +108,7 @@
       </div>
     </div>
     <!-- end modal add promo -->
-     <!-- modal add promotion-->
+     <!-- modal supp promotion-->
      <input type="hidden" id="promoIdInput">
     <div aria-labelledby="exampleModalLabel" class="modal fade" id="suppModal" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
       <div class="modal-dialog" role="document">

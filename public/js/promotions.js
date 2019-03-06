@@ -70,11 +70,14 @@ $("#formPromosSupp").on('submit',function(e) {
                   }
               });
 });
-$('.supp').on('click',function(){
+$('#contentPromos').on('click','.supp',function(){
   $('#promoIdInput').val($(this).attr('role'));
 });
-$('.edit').on('click',function(){
+$('#contentPromos').on('click','.edit',function(){
   $('#promoIdInput').val($(this).attr('role'));
+  $('#libelleModalEdit').val($('.block[role="'+$('#promoIdInput').val()+'"] #libelle').html().trim());
+  $('#filiereModalEdit').val($('input[id="'+$('#promoIdInput').val()+'"').val());
+  $('#niveauModalEdit').val($('input[id="'+$('#promoIdInput').val()+'5"').val());
 });
 
 /**edit promotion**/

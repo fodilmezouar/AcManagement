@@ -16,7 +16,7 @@ class PromotionController extends Controller
     }
     public function getPromos()
     {
-        $promos = Promotion::all();
+        $promos = Promotion::orderBy('id')->get();
         $filieres = Filiere::all();
         return view('gPrel.promotions')->with([
             'promos' => $promos,'filieres' => $filieres
@@ -29,10 +29,12 @@ class PromotionController extends Controller
            $promo->annee = date("Y");
            $promo->filiere_id = $request->input('filiereId');
            $promo->save();
-           $fragment = "<div class='col-sm-3 col-xxxl-3'>
+           $fragment = "<div class='col-sm-3 col-xxxl-3 block' role='".$promo->id."'>
+                        <input type='hidden' id='".$promo->id."' value='".$promo->filiere_id."'>
+                    <input type='hidden' id='".$promo->id."5' value='".$promo->niveau."'>
                         <div>
-                            <button aria-label='Close' class='close' type='button'><i class='os-icon os-icon-ui-15'></i></button>
-                            <button aria-label='Close' class='close' type='button'><i class='os-icon os-icon-ui-49'></i></button>
+                            <button aria-label='Close' class='close supp' type='button' role='".$promo->id."' data-target='#suppModal' data-toggle='modal'><i class='os-icon os-icon-ui-15'></i></button>
+                            <button aria-label='Close' class='close edit' type='button' role='".$promo->id."' data-target='#editModal' data-toggle='modal'><i class='os-icon os-icon-ui-49'></i></button>
                           </div>
                           <a class='element-box el-tablo' href='promotions/".$promo->id."' style='background-color: #e1e1e1;'>
                             <div class='label' id='annee'>
