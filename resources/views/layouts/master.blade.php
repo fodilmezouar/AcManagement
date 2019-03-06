@@ -44,7 +44,7 @@
             <div class="ssg-content">
               <div class="ssg-items ssg-items-boxed">
                 <a class="ssg-item" href="users_profile_big.html">
-                  <div class="item-media" style="background-image: url(img/company6.png)"></div>
+                  <div class="item-media" style="background-image: url(img/company6.png"></div>
                   <div class="item-name">
                     Integ<span>ration</span> with API
                   </div>
@@ -682,6 +682,6 @@
     <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
     <script src="{{asset('js/demo_customizer.js?version=4.4.0')}}"></script>
     <script src="{{asset('js/main.js?version=4.4.0')}}"></script>
-    <script src="{{asset('js/groupes.js')}}"></script>
+    @yield('scripts')
   </body>
 </html>
