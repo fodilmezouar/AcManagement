@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('enseignant', function () {
+    return view('gPrel.enseignant');
 });
 Route::get('promotions','PromotionController@getPromos');
 Route::post('promotions/ajoutPromo','PromotionController@ajoutPromo');
@@ -20,4 +20,9 @@ Route::post('promotions/suppPromo','PromotionController@suppPromo');
 Route::post('promotions/editPromo','PromotionController@editPromo');
 Route::get('promotions/{id}','PromotionController@getGroupes');
 Route::post('promotions/groupes/ajoutGroupe','GroupeController@import');
+
+Route::get('getEnseignant','EnseignantController@getEnseignant');
+Route::post('enseignant/createEnseignant','EnseignantController@createEnseignant');
+Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
+Route::post('editEnseignant/{id}','EnseignantController@editEnseignant');
 

@@ -87,10 +87,7 @@
                                         <label for=""> Email address</label><input name="email" id="email" class="form-control" data-error="Your email address is invalid" placeholder="Enter email" required="required" type="email">
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for=""> pseudonym</label><input name="pseudonym" id="pseudo" class="form-control" data-error="Inserer votre nom" placeholder="Enter pseudonym" required="required" type="text">
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
+
                                     <div class="form-group">
                                         <label for=""> Image</label><input name="image" id="image" class="form-control" data-error="Inserer votre image" placeholder="Enter image"  type="file" accept=".png, .jpg, .jpeg">
                                         <div class="help-block form-text with-errors form-control-feedback"></div>
@@ -112,20 +109,15 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <div class="form-group">
-                                                <label for=""> Date De Naissance</label><input name="dateNais" id="dateNais" class="single-daterange form-control" placeholder="Date of birth" type="text" value="04/12/1978">
+                                                <label for=""> Date De Naissance</label><input name="dateNais" id="datenais" class="single-daterange form-control" placeholder="Date of birth" type="text" value="04/12/1978">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for=""> mot de passe</label><input name="password" class="form-control" id="pass" data-error="Inserer votre password" placeholder="Enter le mot de passe" required="required" type="password">
-                                        <div class="help-block form-text with-errors form-control-feedback"></div>
-                                    </div>
-
 
 
                                 </fieldset>
                                 <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" id="createEnseigantbtn" type="button">Ajouter</button>
+                                    <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" id="createEnseigantbtn" type="submit">Ajouter</button>
                                 </div>
                             </form>
                         </div>
