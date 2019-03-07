@@ -35,3 +35,7 @@ Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
 Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
 
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
