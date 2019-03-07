@@ -38,9 +38,23 @@ $("#formGroupes").unbind('submit').bind('submit', function (e) {
 $('#contentGroupes').on('click','.supp',function(){
   $('#groupIdInput').val($(this).attr('role'));
 });
+$('#contentModules').on('click','.suppModule',function(){
+  $('#moduleIdInput').val($(this).attr('role'));
+});
+$('#contentModules').on('click','.attModule',function(){
+  $('#attModuleIdInput').val($(this).attr('role'));
+  location.href="modules/attModule/"+$('#attModuleIdInput').val();
+});
 $('#contentGroupes').on('click','.edit',function(){
   $('#groupIdInput').val($(this).attr('role'));
   $('#libelleModalEdit').val($('.block[role="'+$('#groupIdInput').val()+'"] #libelle').html().trim());
+  $('.form-group').removeClass('has-error');
+  $('.form-group').removeClass('has-danger');
+  $(".help-block").remove();
+});
+$('#contentModules').on('click','.editModule',function(){
+  $('#moduleIdInput').val($(this).attr('role'));
+  $('#libelleModalEditModule').val($('.blockModule[role="'+$('#moduleIdInput').val()+'"] #libelleModule').html().trim());
   $('.form-group').removeClass('has-error');
   $('.form-group').removeClass('has-danger');
   $(".help-block").remove();
@@ -67,7 +81,28 @@ $("#formGroupSupp").on('submit',function(e) {
                   }
               });
 });
-
+/* Suppression d'un module */
+$("#formModuleSupp").on('submit',function(e) {
+    e.preventDefault();
+    $.ajaxSetup({
+      headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      } 
+    });
+    var moduleId = $('#moduleIdInput').val();
+    $.ajax({
+                  url : "modules/suppModule",
+                  type: "POST",
+                  data: {
+                    "moduleId":moduleId
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                    $('.blockModule[role="'+moduleId+'"]').remove();
+                    $('#suppModuleModal').modal('hide');
+                  }
+              });
+});
 /**edit groupe**/
 $("#formGroupesEdit").on('submit',function(e) {
     e.preventDefault();
@@ -126,3 +161,85 @@ $('.floatChoose').on('click',function(){
      $('#zombro').attr('data-target','#exampleModal1');
    }
 });
+
+$("#formModules").unbind('submit').bind('submit', function (e) {
+    e.preventDefault();
+    $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  } 
+});
+    var libelle = $("#libelleModalModule").val();
+    var promoId = $("#promoId").val();
+    var form = $(this);
+                $("#ajoutModule").button('loading');
+                $.ajax({
+                  url : "modules/ajoutModule",
+                  type: "POST",
+                  data:{
+                    "libelle":libelle,
+                    "promoId":promoId
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                   $("#ajoutModule").button('reset');
+                     if(response.success == true) {
+                          $('#contentModules').append(response.messages);
+                          $("#formModules")[0].reset();
+                           //alert(response.messages);
+                    }  // if
+                    else {
+                      alert('error');
+                    }
+                  }
+              });
+          
+  });
+
+/**edit groupe**/
+$("#formModulesEdit").on('submit',function(e) {
+    e.preventDefault();
+    $.ajaxSetup({
+  headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  } 
+});
+    var libelle = $("#libelleModalEditModule").val();
+    if(!libelle)
+       {
+        $('.form-group').removeClass('has-error');
+        $('.form-group').removeClass('has-danger');
+        $(".help-block").remove();
+       var aAjoute = '<div class="help-block form-text text-muted form-control-feedback"> Enter Libelle</div>';
+        $('#libelleModalEditModule').closest('.form-group').addClass('has-error');
+        $('#libelleModalEditModule').closest('.form-group').addClass('has-danger');
+        $("#libelleModalEditModule").after(aAjoute);
+       }
+    else{
+    var moduleId = $('#moduleIdInput').val();
+    var form = $(this);
+                $("#editGroupe").button('loading');
+                $.ajax({
+                  url : "modules/editModule",
+                  type: "POST",
+                  data: {
+                    "libelle":libelle,
+                    "moduleId":moduleId
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                   $("#editModule").button('reset');
+                     if(response.success == true) {
+                           $('.form-group').removeClass('has-error');
+                           $('.form-group').removeClass('has-danger');
+                           $(".help-block").remove();
+                           $("#formModulesEdit")[0].reset();
+                           $('.blockModule[role="'+moduleId+'"] #libelleModule').html(libelle);
+                    }  // if
+                    else {
+                      alert('error');
+                    }
+                  }
+              });
+      }
+  });
