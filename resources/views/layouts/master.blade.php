@@ -672,6 +672,7 @@
       <script src="{{asset('bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
       <script src="{{asset('bower_components/dropzone/dist/dropzone.js')}}"></script>
       <script src="{{asset('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
+      <script src="{{asset('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
       <script src="{{asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
       <script src="{{asset('bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js')}}"></script>
       <script src="{{asset('bower_components/tether/dist/js/tether.min.js')}}"></script>

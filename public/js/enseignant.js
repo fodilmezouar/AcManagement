@@ -1,29 +1,33 @@
 var refTmp;
 
 
-/*function removeMat($idMat){
-    $('#body-removeRoom').attr('role',$idMat);
+function removeEns($idEns){
+    $('#body-removeEns').attr('role',$idEns);
     return true;
 }
-function editMat($idMat){
+function editEns($idEns){
 
 
-    $('#body-editRoom').attr('role',$idMat);
-    $.getJSON('getInformationRoom/'+$idMat, function (data) {
+    $('#body-editEnse').attr('role',$idEns);
+    $.getJSON('getInformationEnseignant/'+$idEns, function (data) {
         // Iterate the groups first.
-        var ref= data.data[0][0];
-        refTmp=ref;
-        var lits= data.data[0][1];
-        var etage= data.data[0][2];
-        var prix= data.data[0][3];
-        $("#RefRoomEdit").val(ref);
-        $("#numLiEdit").val(lits);
-        $("#etageEdit").val(etage);
-        $("#prixEdit").val(prix);
+        var nom= data.data[0][0];
+       // refTmp=ref;
+        var prenom= data.data[0][1];
+        var email= data.data[0][2];
+        var image= data.data[0][3];
+        var grade= data.data[0][4];
+        var dateNaissance= data.data[0][5];
+        $("#nameEdit").val(nom);
+        $("#prenomEdit").val(prenom);
+        $("#emailEdit").val(email);
+
+        $("#gradeEdit").val(grade);
+        $("#dateNaisEdit").val(dateNaissance);
     });
 
 }
-*/
+
 
 
 
@@ -33,10 +37,19 @@ function editMat($idMat){
 $(function () {
 
     var manageEns = $("#tableEnseignant").DataTable({
-        searching: true,
-        buttons: ['copy', 'excel', 'pdf'],
-
-
+        dom: 'Bfrtip',
+        buttons: [
+            {
+                extend: 'excel',
+                text: 'Export excel',
+                className: 'exportExcel',
+                filename: 'Export excel',
+                exportOptions: {
+                    modifier: {
+                        page: 'all'
+                    }
+                }
+            }],
         destroy: true,
         'ajax': 'getEnseignant',
         'order': []
@@ -91,19 +104,20 @@ $(function () {
         return false;
     });
 
-  $('#removeMat').on('click',function(e){
-        var idRoom = $("#body-removeRoom").attr('role');
+  $('#removeEns').on('click',function(e){
+        var idEns = $("#body-removeEns").attr('role');
 
         $.ajax({
-            url: 'deleteRoom',
+            url: 'deleteEnseignant',
             type: 'post',
             dataType: 'json',
-            data: {"_token": $('meta[name="csrf-token"]').attr('content'),"idRoom":idRoom},
+            data: {"_token": $('meta[name="csrf-token"]').attr('content'),"idEnseignant":idEns},
             success:function(response) {
 
-                $('#removeMatModal').modal('hide');
-                manageMat.ajax.reload(null, false);
-                $('.remove-messagesMat').html('<div class="alert alert-success">'+
+                $('#removeEnsModal').modal('hide');
+                console.log(response);
+                manageEns.ajax.reload(null, false);
+                $('.remove-messagesEns').html('<div class="alert alert-success">'+
                     '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
                     '<strong><i class="fa fa-check"></i></strong> Suppression Effectuée</div>');
 
@@ -118,36 +132,34 @@ $(function () {
 
 
 
-    $('#editRoomBtn').on('click',function(e){
-        var idMatEdit = $("#body-editRoom").attr('role');
-        var RefMatEdit = $("#RefRoomEdit").val().toUpperCase();
-        var NumLitEdit = $("#numLiEdit").val();
-        var etageEdit = $("#etageEdit").val();
-        var prixEdit = $("#prixEdit").val();
-        var RefUniqueEdit = $('#tableRoom td').filter(function (){
-            return $.trim($(this).text()) == RefMatEdit;});
+    $('#formEdit').on('submit',function(e){
+        e.preventDefault();
+        console.log("hey");
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
 
-        if(RefMatEdit == ""){
-            $("#RefRoomEdit").after('<p class="text-danger">Veuillez saisir la référence</p>');
-            $('#RefRoomEdit').closest('.form-group').addClass('has-error');
-        }
-        else if(RefUniqueEdit.length>0 && refTmp != RefMatEdit){
-            $("#RefRoomEdit").after('<p class="text-danger">Référence déja existe</p>');
-            $('#RefRoomEdit').closest('.form-group').addClass('has-error');
-            return false;
-        }
-        else{
+        });
+        var idEns = $('#body-editEnse').attr('role');
+
+
+
+            var formData = new FormData(this);
+
             $.ajax({
-                url: 'editRoom/'+idMatEdit,
-                type: 'post',
+                url: 'enseignant/editEnseignant/'+idEns,
+                type: 'POST',
+                processData: false,
+                contentType: false,
+                data: formData,
                 dataType: 'json',
-                data: {"_token": $('meta[name="csrf-token"]').attr('content'),"refRoomEdit":RefMatEdit,"numEdit":NumLitEdit,"etageEdit":etageEdit,"prixEdit":prixEdit},
                 success:function(response) {
-
-                    manageMat.ajax.reload(null, false);
+                console.log(response);
+                    manageEns.ajax.reload(null, false);
                     $(".text-danger").remove();
                     $('.form-group').removeClass('has-error').removeClass('has-success');
-                    $('#edit-room-messages').html('<div class="alert alert-success">'+
+                    $('#edit-ens-messages').html('<div class="alert alert-success">'+
                         '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
                         '<strong><i class="fa fa-check"></i></strong> '+ response.message +
                         '</div>');
@@ -158,7 +170,7 @@ $(function () {
                     }); // /.alert
                 }
             });
-        }
+
         return false;
     });
 
@@ -166,3 +178,4 @@ $(function () {
 
 
 });
+
