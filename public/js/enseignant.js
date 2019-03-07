@@ -43,11 +43,13 @@ $(function () {
                 extend: 'excel',
                 text: 'Export excel',
                 className: 'exportExcel',
-                filename: 'Export excel',
+                filename: 'listeExcel',
                 exportOptions: {
                     modifier: {
-                        page: 'all'
-                    }
+                        page: 'all',
+
+                    },
+                    columns: [ 0, 1, 2, 3, 4 ]
                 }
             }],
         destroy: true,

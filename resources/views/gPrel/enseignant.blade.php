@@ -26,14 +26,7 @@
                     <h5 class="form-header">
                         Enseignants
                     </h5>
-                    <div class="row">
-
-                        <div class="col-sm-6">
-                            <button class="mr-2 mb-4 btn btn-outline-info exportExcel"  type="button">Download listes</button>
-
-                        </div>
-
-                    </div>
+      
 
                     <div class="table-responsive">
                         <div class="remove-messagesEns"></div>
@@ -232,4 +225,11 @@
 @endsection
 @section('scripts')
     <script src="{{asset('js/enseignant.js')}}"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.print.min.js"></script>
 @endsection
