@@ -12,6 +12,7 @@
   <link href="favicon.png" rel="shortcut icon">
   <link href="apple-touch-icon.png" rel="apple-touch-icon">
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
+      <link href="{{asset('icon_fonts_assets/feather/style.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">

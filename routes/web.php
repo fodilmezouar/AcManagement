@@ -23,6 +23,11 @@ Route::post('promotions/groupes/ajoutGroupe','GroupeController@import');
 Route::post('promotions/groupes/suppGroupe','GroupeController@suppGroupe');
 Route::post('promotions/groupes/editGroupe','GroupeController@editGroupe');
 Route::get('promotions/groupes/liste/{idGroupe}','GroupeController@getStudents');
+Route::post('promotions/modules/ajoutModule','ModuleController@addModule');
+Route::post('promotions/modules/suppModule','ModuleController@suppModule');
+Route::post('promotions/modules/editModule','ModuleController@editModule');
+Route::get('promotions/modules/attModule/{idModule}','ModuleController@attacherModule');
+Route::post('promotions/modules/attModule/valide/yes','ModuleController@validerAttachement');
 
 Route::get('getEnseignant','EnseignantController@getEnseignant');
 Route::post('enseignant/createEnseignant','EnseignantController@createEnseignant');

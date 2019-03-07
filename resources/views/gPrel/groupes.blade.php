@@ -4,6 +4,7 @@
           START - Breadcrumbs
           -------------------->
           <input type="hidden" name="" id="promoId" value="{{$idPromo}}">
+          <input type="hidden" name="" id="ensIdInput">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <a href="index.html">Home</a>
@@ -78,17 +79,60 @@
                             </div>
                           </div>
                           <div class="tab-pane" id="tab_modules">
-                               <div class="col-sm-3 col-xxxl-3 block" role="{{$groupe->id}}">
+                            <div class="row" id="contentModules">
+                              @foreach($modules as $module)
+                               <div class="col-sm-3 col-xxxl-3 blockModule" role="{{$module->id}}">
                           <div>
-                            <button aria-label="Close" class="close supp" type="button" data-target="#suppGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-15"></i></button>
-                            <button aria-label="Close" class="close edit" type="button" data-target="#editGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-49"></i></button>
+                            <button aria-label="Close" class="close suppModule" type="button" data-target="#suppModuleModal" data-toggle="modal" role="{{$module->id}}"><i class="os-icon os-icon-ui-15"></i></button>
+                            <button aria-label="Close" class="close editModule" type="button" data-target="#editModuleModal" data-toggle="modal" role="{{$module->id}}"><i class="os-icon os-icon-ui-49"></i></button>
+                            <button aria-label="Close" class="close attModule" type="button" data-target="#attModuleModal" data-toggle="modal" role="{{$module->id}}"><i class="icon-feather-arrow-up-right"></i></button>
                           </div>
-                          <a class="element-box el-tablo" href="{{url('promotions/groupes/liste/'.$groupe->id)}}" style="background-color: #e1e1e1;">
-                            <div class="value" id="libelle">
-                              {{$groupe->libelle}}
+                          <a class="element-box el-tablo" href="" style="background-color: #e1e1e1;">
+                            <div class="value" id="libelleModule">
+                              {{$module->libelle}}
                             </div>
                           </a>
                         </div>
+                        @endforeach
+                        <div class="users-list-w">
+                    <div class="user-w with-status status-green">
+                      <div class="user-avatar-w">
+                        <div class="user-avatar">
+                          <img alt="" src="{{asset('img/avatar1.jpg')}}">
+                        </div>
+                      </div>
+                      <div class="user-name">
+                        <h6 class="user-title">
+                          John Mayers
+                        </h6>
+                        <div class="user-role">
+                          Account Manager
+                        </div>
+                      </div>
+                      <a class="user-action" href="users_profile_small.html">
+                        <div class="os-icon os-icon-email-forward"></div>
+                      </a>
+                    </div>
+                    <div class="user-w with-status status-green">
+                      <div class="user-avatar-w">
+                        <div class="user-avatar">
+                          <img alt="" src="{{asset('img/avatar2.jpg')}}">
+                        </div>
+                      </div>
+                      <div class="user-name">
+                        <h6 class="user-title">
+                          Ben Gossman
+                        </h6>
+                        <div class="user-role">
+                          Administrator
+                        </div>
+                      </div>
+                      <a class="user-action" href="users_profile_small.html">
+                        <div class="os-icon os-icon-email-forward"></div>
+                      </a>
+                    </div>
+                  </div>
+                      </div>
                       </div>
                           </div>
                         </div>
@@ -102,6 +146,8 @@
                 <i class="os-icon os-icon-plus"></i>
               </div>  
               <input type="hidden" id="groupIdInput">
+              <input type="hidden" id="moduleIdInput">
+              <input type="hidden" id="attModuleIdInput">
       <!-- modal add groupe-->
     <div aria-labelledby="exampleModalLabel" class="modal fade" id="exampleModal1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -142,7 +188,7 @@
        <form id="formModules" method="POST">
           <div class="modal-body">
               <div class="form-group">
-                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModal" name="libelleModal">
+                <label for="libelleModalModule"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModalModule" name="libelleModal">
               </div>
           </div>
           <div class="modal-footer">
@@ -153,7 +199,7 @@
       </div>
     </div>
     <!-- fin modal ajout module -->
-    <!-- modal edit promotion-->
+    <!-- modal edit groupe-->
     <div aria-labelledby="exampleModalLabel" class="modal fade" id="editGroupModal" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -171,6 +217,30 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="editGroupe"> Editer</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <!-- fin modal edit groupe -->
+    <!-- modal edit promotion-->
+    <div aria-labelledby="exampleModalLabel" class="modal fade" id="editModuleModal" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Edit Module
+            </h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
+          </div>
+       <form id="formModulesEdit" method="POST">
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModalEditModule" name="libelleModal">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="editModule"> Editer</button>
           </div>
         </form>
         </div>
@@ -199,6 +269,28 @@
       </div>
     </div>
     <!-- fin supp groupe -->
+    <!-- modal supp  module-->
+    <div aria-labelledby="exampleModalLabel" class="modal fade" id="suppModuleModal" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Suppression Module
+            </h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
+          </div>
+       <form id="formModuleSupp" method="POST" action="">
+          <div class="modal-body">
+              Etes vous sur ?
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="suppModules"> Supprimer</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <!-- fin supp module -->
               <!--------------------
               END - Chat Popup Box
               -------------------->

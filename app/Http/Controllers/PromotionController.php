@@ -8,12 +8,14 @@ use App\Promotion;
 use App\Filiere;
 use App\Groupe;
 use App\Etudiant;
+use App\Module;
 class PromotionController extends Controller
 {
     public function getGroupes($promoId){
       $nomPromo = Promotion::find($promoId)->libelle;
       $groupes = Groupe::where('promotion_id','=',$promoId)->orderBy('id')->get();
-      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'nomPromo'=>$nomPromo]);
+      $modules = Module::where('promotion_id','=',$promoId)->orderBy('id')->get();
+      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'modules' => $modules,'nomPromo'=>$nomPromo]);
     }
     public function getPromos()
     {

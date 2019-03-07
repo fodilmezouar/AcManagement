@@ -16,9 +16,12 @@ class CreateModulesTable extends Migration
         Schema::create('modules', function (Blueprint $table) {
             $table->increments('id');
             $table->string('libelle',100);
+            $table->integer('promotion_id')->unsigned()->nullable();
+            $table->foreign('promotion_id')
+            ->references('id')->on('promotions');
             $table->integer('enseignant_id')->unsigned()->nullable();
             $table->foreign('enseignant_id')
-            ->references('id')->on('enseignant');
+            ->references('id')->on('users');
             $table->timestamps();
         });
     }
