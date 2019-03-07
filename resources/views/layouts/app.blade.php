@@ -18,9 +18,22 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="favicon.png" rel="shortcut icon">
+    <link href="apple-touch-icon.png" rel="apple-touch-icon">
+    <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
+    <link href="bower_components/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="bower_components/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet">
+    <link href="bower_components/dropzone/dist/dropzone.css" rel="stylesheet">
+    <link href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css" rel="stylesheet">
+    <link href="bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
+    <link href="bower_components/perfect-scrollbar/css/perfect-scrollbar.min.css" rel="stylesheet">
+    <link href="bower_components/slick-carousel/slick/slick.css" rel="stylesheet">
+    <link href="css/main.css?version=4.4.0" rel="stylesheet">
 </head>
-<body>
+<body class="auth-wrapper">
+
     <div id="app">
+        <!--
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -31,14 +44,13 @@
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
+                   Left Side Of Navbar 
                     <ul class="navbar-nav mr-auto">
 
                     </ul>
 
-                    <!-- Right Side Of Navbar -->
+                     Right Side Of Navbar 
                     <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
                         @guest
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
@@ -71,7 +83,7 @@
                 </div>
             </div>
         </nav>
-
+        -->
         <main class="py-4">
             @yield('content')
         </main>

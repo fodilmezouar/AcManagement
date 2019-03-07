@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
+use Illuminate\Support\Facades\Hash;
 
 class EnseignantController extends Controller
 {
@@ -49,7 +50,7 @@ class EnseignantController extends Controller
         $user->date_naissance = $request->input('dateNais');
         $user->grade = $request->input('grade');
         $user->pseudoname = $name;
-        $user->password = $name.time();
+        $user->password = Hash::make("password");
         $user->email = $request->input('email');
         $user->save();
         $valid['success'] = array('success' => false, 'messages' => array());
