@@ -186,7 +186,7 @@
                   <span>Gestion Préliminaire</span></a>
                 <ul class="sub-menu">
                   <li>
-                    <a href="index.html">Promotions</a>
+                    <a href="{{url('promotions')}}">Promotions</a>
                   </li>
                 </ul>
               </li>
@@ -472,7 +472,7 @@
                 <div class="sub-menu-i">
                   <ul class="sub-menu">
                     <li>
-                      <a href="index.html">Promotions</a>
+                      <a href="{{url('promotions')}}">Promotions</a>
                     </li>
                     <li>
                       <a href="index.html">Enseignants</a>

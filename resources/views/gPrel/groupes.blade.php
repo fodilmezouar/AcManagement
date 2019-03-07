@@ -9,10 +9,13 @@
               <a href="index.html">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">Products</a>
+              <a href="">G - PRÉLIMINAIRE</a>
             </li>
             <li class="breadcrumb-item">
-              <span>Laptop with retina screen</span>
+              <a href="{{url('promotions')}}">Promotions</a>
+            </li>
+            <li class="breadcrumb-item">
+              <span>{{$nomPromo}}</span>
             </li>
           </ul>
           <!--------------------
@@ -35,10 +38,10 @@
                         <div class="os-tabs-controls">
                           <ul class="nav nav-tabs smaller">
                             <li class="nav-item">
-                              <a class="nav-link active show" data-toggle="tab" href="#tab_groupes">Groupes</a>
+                              <a class="nav-link active show floatChoose" data-toggle="tab" href="#tab_groupes">Groupes</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link" data-toggle="tab" href="#tab_sales">Modules</a>
+                              <a class="nav-link floatChoose" data-toggle="tab" href="#tab_modules">Modules</a>
                             </li>
                           </ul>
                         </div>
@@ -53,7 +56,7 @@
                             <button aria-label="Close" class="close supp" type="button" data-target="#suppGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-15"></i></button>
                             <button aria-label="Close" class="close edit" type="button" data-target="#editGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-49"></i></button>
                           </div>
-                          <a class="element-box el-tablo" href="" style="background-color: #e1e1e1;">
+                          <a class="element-box el-tablo" href="{{url('promotions/groupes/liste/'.$groupe->id)}}" style="background-color: #e1e1e1;">
                             <!--
                             <div class="label" id="annee">
                                  zea
@@ -74,7 +77,20 @@
                    <!-- promotions -->
                             </div>
                           </div>
-                          <div class="tab-pane" id="tab_sales"></div>
+                          <div class="tab-pane" id="tab_modules">
+                               <div class="col-sm-3 col-xxxl-3 block" role="{{$groupe->id}}">
+                          <div>
+                            <button aria-label="Close" class="close supp" type="button" data-target="#suppGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-15"></i></button>
+                            <button aria-label="Close" class="close edit" type="button" data-target="#editGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-49"></i></button>
+                          </div>
+                          <a class="element-box el-tablo" href="{{url('promotions/groupes/liste/'.$groupe->id)}}" style="background-color: #e1e1e1;">
+                            <div class="value" id="libelle">
+                              {{$groupe->libelle}}
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                          </div>
                         </div>
                       </div>
                     <!-- fin content plus -->
@@ -82,7 +98,7 @@
               </div><!--------------------
               START - Chat Popup Box
               -------------------->
-              <div class="floated-chat-btn" data-target="#exampleModal1" data-toggle="modal">
+              <div class="floated-chat-btn" data-target="#exampleModal1" data-toggle="modal" id="zombro">
                 <i class="os-icon os-icon-plus"></i>
               </div>  
               <input type="hidden" id="groupIdInput">
@@ -113,6 +129,30 @@
       </div>
     </div>
     <!-- fin modal ajout groupe -->
+    <!-- modal add module-->
+    <div aria-labelledby="exampleModalLabel" class="modal fade" id="modalModule" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Nouveau Module
+            </h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button" id="dismissModal"><span aria-hidden="true"> ×</span></button>
+          </div>
+       <form id="formModules" method="POST">
+          <div class="modal-body">
+              <div class="form-group">
+                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModal" name="libelleModal">
+              </div>
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="ajoutModule"> Ajouter</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <!-- fin modal ajout module -->
     <!-- modal edit promotion-->
     <div aria-labelledby="exampleModalLabel" class="modal fade" id="editGroupModal" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
       <div class="modal-dialog" role="document">

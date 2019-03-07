@@ -115,3 +115,14 @@ $("#formGroupesEdit").on('submit',function(e) {
               });
       }
   });
+/** choose modal when clickin floatede button **/
+$('.floatChoose').on('click',function(){
+   var choix = $(this).html().trim();
+   if(choix == "Modules"){
+     $('#zombro').attr('data-target','#modalModule');
+   }
+   else
+   {
+     $('#zombro').attr('data-target','#exampleModal1');
+   }
+});

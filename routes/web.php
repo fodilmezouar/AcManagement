@@ -22,4 +22,4 @@ Route::get('promotions/{id}','PromotionController@getGroupes');
 Route::post('promotions/groupes/ajoutGroupe','GroupeController@import');
 Route::post('promotions/groupes/suppGroupe','GroupeController@suppGroupe');
 Route::post('promotions/groupes/editGroupe','GroupeController@editGroupe');
-
+Route::get('promotions/groupes/liste/{idGroupe}','GroupeController@getStudents');

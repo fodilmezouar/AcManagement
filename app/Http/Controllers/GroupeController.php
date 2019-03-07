@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Groupe;
 use App\Etudiant;
+use App\Promotion;
 class GroupeController extends Controller
 {
 	public function import(Request $request) 
@@ -61,5 +62,11 @@ class GroupeController extends Controller
            $valid['success'] = true;
            $valid['messages'] = "ok babe";
         return response()->json($valid);
+    }
+    public function getStudents($idGroupe){
+         $groupe = Groupe::find($idGroupe);
+         $promo = Promotion::find($groupe->promotion_id);
+         $etudiants = Etudiant::where('groupe_id','=',$idGroupe)->get();
+         return view('gPrel.groupe')->with(['etudiants'=>$etudiants,'nomGroupe'=>$groupe->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id]);
     }
 }
