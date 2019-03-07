@@ -111,8 +111,8 @@ $(function () {
     calendar = $("#fullCalendar").fullCalendar({
       header: {
         left: "prev,next today",
-        center: "title",
-        right: "month,agendaWeek,agendaDay"
+        center: "title,year",
+        right: "year,month,basicWeek,basicDay"
       },
       selectable: true,
       selectHelper: true,
