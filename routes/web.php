@@ -23,6 +23,8 @@ Route::post('promotions/groupes/ajoutGroupe','GroupeController@import');
 
 Route::get('getEnseignant','EnseignantController@getEnseignant');
 Route::post('enseignant/createEnseignant','EnseignantController@createEnseignant');
+Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
-Route::post('editEnseignant/{id}','EnseignantController@editEnseignant');
+Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
+
 
