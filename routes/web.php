@@ -39,3 +39,15 @@ Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignan
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::group( ['middleware' => 'auth' ], function()
+{
+    Route::get('promotions/{id}', 'PromotionController@getGroupes');
+    Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
+    Route::get('promotions/modules/attModule/{idModule}','ModuleController@attacherModule');
+    Route::get('promotions/{id}','PromotionController@getGroupes');
+    Route::get('promotions','PromotionController@getPromos');
+    Route::get('enseignant', function () {
+    return view('gPrel.enseignant');
+    });
+});
+Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
