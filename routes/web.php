@@ -22,11 +22,11 @@ Route::get('promotions/{id}','PromotionController@getGroupes');
 Route::post('promotions/groupes/ajoutGroupe','GroupeController@import');
 Route::post('promotions/groupes/suppGroupe','GroupeController@suppGroupe');
 Route::post('promotions/groupes/editGroupe','GroupeController@editGroupe');
+Route::get('promotions/groupes/liste/{idGroupe}','GroupeController@getStudents');
 
 Route::get('getEnseignant','EnseignantController@getEnseignant');
 Route::post('enseignant/createEnseignant','EnseignantController@createEnseignant');
 Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
 Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
-
 

@@ -11,8 +11,9 @@ use App\Etudiant;
 class PromotionController extends Controller
 {
     public function getGroupes($promoId){
+      $nomPromo = Promotion::find($promoId)->libelle;
       $groupes = Groupe::where('promotion_id','=',$promoId)->orderBy('id')->get();
-      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes]);
+      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'nomPromo'=>$nomPromo]);
     }
     public function getPromos()
     {
