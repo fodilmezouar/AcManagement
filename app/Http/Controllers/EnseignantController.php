@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Mail;
 
 class EnseignantController extends Controller
 {
@@ -50,6 +53,11 @@ class EnseignantController extends Controller
         $user->date_naissance = $request->input('dateNais');
         $user->grade = $request->input('grade');
         $user->pseudoname = $name;
+       /* Mail::send('gPrel.enseignant',array('user'=>$user),function ($message)
+        {
+            $name = Input::get('name').".".Input::get('prenom');
+            $message->to(Input::get('email'),Input::get('name'))->subject('You password is :'.$name.time());
+        });*/
         $user->password = Hash::make("password");
         $user->email = $request->input('email');
         $user->save();

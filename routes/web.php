@@ -35,7 +35,8 @@ Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
 Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
 
-
+Route::get('test/{id}','AffectationController@attacherGroupe');
+Route::post('test/valider','AffectationController@validerAffectation');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

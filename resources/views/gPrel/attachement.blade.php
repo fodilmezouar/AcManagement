@@ -3,7 +3,7 @@
           START - Breadcrumbs
           -------------------->
 @section('content')
-     <input type="hidde" id="ensIdInput">
+     <input type="hidden" id="ensIdInput">
      <input type="hidden" id="moduleId" value="{{$idModule}}">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">

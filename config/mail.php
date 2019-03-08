@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 'fadhil.mezouar@student.univ-tlemcen.dz'),
+        'name' => env('MAIL_FROM_NAME', 'University Tlemcen'),
     ],
 
     /*
@@ -84,7 +84,7 @@ return [
     |
     */
 
-    'username' => env('MAIL_USERNAME'),
+    'username' => env('fadhil.mezouar@student.univ-tlemcen.dz'),
 
     'password' => env('MAIL_PASSWORD'),
 
