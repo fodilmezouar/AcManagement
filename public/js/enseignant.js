@@ -18,10 +18,11 @@ function editEns($idEns){
         var image= data.data[0][3];
         var grade= data.data[0][4];
         var dateNaissance= data.data[0][5];
+        var filliere_id = data.data[0][6];
         $("#nameEdit").val(nom);
         $("#prenomEdit").val(prenom);
         $("#emailEdit").val(email);
-
+        $('#filiereModalEdit').val(filliere_id);
         $("#gradeEdit").val(grade);
         $("#dateNaisEdit").val(dateNaissance);
     });
@@ -72,9 +73,11 @@ $(function () {
 
         });
         var nom = $('#name').val(),prenom=$('#prenom').val();
+        var filiereId = $("#filiereModal").val();
         if(nom != "" || prenom !=  ""  || $('#email').val() ) {
 
             var formData = new FormData(this);
+            formData.append('filiereId',filiereId)
             $.ajax({
                 url: "enseignant/createEnseignant",
                 type: 'POST',
@@ -136,7 +139,7 @@ $(function () {
 
     $('#formEdit').on('submit',function(e){
         e.preventDefault();
-        console.log("hey");
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -144,11 +147,11 @@ $(function () {
 
         });
         var idEns = $('#body-editEnse').attr('role');
-
+        var filiereId = $("#filiereModalEdit").val();
 
 
             var formData = new FormData(this);
-
+            formData.append('filiereId',filiereId);
             $.ajax({
                 url: 'enseignant/editEnseignant/'+idEns,
                 type: 'POST',

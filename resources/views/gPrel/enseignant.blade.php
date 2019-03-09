@@ -105,9 +105,17 @@
                                                 <label for=""> Date De Naissance</label><input name="dateNais" id="datenais" class="single-daterange form-control" placeholder="Date of birth" type="text" value="04/12/1978">
                                             </div>
                                         </div>
+
                                     </div>
 
-
+                                    <div class="form-group">
+                                        <label for=""> Filliere</label>
+                                        <select class="form-control" id="filiereModal">
+                                            @foreach($modules as $module)
+                                                <option value="{{$module->id}}">{{$module->libelle}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </fieldset>
                                 <div class="modal-footer">
                                     <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" id="createEnseigantbtn" type="submit">Ajouter</button>
@@ -181,8 +189,15 @@
                                                 <label for=""> Date De Naissance</label><input name="dateNaisEdit" id="dateNaisEdit" class="single-daterange form-control" placeholder="Date of birth" type="text" value="04/12/1978">
                                             </div>
                                         </div>
-                                    </div>
 
+                                    </div>
+                                    <div class="form-group">
+                                        <select class="form-control" id="filiereModalEdit">
+                                            @foreach($modules as $module)
+                                                <option value="{{$module->id}}">{{$module->libelle}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                 </fieldset>
                                 <div class="modal-footer">
