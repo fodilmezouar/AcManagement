@@ -175,10 +175,11 @@
               {{Auth::user()->name}} {{Auth::user()->prenom}}
             </div>
             <div class="logged-user-role">
-              @if(Auth::user()->role == "4")
-                  Administrator
-              @elseif(stristr(Auth::user()->role,"1"))
+              
+              @if(stristr(Auth::user()->role,"1"))
                   Chef Département
+              @elseif(Auth::user()->role == "4")
+                  Administrator
               @else
                   Enseignant
               @endif
@@ -484,7 +485,7 @@
           <span>Gestion Préliminaire</span>
         </li>
         @if(stristr(Auth::user()->role,'4'))
-        <li class="selected has-sub-menu {{$active ==  'Promotions' ? 'active':''}}">
+        <li class="selected has-sub-menu {{ $active ==  'Promotions' ? 'active':'' }}">
           <a href="{{url('promotions')}}">
             <div class="icon-w">
               <div class="os-icon os-icon-layout"></div>
@@ -508,6 +509,16 @@
               <div class="os-icon os-icon-layout"></div>
             </div>
             <span>Répartition Taches</span>
+          </a>
+        </li>
+        @endif
+        @if(stristr(Auth::user()->role,'1'))
+        <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
+          <a href="{{url('enseignants/repartitionRole')}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Répartition Roles</span>
           </a>
         </li>
         @endif

@@ -35,17 +35,24 @@ Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignan
 
 Route::get('test/{id}','AffectationController@attacherGroupe');
 Route::post('test/valider','AffectationController@validerAffectation');
+Route::post('enseignants/validerRepartition','EnseignantController@validerRepartition');
+
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 Route::group( ['middleware' => 'auth' ], function()
 {
+	Route::get('/home', 'HomeController@index')->name('home');
+	Route::get('getEnseignant','EnseignantController@getEnseignant');
     Route::get('promotions/{id}', 'PromotionController@getGroupes');
     Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
     Route::get('promotions/modules/attModule/{idModule}','ModuleController@attacherModule');
     Route::get('promotions/{id}','PromotionController@getGroupes');
     Route::get('promotions','PromotionController@getPromos');
     Route::get('test/{id}','AffectationController@attacherGroupe');
+
+    Route::get('enseignants/repartitionRole','EnseignantController@repartirRoles'); 
+
     Route::get('enseignant','EnseignantController@enseignantView');
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
+Route::get('enseignants/repartitionRole','EnseignantController@repartirRoles');
