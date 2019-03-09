@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
 
     /*
     |--------------------------------------------------------------------------
@@ -56,7 +56,7 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'fadhil.mezouar@student.univ-tlemcen.dz'),
+        'address' => env('MAIL_FROM_ADDRESS', 'univtlemcenzatchi@gmail.com'),
         'name' => env('MAIL_FROM_NAME', 'University Tlemcen'),
     ],
 
@@ -84,9 +84,9 @@ return [
     |
     */
 
-    'username' => env('fadhil.mezouar@student.univ-tlemcen.dz'),
+    'username' => env('univtlemcenzatchi@gmail.com'),
 
-    'password' => env('MAIL_PASSWORD'),
+    'password' => env('zatchizarbout'),
 
     /*
     |--------------------------------------------------------------------------

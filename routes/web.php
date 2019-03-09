@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('enseignant', function () {
-    return view('gPrel.enseignant');
-});
+
 Route::get('promotions','PromotionController@getPromos');
 Route::post('promotions/ajoutPromo','PromotionController@ajoutPromo');
 Route::post('promotions/suppPromo','PromotionController@suppPromo');
@@ -48,8 +46,6 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('promotions/{id}','PromotionController@getGroupes');
     Route::get('promotions','PromotionController@getPromos');
     Route::get('test/{id}','AffectationController@attacherGroupe');
-    Route::get('enseignant', function () {
-    return view('gPrel.enseignant');
-    });
+    Route::get('enseignant','EnseignantController@enseignantView');
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
