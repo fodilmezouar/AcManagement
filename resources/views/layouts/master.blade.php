@@ -168,14 +168,20 @@
       <div class="menu-and-user">
         <div class="logged-user-w">
           <div class="avatar-w">
-            <img alt="" src="{{asset('img/avatar1.jpg')}}">
+            <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
           </div>
           <div class="logged-user-info-w">
             <div class="logged-user-name">
-              Maria Gomez
+              {{Auth::user()->name}} {{Auth::user()->prenom}}
             </div>
             <div class="logged-user-role">
-              Administrator
+              @if(Auth::user()->role == "4")
+                  Administrator
+              @elseif(stristr(Auth::user()->role,"1"))
+                  Chef Département
+              @else
+                  Enseignant
+              @endif
             </div>
           </div>
         </div>
@@ -218,14 +224,20 @@
       <div class="logged-user-w avatar-inline">
         <div class="logged-user-i">
           <div class="avatar-w">
-            <img alt="" src="{{asset('img/avatar1.jpg')}}">
+            <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
           </div>
           <div class="logged-user-info-w">
             <div class="logged-user-name">
-              Maria Gomez
+              {{Auth::user()->name}} {{Auth::user()->prenom}}
             </div>
             <div class="logged-user-role">
-              Administrator
+              @if(Auth::user()->role == "4")
+                  Administrator
+              @elseif(stristr(Auth::user()->role,"1"))
+                  Chef Département
+              @else
+                  Enseignant
+              @endif
             </div>
           </div>
           <div class="logged-user-toggler-arrow">
@@ -234,14 +246,20 @@
           <div class="logged-user-menu color-style-bright">
             <div class="logged-user-avatar-info">
               <div class="avatar-w">
-                <img alt="" src="{{asset('img/avatar1.jpg')}}">
+                <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
               </div>
               <div class="logged-user-info-w">
                 <div class="logged-user-name">
-                  Maria Gomez
+                  {{Auth::user()->name}} {{Auth::user()->prenom}}
                 </div>
                 <div class="logged-user-role">
-                  Administrator
+                  @if(Auth::user()->role == "4")
+                        Administrator
+                  @elseif(stristr(Auth::user()->role,"1"))
+                        Chef Département
+                  @else
+                        Enseignant
+                  @endif
                 </div>
               </div>
             </div>
@@ -282,7 +300,7 @@
               <li>
                 <a href="#">
                   <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar1.jpg')}}">
+                    <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
                   </div>
                   <span>Gestion Préliminaire</span></a>
                 <ul class="sub-menu">
@@ -393,7 +411,7 @@
               <li>
                 <a href="#">
                   <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar1.jpg')}}">
+                    <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
                   </div>
                   <div class="message-content">
                     <h6 class="message-from">
@@ -463,32 +481,23 @@
 
       <ul class="main-menu">
         <li class="sub-header">
-          <span>Layouts</span>
+          <span>Gestion Préliminaire</span>
         </li>
-        <li class="selected has-sub-menu">
-          <a href="index.html">
+        <li class="selected has-sub-menu {{$active ==  'Promotions' ? 'active':''}}">
+          <a href="{{url('promotions')}}">
             <div class="icon-w">
               <div class="os-icon os-icon-layout"></div>
             </div>
-            <span>Gestion Préliminaire</span></a>
-          <div class="sub-menu-w">
-            <div class="sub-menu-header">
-              G - Préliminaire
+            <span>Promotions</span>
+          </a>
+        </li>
+        <li class="selected has-sub-menu {{ $active ==  'Enseignants' ? 'active':''}}">
+          <a href="{{url('enseignant')}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
             </div>
-            <div class="sub-menu-icon">
-              <i class="os-icon os-icon-layout"></i>
-            </div>
-            <div class="sub-menu-i">
-              <ul class="sub-menu">
-                <li>
-                  <a href="index.html">Promotions</a>
-                </li>
-                <li>
-                  <a href="index.html">Enseignants</a>
-                </li>
-              </ul>
-            </div>
-          </div>
+            <span>Enseignants</span>
+          </a>
         </li>
       </ul>
     </div>
@@ -520,7 +529,7 @@
                 <li>
                   <a href="#">
                     <div class="user-avatar-w">
-                      <img alt="" src="{{asset('img/avatar1.jpg')}}">
+                      <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
                     </div>
                     <div class="message-content">
                       <h6 class="message-from">
@@ -615,19 +624,25 @@
           <div class="logged-user-w">
             <div class="logged-user-i">
               <div class="avatar-w">
-                <img alt="" src="{{asset('img/avatar1.jpg')}}">
+                <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
               </div>
               <div class="logged-user-menu color-style-bright">
                 <div class="logged-user-avatar-info">
                   <div class="avatar-w">
-                    <img alt="" src="{{asset('img/avatar1.jpg')}}">
+                    <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
                   </div>
                   <div class="logged-user-info-w">
                     <div class="logged-user-name">
-                      Maria Gomez
+                      {{Auth::user()->name}} {{Auth::user()->prenom}}
                     </div>
                     <div class="logged-user-role">
-                      Administrator
+                      @if(Auth::user()->role == "4")
+                        Administrator
+                      @elseif(stristr(Auth::user()->role,"1"))
+                        Chef Département
+                      @else
+                        Enseignant
+                      @endif
                     </div>
                   </div>
                 </div>

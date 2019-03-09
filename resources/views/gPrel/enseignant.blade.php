@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master',['active'=>'Enseignants'])
 @section('content')
 
     <ul class="breadcrumb">

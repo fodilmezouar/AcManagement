@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master',['active'=>'Promotions'])
    <!--------------------
           START - Breadcrumbs
           -------------------->
@@ -7,13 +7,16 @@
      <input type="hidden" id="moduleId" value="{{$idModule}}">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
+              <a href="{{url('home')}}">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">G - Préliminaire</a>
+               G - Préliminaire
             </li>
             <li class="breadcrumb-item">
-              <span>Promotions</span>
+                <a href="{{url('promotions/'.$promoId)}}">{{$promoName}}</a>
+            </li>
+            <li class="breadcrumb-item">
+              <span>{{$moduleName}}</span>
             </li>
           </ul>
           <!--------------------
