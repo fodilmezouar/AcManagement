@@ -47,6 +47,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('promotions/modules/attModule/{idModule}','ModuleController@attacherModule');
     Route::get('promotions/{id}','PromotionController@getGroupes');
     Route::get('promotions','PromotionController@getPromos');
+    Route::get('test/{id}','AffectationController@attacherGroupe');
     Route::get('enseignant', function () {
     return view('gPrel.enseignant');
     });

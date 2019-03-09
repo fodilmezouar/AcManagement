@@ -19,10 +19,14 @@ class ModuleController extends Controller
                          <div>
                             <button aria-label='Close' class='close suppModule' type='button' data-target='#suppModuleModal' data-toggle='modal' role='".$module->id."'><i class='os-icon os-icon-ui-15'></i></button>
                             <button aria-label='Close' class='close editModule' type='button' data-target='#editModuleModal' data-toggle='modal' role='".$module->id."'><i class='os-icon os-icon-ui-49'></i></button>
+                            <button aria-label='Close' class='close attModule' type='button' data-target='#attModuleModal' data-toggle='modal' role='".$module->id."'><i class='icon-feather-arrow-up-right'></i></button>
                           </div>
                           <a class='element-box el-tablo' href='#' style='background-color: #e1e1e1;'>
                             <div class='value' id='libelleModule'>
                               ".$module->libelle."
+                            </div>
+                            <div class='trending trending-down-basic'>
+                                <span style='color:red;'>non affecté</span>
                             </div>
                           </a>
                         </div>";

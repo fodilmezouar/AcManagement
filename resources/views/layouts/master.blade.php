@@ -483,6 +483,7 @@
         <li class="sub-header">
           <span>Gestion Préliminaire</span>
         </li>
+        @if(stristr(Auth::user()->role,'4'))
         <li class="selected has-sub-menu {{$active ==  'Promotions' ? 'active':''}}">
           <a href="{{url('promotions')}}">
             <div class="icon-w">
@@ -499,6 +500,17 @@
             <span>Enseignants</span>
           </a>
         </li>
+        @endif
+        @if(stristr(Auth::user()->role,'2'))
+        <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
+          <a href="{{url('enseignant')}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Répartition Taches</span>
+          </a>
+        </li>
+        @endif
       </ul>
     </div>
     <!--------------------
