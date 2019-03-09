@@ -112,4 +112,20 @@ class EnseignantController extends Controller
         $valid['messages'] = "Suppression réussi";
         return response()->json($valid);
     }
+    public function repartirRoles(){
+      $enseignants = User::all();
+      return view('gPrel.repartitionRole')->with('enseignants',$enseignants);
+    }
+    public function validerRepartition(Request $request){
+       $enseignant = User::find($request->input('ensId'));
+       if(stristr($enseignant->role,'1') || stristr($enseignant->role,'4'))
+        $enseignant->role.=" ".$request->input('aRet');
+       else
+        $enseignant->role = $request->input('aRet');
+       $enseignant->save();
+       $valid['success'] = array('success' => false, 'messages' => array());
+       $valid['success'] = true;
+       $valid['messages'] = "yes babe";
+       return response()->json($valid);   
+    }
 }
