@@ -34,36 +34,27 @@ class AffectationController extends Controller
         $listTP = $request->get('listTp');
         $listG = $request->get('listeG');
         $data = array();
-        $affect = new Affectation();
-        $affect =[];
-        for ($i=1;$i<=$nombreG;$i++){
 
-            $affect[] = new Affectation();
-          /*  $data[] = [
-                'enseignant_id'=>$request->input('enseignantId'),
-                'groupe_id' =>$listG[$i],
-                'module_id' => $request->input('moduleId'),
-                'td' => $listTd[$i],
-                'tp' => $listTP[$i],
-                'date_affectation' => date("Y")
-            ];
-            /*$affect->enseignant_id = $request->input('enseignantId');
-            $affect->groupe_id = $listG[$i];
-            $affect->module_id = $request->input('moduleId');
-            $affect->td = $listTd[$i];
-            $affect->tp = $listTP[$i];
-            $affect->date_affectation =date("Y");
-            $affect->save();
-            $i= $i++;*/
+        for ($i=0;$i<sizeof($listG);$i++){
+
+            $data[] = array(
+                "enseignant_id"=>$request->input('enseignantId'),
+                "groupe_id" =>$listG[$i],
+                "module_id" => $request->input('moduleId'),
+                "td" => $listTd[$i],
+                "tp" => $listTP[$i],
+                "date_affectation" => date("y-m-d")
+            );
 
 
         }
-
+        DB::table('affectations')->insert($data);
 
 
         $valid['success'] = array('success' => false, 'messages' => array());
         $valid['success'] = true;
         $valid['messages'] = "success";
         return response()->json($valid);
+
     }
 }

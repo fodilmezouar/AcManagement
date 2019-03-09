@@ -15,7 +15,7 @@ $("#formModuleAtt").on('submit',function(e) {
         listTp.push(isChecked($('#tp'+i)));
         listeG.push(parseInt($('#tp'+i).attr('role')));
     }
-
+    var moduleId = parseInt($('#moduleId').val());
     $.ajax({
         url : "valider",
         type: "POST",
@@ -23,6 +23,7 @@ $("#formModuleAtt").on('submit',function(e) {
             listTd:listTd,
             listTp:listTp,
             listeG:listeG,
+            "moduleId":moduleId,
             "enseignantId":$('#ensIdInput').val()
         },
         dataType: 'json',
