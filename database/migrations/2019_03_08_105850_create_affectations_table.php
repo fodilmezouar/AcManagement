@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAffectationTable extends Migration
+class CreateAffectationsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -36,6 +36,6 @@ class CreateAffectationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('affectation');
+        Schema::dropIfExists('affectations');
     }
 }
