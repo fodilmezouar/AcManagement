@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.master',['active'=>'Promotions'])
 @section('content')
 <!--------------------
           START - Breadcrumbs
@@ -91,47 +91,17 @@
                             <div class="value" id="libelleModule">
                               {{$module->libelle}}
                             </div>
+                            <div class="trending trending-down-basic">
+                              
+                                 @if($module->enseignant_id)
+                                   <span style="color:green;">affecté</span>
+                                 @else
+                                   <span style="color:red;">non affecté</span>
+                                 @endif
+                            </div>
                           </a>
                         </div>
                         @endforeach
-                        <div class="users-list-w">
-                    <div class="user-w with-status status-green">
-                      <div class="user-avatar-w">
-                        <div class="user-avatar">
-                          <img alt="" src="{{asset('img/avatar1.jpg')}}">
-                        </div>
-                      </div>
-                      <div class="user-name">
-                        <h6 class="user-title">
-                          John Mayers
-                        </h6>
-                        <div class="user-role">
-                          Account Manager
-                        </div>
-                      </div>
-                      <a class="user-action" href="users_profile_small.html">
-                        <div class="os-icon os-icon-email-forward"></div>
-                      </a>
-                    </div>
-                    <div class="user-w with-status status-green">
-                      <div class="user-avatar-w">
-                        <div class="user-avatar">
-                          <img alt="" src="{{asset('img/avatar2.jpg')}}">
-                        </div>
-                      </div>
-                      <div class="user-name">
-                        <h6 class="user-title">
-                          Ben Gossman
-                        </h6>
-                        <div class="user-role">
-                          Administrator
-                        </div>
-                      </div>
-                      <a class="user-action" href="users_profile_small.html">
-                        <div class="os-icon os-icon-email-forward"></div>
-                      </a>
-                    </div>
-                  </div>
                       </div>
                       </div>
                           </div>

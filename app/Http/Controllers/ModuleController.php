@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Module;
 use App\User;
+use App\Promotion;
 class ModuleController extends Controller
 {
     public function addModule(Request $request) 
@@ -40,9 +41,10 @@ class ModuleController extends Controller
         return response()->json($valid);
     }
     public function attacherModule($id){
-    	$enseignants = User::where('grade','!=',NULL)->get();
     	$moduleName = Module::find($id)->libelle;
-    	return view('gPrel.attachement')->with(['enseignants'=>$enseignants,'idModule'=>$id,'moduleName'=>$moduleName]);
+      $promo = Promotion::find(Module::find($id)->promotion_id);
+      $enseignants = User::where('grade','!=',"")->where('filliere_id','=',$promo->filiere_id)->get();
+    	return view('gPrel.attachement')->with(['enseignants'=>$enseignants,'idModule'=>$id,'moduleName'=>$moduleName,'promoName'=>$promo->libelle,'promoId'=>$promo->id]);
     }
     //role 1 chef , 2 charge , 3 assistant
     public function validerAttachement(Request $request){
