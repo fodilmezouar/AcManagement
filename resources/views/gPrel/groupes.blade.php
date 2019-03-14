@@ -57,7 +57,7 @@
                             <button aria-label="Close" class="close supp" type="button" data-target="#suppGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-15"></i></button>
                             <button aria-label="Close" class="close edit" type="button" data-target="#editGroupModal" data-toggle="modal" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-49"></i></button>
                           </div>
-                          <a class="element-box el-tablo" href="{{url('promotions/groupes/liste/'.$groupe->id)}}" style="background-color: #e1e1e1;">
+                          <a class="element-box el-tablo" href="{{url('promotions/groupes/liste/'.$groupe->id)}}" style="background-color: #f2f4f8;">
                             <!--
                             <div class="label" id="annee">
                                  zea
@@ -87,7 +87,7 @@
                             <button aria-label="Close" class="close editModule" type="button" data-target="#editModuleModal" data-toggle="modal" role="{{$module->id}}"><i class="os-icon os-icon-ui-49"></i></button>
                             <button aria-label="Close" class="close attModule" type="button" data-target="#attModuleModal" data-toggle="modal" role="{{$module->id}}"><i class="icon-feather-arrow-up-right"></i></button>
                           </div>
-                          <a class="element-box el-tablo" href="" style="background-color: #e1e1e1;">
+                          <a class="element-box el-tablo" href="" style="background-color: #f2f4f8;">
                             <div class="value" id="libelleModule">
                               {{$module->libelle}}
                             </div>

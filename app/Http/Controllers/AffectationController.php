@@ -19,14 +19,15 @@ class AffectationController extends Controller
         $userId = Auth::id();
         $enseignants = User::where('grade','!=',NULL)->where('role','3')->where('id','!=',$userId)
                             ->get();
-
+        $nombreEnseignant = User::where('grade','!=',NULL)->where('role','3')->where('id','!=',$userId)->select(DB::raw('count(distinct id) as count'))
+            ->get()->first();
         $idFilliere = User::find($userId)->filliere_id;
         $idPromotion = Promotion::where('filiere_id',$idFilliere)->get('id')->first();
         $groupes = Groupe::where('promotion_id',$idPromotion->id)->get();
         $nombreGroupe = Groupe::where('promotion_id',$idPromotion->id)->select(DB::raw('count(distinct id) as count'))
             ->get()->first();
         return view('gPrel.affectation')->with(['enseignants'=>$enseignants,'idModule'=>$id,'groupes'=>$groupes,
-            'nombreG'=>$nombreGroupe->count]);
+            'nombreG'=>$nombreGroupe->count,'nombreEns'=>$nombreEnseignant->count]);
     }
     public function validerAffectation(Request $request){
         $nombreG  = $request->input('nombreG');
@@ -57,8 +58,17 @@ class AffectationController extends Controller
         return response()->json($valid);
 
     }
+
    public function affectationEnseignant($idEns){
       $affectations = Affectation::where('enseignant_id','=',$idEns)->get();
       return view('gAbs.calendrier')->with('affectations',$affectations);
    }
+
+
+    public function getIndexAffect(){
+        $userId = Auth::id();
+        $modules = Module::where('enseignant_id',$userId)->get();
+        return view('gPrel.repartieTache')->with(['modules'=>$modules]);
+    }
+
 }

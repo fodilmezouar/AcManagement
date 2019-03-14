@@ -505,7 +505,7 @@
         @endif
         @if(stristr(Auth::user()->role,'2'))
         <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
-          <a href="{{url('enseignant')}}">
+          <a href="{{url('repartieTache')}}">
             <div class="icon-w">
               <div class="os-icon os-icon-layout"></div>
             </div>

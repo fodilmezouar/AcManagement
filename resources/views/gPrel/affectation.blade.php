@@ -4,8 +4,10 @@
           -------------------->
 @section('content')
     <input type="hidden" id="ensIdInput">
+    <input type="hidden" id="targetId">
     <input type="hidden" id="moduleId" value="{{$idModule}}">
     <input type="hidden" id="nombreG" name="nombreG" value="{{$nombreG}}">
+    <input type="hidden" id="nombreEns" name="nombreEns" value="{{$nombreEns}}">
     <ul class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="index.html">Home</a>
@@ -82,8 +84,8 @@
                                                                         @foreach($groupes as $groupe)
                                                                         <td>
                                                                             <div class="form-check">
-                                                                                <input type="checkbox" class="form-check-input" id="td{{ $loop->iteration }}"  role="{{ $groupe->id }}">
-                                                                                <label class="form-check-label">{{ $groupe->libelle }}</label>
+                                                                                <input type="checkbox" class="form-check-input" id="td{{ $loop->iteration }}"  role="td{{ $loop->iteration }}">
+                                                                                <label class="form-check-label" >{{ $groupe->libelle }}</label>
                                                                             </div>
                                                                         </td>
                                                                         @endforeach
@@ -93,7 +95,7 @@
                                                                 @foreach($groupes as $groupe)
                                                                     <td>
                                                                         <div class="form-check">
-                                                                            <input type="checkbox" class="form-check-input" id="tp{{ $loop->iteration }}"  role="{{$groupe->id}}">
+                                                                            <input type="checkbox" class="form-check-input" id="tp{{ $loop->iteration }}"  role="tp{{$loop->iteration}}" target="{{ $groupe->id }}">
                                                                             <label class="form-check-label">{{ $groupe->libelle }}</label>
                                                                         </div>
                                                                     </td>
@@ -102,8 +104,9 @@
                                                         </table>
                                                     </td>
                                                     <td>
-                                                        <a class="user-action attaAction" href="" data-target="#attModal" data-toggle="modal" role="{{$enseignant->id}}">
+                                                        <a class="user-action attaAction" href="" data-target="#attModal" data-toggle="modal" role="{{$enseignant->id}}" target="{{ $loop->iteration }}">
                                                             <div class="os-icon os-icon-email-forward"></div>
+
                                                         </a></td>
                                                 </tr>
                                             @endforeach
