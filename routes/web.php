@@ -35,7 +35,7 @@ Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignan
 
 Route::get('repartieTache/{id}','AffectationController@attacherGroupe');
 Route::get('repartieTache','AffectationController@getIndexAffect');
-Route::post('test/valider','AffectationController@validerAffectation');
+Route::post('repartieTache/valider','AffectationController@validerAffectation');
 Route::post('enseignants/repartitionRole/validerRepartition','EnseignantController@validerRepartition');
 
 Auth::routes();
