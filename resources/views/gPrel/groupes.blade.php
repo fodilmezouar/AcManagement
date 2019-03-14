@@ -158,7 +158,25 @@
        <form id="formModules" method="POST">
           <div class="modal-body">
               <div class="form-group">
-                <label for="libelleModalModule"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModalModule" name="libelleModal">
+                 <div class="form-group">
+            <label for=""> Multiselect</label><select class="form-control select2" multiple="true">
+              <option selected="true">
+                New York
+              </option>
+              <option selected="true">
+                California
+              </option>
+              <option>
+                Boston
+              </option>
+              <option>
+                Texas
+              </option>
+              <option>
+                Colorado
+              </option>
+            </select>
+          </div>
               </div>
           </div>
           <div class="modal-footer">

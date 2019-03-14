@@ -57,4 +57,8 @@ class AffectationController extends Controller
         return response()->json($valid);
 
     }
+   public function affectationEnseignant($idEns){
+      $affectations = Affectation::where('enseignant_id','=',$idEns)->get();
+      return view('gAbs.calendrier')->with('affectations',$affectations);
+   }
 }

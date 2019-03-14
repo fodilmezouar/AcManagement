@@ -11,6 +11,7 @@
   <meta content="width=device-width, initial-scale=1" name="viewport">
   <link href="favicon.png" rel="shortcut icon">
   <link href="apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="{{asset('icon_fonts_assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
       <link href="{{asset('icon_fonts_assets/feather/style.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
@@ -514,7 +515,7 @@
         @endif
         @if(stristr(Auth::user()->role,'1'))
         <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
-          <a href="{{url('enseignants/repartitionRole')}}">
+          <a href="{{url('enseignants/repartitionRole/'.Auth::user()->filliere_id)}}">
             <div class="icon-w">
               <div class="os-icon os-icon-layout"></div>
             </div>
@@ -522,6 +523,29 @@
           </a>
         </li>
         @endif
+        <li class="sub-header">
+          <span>Gestion Absences</span>
+          @if(stristr(Auth::user()->role,'3'))
+        <li class="selected has-sub-menu {{ $active ==  'Calendrier' ? 'active':''}}">
+          <a href="{{url('calendrier/'.Auth::user()->id)}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Mon Calendrier</span>
+          </a>
+        </li>
+        @endif
+        @if(stristr(Auth::user()->role,'3'))
+        <li class="selected has-sub-menu {{ $active ==  'mesModules' ? 'active':''}}">
+          <a href="{{url('mesModules/'.Auth::user()->id)}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Mes Modules</span>
+          </a>
+        </li>
+        @endif
+        </li>
       </ul>
     </div>
     <!--------------------
@@ -729,6 +753,7 @@
       <script src="{{asset('bower_components/bootstrap/js/dist/carousel.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/collapse.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/dropdown.js')}}"></script>
+      <script src=" https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/modal.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tab.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tooltip.js')}}"></script>
