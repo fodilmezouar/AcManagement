@@ -58,4 +58,10 @@ class AffectationController extends Controller
         return response()->json($valid);
 
     }
+
+    public function getIndexAffect(){
+        $userId = Auth::id();
+        $modules = Module::where('enseignant_id',$userId)->get();
+        return view('gPrel.repartieTache')->with(['modules'=>$modules]);
+    }
 }
