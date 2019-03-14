@@ -33,7 +33,8 @@ Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
 Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
 
-Route::get('test/{id}','AffectationController@attacherGroupe');
+Route::get('repartieTache/{id}','AffectationController@attacherGroupe');
+Route::get('repartieTache','AffectationController@getIndexAffect');
 Route::post('test/valider','AffectationController@validerAffectation');
 Route::post('enseignants/validerRepartition','EnseignantController@validerRepartition');
 
@@ -48,7 +49,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('promotions/modules/attModule/{idModule}','ModuleController@attacherModule');
     Route::get('promotions/{id}','PromotionController@getGroupes');
     Route::get('promotions','PromotionController@getPromos');
-    Route::get('test/{id}','AffectationController@attacherGroupe');
+    Route::get('repartieTache/{id}','AffectationController@attacherGroupe');
 
     Route::get('enseignants/repartitionRole','EnseignantController@repartirRoles'); 
 
