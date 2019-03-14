@@ -62,7 +62,7 @@ class EnseignantController extends Controller
         $user->grade = $request->input('grade');
         $user->pseudoname = $name;
         $user->filliere_id = $request->input('filiereId');
-        $data = array(
+        /*$data = array(
             'name'      =>  $request->input('name'),
             'body'   =>   $request->input('name').".".$request->input('prenom')
         );
@@ -70,7 +70,7 @@ class EnseignantController extends Controller
         {
             $name = Input::get('name').".".Input::get('prenom');
             $message->to(Input::get('email'),Input::get('name'))->subject('You password is :'.$name.time());
-        });
+        });*/
 
 
 
@@ -138,8 +138,8 @@ class EnseignantController extends Controller
         $valid['messages'] = "Suppression réussi";
         return response()->json($valid);
     }
-    public function repartirRoles(){
-      $enseignants = User::all();
+    public function repartirRoles($id){
+      $enseignants = User::where('grade','!=',NULL)->get();
       return view('gPrel.repartitionRole')->with('enseignants',$enseignants);
     }
     public function validerRepartition(Request $request){

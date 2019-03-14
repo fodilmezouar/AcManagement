@@ -59,9 +59,16 @@ class AffectationController extends Controller
 
     }
 
+   public function affectationEnseignant($idEns){
+      $affectations = Affectation::where('enseignant_id','=',$idEns)->get();
+      return view('gAbs.calendrier')->with('affectations',$affectations);
+   }
+
+
     public function getIndexAffect(){
         $userId = Auth::id();
         $modules = Module::where('enseignant_id',$userId)->get();
         return view('gPrel.repartieTache')->with(['modules'=>$modules]);
     }
+
 }

@@ -96,7 +96,23 @@ $(function () {
   $('.floated-chat-w .chat-messages').perfectScrollbar();
 
   // #2. CALENDAR INIT
+  $('#external-events .fc-event').each(function() {
 
+    // store data so the calendar knows to render an event upon drop
+    $(this).data('event', {
+      title: $.trim($(this).text()),
+      idAffect:$(this).attr('id'),// use the element's text as the event title
+      stick: true // maintain when user navigates (see docs on the renderEvent method)
+    });
+
+    // make the event draggable using jQuery UI
+    $(this).draggable({
+      zIndex: 999,
+      revert: true,      // will cause the event to go back to its
+      revertDuration: 0  //  original position after the drag
+    });
+
+  });
   if ($("#fullCalendar").length) {
     var calendar, d, date, m, y;
 
@@ -107,15 +123,57 @@ $(function () {
     m = date.getMonth();
 
     y = date.getFullYear();
-
+    
+    $.ajaxSetup({
+        headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     } 
+    });
+    var ensId = $('#ensId').val();
+    var scs;
+    var nvScs=[];
+        $.ajax({
+                  url : "seances/mesSeances",
+                  type: "POST",
+                  data:{
+                      ensId:ensId
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                    scs = response.messages;
+                     if(response.success == true) {
+                          var courant = moment().day() + 1;
+        var nv = [];
+        for (var i = 0; i < scs.length; i++) {
+        var deff = courant - parseInt(scs[i]['jour']);
+        if(deff < 0)
+          nv[i] = moment().add(Math.abs(deff),'days');
+        else
+          nv[i] = moment().subtract(deff,'days');
+    }
+    
+    for (var i = 0; i < scs.length; i++) {
+         nvScs[i] ={
+           title: scs[i]['title'],
+           start: nv[i].format("dddd")+", "+nv[i].format("MMMM")+" "+nv[i].format("DD")+", "+nv[i].format("YYYY")+" "+scs[i]['start'],
+           end: nv[i].format("dddd")+", "+nv[i].format("MMMM")+" "+nv[i].format("DD")+", "+nv[i].format("YYYY")+" "+scs[i]['end'],
+           idAffect:scs[i]['idAffect'],
+           idSeance:scs[i]['idSeance']
+         }
+    }
     calendar = $("#fullCalendar").fullCalendar({
       header: {
         left: "prev,next today",
-        center: "title,year",
-        right: "year,month,basicWeek,basicDay"
+        center: "title",
+        right: "agendaWeek"
       },
+      defaultView: 'agendaWeek',
       selectable: true,
       selectHelper: true,
+      droppable: true,
+      eventRender: function (event, element) {
+        element.attr('href','getListe/'+event.idSeance);
+      },
       select: function select(start, end, allDay) {
         var title;
         title = prompt("Event Title:");
@@ -130,26 +188,64 @@ $(function () {
         return calendar.fullCalendar("unselect");
       },
       editable: true,
-      events: [{
-        title: "Long Event",
-        start: new Date(y, m, 3, 12, 0),
-        end: new Date(y, m, 7, 14, 0)
-      }, {
-        title: "Lunch",
-        start: new Date(y, m, d, 12, 0),
-        end: new Date(y, m, d + 2, 14, 0),
-        allDay: false
-      }, {
-        title: "Click for Google",
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        url: "http://google.com/"
-      }]
+      events: nvScs
     });
+                     //console.log(calendar.fullCalendar('clientEvents'));
+                           //alert(response.messages);
+                    }  // if
+                    else {
+                      alert('error');
+                    }
+                  }
+              });
+        
+    
   }
-
+  
   // #3. FORM VALIDATION
-
+  $('#valid').on('click',function(){
+        var seances = [];
+        var i =0;
+        var events = calendar.fullCalendar('clientEvents'); 
+        events.forEach(function(event) {
+          var tab = event.title.split(" ");
+          var idAffect = event.idAffect;
+          var type = tab[tab.length - 1];
+          var startHour = event.start.format("HH:mm:ss");
+          var jour = event.start.day() + 1;
+          var endHour = event.end.format("HH:mm:ss");
+          seances[i++] = {
+                "startHour":startHour,
+                "endHour":endHour,
+                "jour":jour,
+                "idAffect":idAffect,
+                "type":type
+             };
+        });
+        //console.log(seances);
+        $.ajaxSetup({
+        headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     } 
+    });
+        $.ajax({
+                  url : "valideCalendar/valide",
+                  type: "POST",
+                  data:{
+                      "seances":seances,
+                      "ensId":$('#ensId').val()
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                     if(response.success == true) {
+                           //alert(response.messages);
+                    }  // if
+                    else {
+                      alert('error');
+                    }
+                  }
+              });
+  });
   if ($('#formValidate').length) {
     $('#formValidate').validator();
   }
