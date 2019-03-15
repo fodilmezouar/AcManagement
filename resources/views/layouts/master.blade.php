@@ -502,6 +502,17 @@
             <span>Enseignants</span>
           </a>
         </li>
+          <li class="sub-header">
+            <span>Gestion Anonymat</span>
+          </li>
+          <li class="selected has-sub-menu {{ $active ==  'Anonymat' ? 'active':''}}">
+            <a href="{{url('anonymat')}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Anonymat</span>
+            </a>
+          </li>
         @endif
         @if(stristr(Auth::user()->role,'2'))
         <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
@@ -753,7 +764,6 @@
       <script src="{{asset('bower_components/bootstrap/js/dist/carousel.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/collapse.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/dropdown.js')}}"></script>
-      <script src=" https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/modal.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tab.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tooltip.js')}}"></script>

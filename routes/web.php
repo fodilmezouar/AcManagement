@@ -38,6 +38,7 @@ Route::get('repartieTache','AffectationController@getIndexAffect');
 Route::post('repartieTache/valider','AffectationController@validerAffectation');
 Route::post('enseignants/repartitionRole/validerRepartition','EnseignantController@validerRepartition');
 
+
 Auth::routes();
 
 Route::group( ['middleware' => 'auth' ], function()
@@ -59,6 +60,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence');
     Route::get('mesModules/groupes/{idMod}/{ensId}','ModuleController@getGroupes');
     Route::get('mesModules/groupes/{idMod}/{idAff}/{type}','ModuleController@getListeAbs');
+    Route::get('anonymat','PaquetsController@getPromos');
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles');
@@ -67,3 +69,9 @@ Route::post('calendrier/valideCalendar/valide','SeanceController@valideCalendar'
 Route::post('calendrier/seances/mesSeances','SeanceController@getSeanceEns');
 //Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence');
 Route::post('calendrier/getListe/absences/valider','AbsenceController@validerAbsence');
+
+Route::get('anonymat/{id}','PaquetsController@getPaquets');
+Route::post('anonymat/import/add','PaquetsController@import');
+Route::post('anonymat/paquets/suppPaquet','PaquetsController@suppPaquet');
+Route::post('anonymat/paquets/editPaquet','PaquetsController@editPaquet');
+Route::get('anonymat/paquets/liste/{idPaquet}','PaquetsController@getCopies');
