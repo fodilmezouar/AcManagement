@@ -4,11 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Module extends Model
+class Exams extends Model
 {
     //
     public function module()
     {
-        return $this->hasMany('App\Exams');
+        return $this->belongsTo('App\Module','module_id');
     }
 }

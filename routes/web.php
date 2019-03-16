@@ -75,3 +75,7 @@ Route::post('anonymat/import/add','PaquetsController@import');
 Route::post('anonymat/paquets/suppPaquet','PaquetsController@suppPaquet');
 Route::post('anonymat/paquets/editPaquet','PaquetsController@editPaquet');
 Route::get('anonymat/paquets/liste/{idPaquet}','PaquetsController@getCopies');
+Route::post('exams/ajoutExam','ExamsController@ajoutExam');
+Route::post('exams/suppExam','ExamsController@suppExam');
+Route::post('exams/editExam','ExamsController@editExam');
+Route::get('exams','ExamsController@getExam');

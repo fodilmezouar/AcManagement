@@ -28,6 +28,7 @@
                     <h5 class="form-header">
                         Les Paquets
                     </h5>
+                    <div class="pull-right"><?php if (count($paquets)>0){?><a class="btn btn-outline-primary"  href="{{url('anonymat')}}">Affecter</a><?php }?></div>
                     <div class="form-desc">
                     </div>
                     <!-- promotions -->
@@ -39,19 +40,9 @@
                                     <button aria-label="Close" class="close edit" type="button" data-target="#editGroupModal" data-toggle="modal" role="{{$paquet->id}}"><i class="os-icon os-icon-ui-49"></i></button>
                                 </div>
                                 <a class="element-box el-tablo" href="{{url('anonymat/paquets/liste/'.$paquet->id)}}" style="background-color: #f2f4f8;">
-                                    <!--
-                                    <div class="label" id="annee">
-                                         zea
-                                    </div>
-                                     -->
                                     <div class="value" id="libelle">
                                         {{$paquet->libelle}}
                                     </div>
-                                    <!--
-                                    <div class="trending trending-down-basic">
-                                      <span id="filiere">bombof</span>
-                                    </div>
-                                     -->
                                 </a>
                             </div>
                         @endforeach
