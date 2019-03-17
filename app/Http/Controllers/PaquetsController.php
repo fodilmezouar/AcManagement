@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CsvImportRequest;
+use App\Module;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Promotion;
@@ -19,10 +20,10 @@ class PaquetsController extends Controller
         return view('gPrel.paquets')->with([
             'promos' => $promos]);
     }
-    public function getPaquets($promoId){
-        $paquets = Paquets::where('promotion_id','=',$promoId)->get();
+    public function getPaquets($examId){
+        $paquets = Paquets::where('exam_id','=',$examId)->get();
 
-        return view('gPrel.paquetsG')->with(['paquets' => $paquets,'idPromo'=>$promoId]);
+        return view('gPrel.paquetsG')->with(['paquets' => $paquets,'idExam'=>$examId]);
 
     }
     public function import(Request $request)
@@ -32,7 +33,7 @@ class PaquetsController extends Controller
         $libelle = $request->input('libelleModal');
 
         $paquet->libelle = $libelle;
-        $paquet->promotion_id = $request->input('promoId');
+        $paquet->exam_id = $request->input('examId');
 
         $file = $request->file('fichier');
         $file_name = $libelle.'.'.$file->getClientOriginalExtension();
@@ -89,7 +90,7 @@ class PaquetsController extends Controller
     }
     public function getCopies($idPaquet){
         $paquet = Paquets::find($idPaquet);
-        $promo = Promotion::find($paquet->promotion_id);
+        $promo = Module::find($paquet->exam_id);
         $copies = Copies::where('paquetId','=',$idPaquet)->get();
         return view('gPrel.paquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id]);
     }

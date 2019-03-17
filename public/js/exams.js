@@ -26,7 +26,7 @@ $("#formPromos").on('submit',function(e) {
         var form = $(this);
         $("#ajoutExam").button('loading');
         $.ajax({
-            url : "exams/ajoutExam",
+            url : "ajoutExam",
             type: "POST",
             data: {
                 "libelle":libelle,
@@ -95,7 +95,7 @@ $("#formPromosEdit").on('submit',function(e) {
     var form = $(this);
     $("#ajoutPromo").button('loading');
     $.ajax({
-        url : "exams/editExam",
+        url : "editExam",
         type: "POST",
         data: {
             "libelle":libelle,

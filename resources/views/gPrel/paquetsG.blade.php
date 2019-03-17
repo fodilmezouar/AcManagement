@@ -18,7 +18,7 @@
     END - Breadcrumbs
     -------------------->
     <div class="content-i">
-        <input type="hidden" name="" id="promoId" value="{{$idPromo}}">
+        <input type="hidden" name="" id="promoId" value="{{$idExam}}">
         <div class="content-box">
             <div class="element-wrapper">
                 <h6 class="element-header">
@@ -28,7 +28,6 @@
                     <h5 class="form-header">
                         Les Paquets
                     </h5>
-                    <div class="pull-right"><?php if (count($paquets)>0){?><a class="btn btn-outline-primary"  href="{{url('anonymat')}}">Affecter</a><?php }?></div>
                     <div class="form-desc">
                     </div>
                     <!-- promotions -->

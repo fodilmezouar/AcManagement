@@ -36,7 +36,7 @@
                             <div class="col-sm-3 col-xxxl-3 block" role="{{$promo->id}}">
                                 <input type="hidden" id="{{$promo->id}}" value="{{$promo->filiere_id}}">
                                 <input type="hidden" id="{{$promo->id}}5" value="{{$promo->niveau}}">
-                                <a class="element-box el-tablo" href="anonymat/{{$promo->id}}" style="background-color: #f2f4f8;">
+                                <a class="element-box el-tablo" href="exams/{{$promo->id}}" style="background-color: #f2f4f8;">
                                     <div class="label" id="annee">
                                         {{$promo->annee}} / {{$promo->annee + 1}}
                                     </div>

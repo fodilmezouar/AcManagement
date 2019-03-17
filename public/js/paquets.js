@@ -11,7 +11,7 @@ $("#formGroupes").unbind('submit').bind('submit', function (e) {
     var libelle = $("#libelleModal").val();
     var promoId = $("#promoId").val();
     var formData = new FormData(this);
-    formData.append('promoId',promoId);
+    formData.append('examId',promoId);
     var form = $(this);
     $("#ajoutGroupe").button('loading');
     $.ajax({
@@ -52,7 +52,7 @@ $('#contentGroupes').on('click','.edit',function(){
     $(".help-block").remove();
 });
 
-/* Suppression d'un groupe */
+/** Suppression d'un paquet */
 $("#formGroupSupp").on('submit',function(e) {
     e.preventDefault();
     $.ajaxSetup({
@@ -74,7 +74,7 @@ $("#formGroupSupp").on('submit',function(e) {
         }
     });
 });
-/**edit groupe**/
+/**edit paquets**/
 $("#formGroupesEdit").on('submit',function(e) {
     e.preventDefault();
     $.ajaxSetup({
@@ -120,6 +120,29 @@ $("#formGroupesEdit").on('submit',function(e) {
             }
         });
     }
+});
+
+/* affecter les paquets*/
+$("#formAffecter").on('submit',function(e) {
+    e.preventDefault();
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    var paquetId = $('#paquetIdInput').val();
+    $.ajax({
+        url : "paquets/affecter",
+        type: "POST",
+        data: {
+            "paquetId":paquetId
+        },
+        dataType: 'json',
+        success:function(response) {
+            $('.block[role="'+paquetId+'"]').remove();
+            $('#formAffecter').modal('hide');
+        }
+    });
 });
 
 

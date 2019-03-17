@@ -17,9 +17,7 @@ class CreatePaquetsTable extends Migration
             $table->increments('id');
             $table->string('libelle',30);
             $table->string('fichier',100);
-            $table->integer('promotion_id')->unsigned();
             $table->integer('exam_id')->unsigned();
-            $table->foreign('promotion_id')->references('id')->on('promotions');
             $table->foreign('exam_id')->references('id')->on('exams');
             $table->timestamps();
         });

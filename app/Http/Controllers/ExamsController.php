@@ -9,9 +9,9 @@ use App\Module;
 class ExamsController extends Controller
 {
     //
-    public function getExam(){
+    public function getExam($id){
         $exams = Exams::all();
-        $modules = Module::all();
+        $modules = Module::where('promotion_id',$id)->get();
 
         return view('gPrel.exam')->with(['exams' => $exams,'modules' => $modules]);
 

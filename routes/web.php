@@ -61,6 +61,11 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('mesModules/groupes/{idMod}/{ensId}','ModuleController@getGroupes');
     Route::get('mesModules/groupes/{idMod}/{idAff}/{type}','ModuleController@getListeAbs');
     Route::get('anonymat','PaquetsController@getPromos');
+    Route::get('exams/{id}','ExamsController@getExam');
+    Route::post('exams/ajoutExam','ExamsController@ajoutExam');
+    Route::post('exams/suppExam','ExamsController@suppExam');
+    Route::post('exams/editExam','ExamsController@editExam');
+    Route::get('enseignant/paquets','EnseignantController@getPaquets');
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles');
@@ -70,12 +75,13 @@ Route::post('calendrier/seances/mesSeances','SeanceController@getSeanceEns');
 //Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence');
 Route::post('calendrier/getListe/absences/valider','AbsenceController@validerAbsence');
 
-Route::get('anonymat/{id}','PaquetsController@getPaquets');
-Route::post('anonymat/import/add','PaquetsController@import');
-Route::post('anonymat/paquets/suppPaquet','PaquetsController@suppPaquet');
-Route::post('anonymat/paquets/editPaquet','PaquetsController@editPaquet');
+Route::get('exams/anonymat/{id}','PaquetsController@getPaquets');
+Route::post('exams/anonymat/import/add','PaquetsController@import');
+Route::post('exams/anonymat/paquets/suppPaquet','PaquetsController@suppPaquet');
+Route::post('exams/anonymat/paquets/editPaquet','PaquetsController@editPaquet');
 Route::get('anonymat/paquets/liste/{idPaquet}','PaquetsController@getCopies');
 Route::post('exams/ajoutExam','ExamsController@ajoutExam');
 Route::post('exams/suppExam','ExamsController@suppExam');
 Route::post('exams/editExam','ExamsController@editExam');
-Route::get('exams','ExamsController@getExam');
+Route::get('enseignant/paquets/liste/{idPaquet}','EnseignantController@getCopies');
+

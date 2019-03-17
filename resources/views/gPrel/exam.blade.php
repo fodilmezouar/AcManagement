@@ -43,7 +43,7 @@
                                     <button aria-label="Close" class="close supp" type="button" data-target="#suppModal" data-toggle="modal" role="{{$exam->id}}"><i class="os-icon os-icon-ui-15"></i></button>
                                     <button aria-label="Close" class="close edit" type="button" data-target="#editModal" data-toggle="modal" role="{{$exam->id}}"><i class="os-icon os-icon-ui-49"></i></button>
                                 </div>
-                                <a class="element-box el-tablo" href="anonymat/exam/{{$exam->id}}" style="background-color: #f2f4f8;">
+                                <a class="element-box el-tablo" href="anonymat/{{$exam->id}}" style="background-color: #f2f4f8;">
                                     <div class="label" id="annee">
                                         {{$exam->dateExam}}
                                     </div>
