@@ -1,17 +1,23 @@
-@extends('layouts.master',['active'=>'mesModules'])
-   <!--------------------
+@extends('layouts.master',['active'=>isset($justifier) ? 'Justificatif' :'mesModules'])   <!--------------------
           START - Breadcrumbs
           -------------------->
 @section('content')
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
+              <a href="/home">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">G - Préliminaire</a>
+              @if(isset($justifier))
+                <a href="/mesModules/justifier/{{Auth::user()->id}}">Modules</a>
+              @else
+              <a href="/mesModules/{{Auth::user()->id}}">Modules</a>
+              @endif
             </li>
             <li class="breadcrumb-item">
-              <span>Promotions</span>
+              {{$nomMod}}
+            </li>
+            <li class="breadcrumb-item">
+              <span>groupes</span>
             </li>
           </ul>
           <!--------------------
@@ -21,33 +27,43 @@
             <div class="content-box">
               <div class="element-wrapper">
                 <h6 class="element-header">
-                  Promotions
+                  Groupes
                 </h6>
-                <div class="element-box">
+                <div class="element-box pipeline white lined-primary">
                   <h5 class="form-header">
-                    Promotions
+                     Groupes
                   </h5>
                   <div class="form-desc">
                   </div>
                   <!-- promotions -->
-                  <div class="row" id="contentPromos">
-                    @foreach($groupesEns as $groupeEns)
+                  <div class="pipeline-body row" id="contentPromos">
+                    <!-- pipeline -->
 
-                        <div class="col-sm-3 col-xxxl-3 block">
-                          <div>
-                            @if($groupeEns->tp == "1")
-                            <button aria-label="Close" class="close supp" type="button" data-target="#suppModal" data-toggle="modal"><a href="{{$groupeEns->affId}}/TP">TP</a> </button>
-                            @endif
-                            @if($groupeEns->td == "1")
-                            <button aria-label="Close" class="close edit" type="button" data-target="#editModal" data-toggle="modal" ><a href="{{$groupeEns->affId}}/TD">TD</a></button>
-                            @endif
-                          </div>
-                          <a class="element-box el-tablo" href="" style="background-color: #e1e1e1;">
-                            <div class="value" id="libelle">
-                              {{$groupeEns->libelle}}
+                    @foreach($groupesEns as $groupeEns)
+                    <div class="col-sm-4">
+                     <div class="pipeline-item">
+                          <div class="pi-body">
+                            <div class="pi-info">
+                              <div class="h6 pi-name">
+                                {{$groupeEns->libelle}}
+                              </div>
+                              <div class="pi-sub">
+                                <br>
+                              </div>
                             </div>
-                          </a>
+                          </div>
+                          <div class="pi-foot">
+                            <div class="tags">
+                              @if($groupeEns->tp == "1")
+                                <a class="tag" href="{{$groupeEns->affId}}/TP">Liste TP</a>
+                              @endif
+                              @if($groupeEns->td == "1")
+                                <a class="tag" href="{{$groupeEns->affId}}/TD">Liste TD</a>
+                              @endif
+                            </div>
+                          </div>
                         </div>
+                      </div>
                        @endforeach
                    </div>
                    <!-- promotions -->

@@ -9,13 +9,13 @@
           -------------------->
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
+              <a href="/home">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">Products</a>
+              G - Absences
             </li>
             <li class="breadcrumb-item">
-              <span>Laptop with retina screen</span>
+              <span>Calendrier</span>
             </li>
           </ul>
           <!--------------------
@@ -26,37 +26,61 @@
             <div class="content-box">
               <div class="element-wrapper">
                 <h6 class="element-header">
-                  Event Calendar
+                  Mon Emploi Du temps
                 </h6>
                 <div class="element-box">
                   <h5 class="form-header">
-                    Calendar powered by FullCalendar
+                    Gérer Mes séances
                   </h5>
+                  <div id="success-mess"></div>
                   <div class="form-desc">
-                    A JavaScript event calendar. Customizable and open source. Display a full-size drag-n-drop event calendar, leveraging jQuery. <a href="https://fullcalendar.io/" target="_blank">Learn More about FullCalendar</a>
+                    Drag And Drop les affectations que vous correspond
                   </div>
                   <div class="row">
 
                    <div id='external-events' class="col-sm-3" style="margin-top:50px;">
-  <p>
-    <strong>Draggable Events</strong>
-  </p>
+  <h6 class="element-header">Mes Affectations
+  </h6>
   <input type="hidden" value="{{Auth::user()->id}}" id="idEns">
    @foreach($affectations as $affectation)
    @if($affectation->td == "1" || $affectation->tp == "1")
      @if($affectation->td == "1")
-       <div class='fc-event' id="{{$affectation->id}}">{{$affectation->module->libelle}} {{$affectation->groupe->libelle}} td
+       <div class='fc-event' id="{{$affectation->id}}" style="margin-bottom: 5px; padding: 10px;">{{$affectation->module->libelle}} {{$affectation->groupe->libelle}} td
         </div>
        @endif
         @if($affectation->tp == "1")
-          <div class='fc-event' id="{{$affectation->id}}">{{$affectation->module->libelle}} {{$affectation->groupe->libelle}} tp
+          <div class='fc-event' id="{{$affectation->id}}" style="margin-bottom: 5px;padding: 10px;">{{$affectation->module->libelle}} {{$affectation->groupe->libelle}} tp
           </div>
         @endif
 
      @endif
         
    @endforeach
-   <button id="valid">ok</button>
+   <div class="floated-chat-btn" data-target="#emploiModal" data-toggle="modal" >
+                <i class="icon-feather-arrow-up-right"></i>
+              </div>
+              <!-- modal supp groupe-->
+    <div aria-labelledby="exampleModalLabel" class="modal fade" id="emploiModal" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">
+              Valider Calendrier
+            </h5>
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
+          </div>
+       <form id="formGroupSupp" method="POST" action="">
+          <div class="modal-body">
+              Vous Optez pour cet emploi du temps ?
+          </div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="valid"> Valider</button>
+          </div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <!-- fin supp groupe -->
 </div>
                   <div id="fullCalendar" class="col-sm-9"></div>
      </div>              
@@ -65,4 +89,5 @@
             </div>
           </div>
         </div>
+
 @endsection

@@ -60,7 +60,7 @@ class AffectationController extends Controller
     }
 
    public function affectationEnseignant($idEns){
-      $affectations = Affectation::where('enseignant_id','=',$idEns)->get();
+      $affectations = Affectation::where('enseignant_id','=',$idEns)->orderBy('id','asc')->get();
       return view('gAbs.calendrier')->with('affectations',$affectations);
    }
 

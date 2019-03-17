@@ -1,7 +1,9 @@
-@extends('layouts.master',['active'=>isset($justifier) ? 'Justificatif' :'mesModules'])   <!--------------------
+@extends('layouts.master',['active'=>'mesModulesCharge'])
+   <!--------------------
           START - Breadcrumbs
           -------------------->
 @section('content')
+
    <input type="hidden" id="seanceId" value="{{$seanceId}}">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
@@ -11,23 +13,16 @@
                G - Absences
             </li>
             <li class="breadcrumb-item">
-              @if(isset($justifier))
-                <a href="/mesModules/justifier/{{Auth::user()->id}}">Modules</a>
-              @else
-                <a href="/mesModules/{{Auth::user()->id}}">Modules</a>
-              @endif
+                <a href="/mesModulesCharge/{{Auth::user()->id}}">Modules</a>
             </li>
             <li class="breadcrumb-item">
-              @if(isset($justifier))
-                <a href="/mesModules/justifier/groupes/{{$module->id}}/{{Auth::user()->id}}">{{$module->libelle}}</a>
-              @else
-              <a href="/mesModules/groupes/{{$module->id}}/{{Auth::user()->id}}">{{$module->libelle}}</a>
-              @endif
+                <a href="/mesModulesCharge/groupes/{{$module->id}}/{{Auth::user()->id}}">{{$module->libelle}}</a>
             </li>
             <li class="breadcrumb-item">
               <span>Liste - {{$type}}</span>
             </li>
           </ul>
+
           <!--------------------
           END - Breadcrumbs
           -------------------->
@@ -49,7 +44,7 @@
                        <div class="table-responsive">
                     <div id="dataTable1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4"><div class="row"><div class="col-sm-12"><table id="dataTable1" width="100%" class="table table-striped dataTable" role="grid" aria-describedby="dataTable1_info" style="width: 100%;margin:auto; "><thead><tr role="row">
                       <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width:30%;">Nom</th>
-                      <?php for ($i=0; $i < 7; $i++){ ?>
+                      <?php for ($i=0; $i < 7 || $i < count($instances); $i++){ ?>
                       <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width:10%;">sc</th>
                       <?php } ?>
                       @if(isset($justifier))
@@ -59,7 +54,7 @@
                       
                       <tfoot><tr>
                           <th rowspan="1" colspan="1">Nom</th>
-                          <?php for ($i=0; $i < 7; $i++){ ?>
+                          <?php for ($i=0; $i < 7 || $i < count($instances); $i++){ ?>
                            <th rowspan="1" colspan="1">sc</th>
                            <?php } ?>
                            @if(isset($justifier))
@@ -67,22 +62,25 @@
                            @endif
                             </tr>
                       </tfoot>
+
                       <tbody>
                         @foreach($students as $student)
                         <?php  
                         $st="";
+
                           if($seance && $student->isExclu($seance->id))
                              $st = "background-color: red;";
                          ?>
+
                            <tr role="row" class="block" id="{{$student->id}}" style="{{$st}}">
                                <td>
                                    {{$student->nom}} {{$student->prenom}}
                                </td>
                                <?php $k = 0;
-                               for ($i=0; $i < 7; $i++){ ?>
+                               for ($i=0; $i < 7 || $i < count($instances); $i++){ ?>
                            <td rowspan="1" colspan="1">
                                 <?php 
-                                  if($seance &&$i < sizeof($instances))
+                                  if($seance && $i < sizeof($instances))
                                      {
                                       $instance = $instances->get($i);
                                       if(! $instance->hasAbsence($student->id,$instance->id))

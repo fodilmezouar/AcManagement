@@ -6,13 +6,16 @@
    <input type="hidden" id="seanceId" value="{{$seanceId}}">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{url('home')}}">Home</a>
+              <a href="/home">Home</a>
             </li>
             <li class="breadcrumb-item">
-               G - Préliminaire
+               G - Absences
             </li>
             <li class="breadcrumb-item">
-                <a href="{{url('promotions/')}}"></a>
+               <a href="/calendrier/{{$ensId}}">Séances</a>
+            </li>
+            <li class="breadcrumb-item">
+                {{$groupeLib}} - {{$type}}
             </li>
             <li class="breadcrumb-item">
               <span></span>
@@ -25,14 +28,15 @@
             <div class="content-box">
               <div class="element-wrapper">
                 <h6 class="element-header">
-                  Promotions
+                  Séance {{$moduleName}} {{$type}}
                 </h6>
                 <div class="element-box">
-                  <h5 class="form-header">
-                    Promotions
+                  <h5 class="form-header" align="center">
+                     Date : {{$date}}
                   </h5>
                   <div class="form-desc">
                   </div>
+                  <div id="mess"></div>
                   <!-- promotions -->
                   <div class="row" id="contentPromos">
                       <!-- table etudiants -->
@@ -44,10 +48,15 @@
                                <td>
                                    {{$etudiant->nom}}
                                </td>
+                               <?php 
+                                  $checked="";
+                                  if($etudiant->hasAbs($seanceId))
+                                    $checked="checked";
+                                ?>
                                <td>
                                   {{$etudiant->prenom}}
                                </td>
-                               <td><input type="checkbox" name="" id="{{$etudiant->id}}"></td>
+                               <td><input type="checkbox" name="" id="{{$etudiant->id}}" {{$checked}}></td>
                            </tr>
                            @endforeach
                       </tbody></table></div></div>

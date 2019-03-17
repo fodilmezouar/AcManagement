@@ -6,16 +6,13 @@
    <input type="hidden" id="ensCourant">
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="{{url('home')}}">Home</a>
+              <a href="{{url('/home')}}">Home</a>
             </li>
             <li class="breadcrumb-item">
                G - Préliminaire
             </li>
             <li class="breadcrumb-item">
-                <a href="{{url('promotions/')}}"></a>
-            </li>
-            <li class="breadcrumb-item">
-              <span></span>
+              <span>Répartition des Roles</span>
             </li>
           </ul>
           <!--------------------
@@ -25,20 +22,23 @@
             <div class="content-box">
               <div class="element-wrapper">
                 <h6 class="element-header">
-                  Promotions
+                  Répartions des Roles
                 </h6>
                 <div class="element-box">
                   <h5 class="form-header">
-                    Promotions
+                    Répartions de Roles
                   </h5>
                   <div class="form-desc">
                   </div>
+                  <div id="success-mess"></div>
                   <!-- promotions -->
                   <div class="row" id="contentPromos">
                       <!-- table etudiants -->
                        <div class="table-responsive">
                     <div id="dataTable1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4"><div class="row"><div class="col-sm-12"><table id="dataTable1" width="100%" class="table table-striped dataTable" role="grid" aria-describedby="dataTable1_info" style="width: 100%;margin:auto; "><thead><tr role="row"><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width:25%;">Enseignant</th><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Chargé Module</th><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Assisstant</th>
-                      <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Action</th></tr></thead><tfoot><tr><th rowspan="1" colspan="1">Enseignant</th><th rowspan="1" colspan="1">Chargé Module</th><th rowspan="1" colspan="1">Assistant</th></tr><th rowspan="1" colspan="1">Action</th></tfoot>
+                      <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Action</th></tr></thead><tfoot><tr><th rowspan="1" colspan="1">Enseignant</th><th rowspan="1" colspan="1">Chargé Module</th><th rowspan="1" colspan="1">Assistant</th><th rowspan="1" colspan="1">Action</th>
+                         </tr>
+                      </tfoot>
                       <tbody>
                         @foreach($enseignants as $enseignant)
                            <tr role="row" class="block" id="{{$enseignant->id}}">

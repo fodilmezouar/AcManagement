@@ -1,4 +1,4 @@
-@extends('layouts.master',['active'=>isset($justifier) ? 'Justificatif' :'mesModules'])
+@extends('layouts.master',['active'=>'mesModulesCharge'])
    <!--------------------
           START - Breadcrumbs
           -------------------->
@@ -8,10 +8,13 @@
               <a href="/home">Home</a>
             </li>
             <li class="breadcrumb-item">
-              G - Absences
+              <a href="/mesModulesCharge/{{Auth::user()->id}}">Modules</a>
             </li>
             <li class="breadcrumb-item">
-              <span>Mes Modules</span>
+              {{$nomMod}}
+            </li>
+            <li class="breadcrumb-item">
+              <span>groupes</span>
             </li>
           </ul>
           <!--------------------
@@ -21,25 +24,39 @@
             <div class="content-box">
               <div class="element-wrapper">
                 <h6 class="element-header">
-                  Mes Modules
+                  Groupes
                 </h6>
-                <div class="element-box">
+                <div class="element-box pipeline white lined-primary">
                   <h5 class="form-header">
-                    Mes Modules
+                     Groupes
                   </h5>
                   <div class="form-desc">
                   </div>
                   <!-- promotions -->
-                  <div class="row" id="contentPromos">
-                    @foreach($modules as $module)
+                  <div class="pipeline-body row" id="contentPromos">
+                    <!-- pipeline -->
 
-                        <div class="col-sm-3 col-xxxl-3 block">
-                          <a class="element-box el-tablo" href="groupes/{{$module->id}}/{{Auth::user()->id}}" style="background-color: #e1e1e1;">
-                            <div class="value" id="libelle">
-                              {{$module->libelle}}
+                    @foreach($groupes as $groupe)
+                    <div class="col-sm-4">
+                     <div class="pipeline-item">
+                          <div class="pi-body">
+                            <div class="pi-info">
+                              <div class="h6 pi-name">
+                                {{$groupe->libelle}}
+                              </div>
+                              <div class="pi-sub">
+                                <br>
+                              </div>
                             </div>
-                          </a>
+                          </div>
+                          <div class="pi-foot">
+                            <div class="tags">
+                                <a class="tag" href="{{$groupe->id}}/TP">Liste TP</a>
+                                <a class="tag" href="{{$groupe->id}}/TD">Liste TD</a>
+                            </div>
+                          </div>
                         </div>
+                      </div>
                        @endforeach
                    </div>
                    <!-- promotions -->

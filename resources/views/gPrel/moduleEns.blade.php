@@ -1,4 +1,4 @@
-@extends('layouts.master',['active'=>isset($justifier) ? 'Justificatif' :'mesModules'])
+@extends('layouts.master',['active'=>'mesModulesCharge'])
    <!--------------------
           START - Breadcrumbs
           -------------------->
@@ -47,10 +47,6 @@
               </div><!--------------------
               START - Chat Popup Box
               -------------------->
-              <div class="floated-chat-btn" data-target="#exampleModal1" data-toggle="modal">
-                <i class="os-icon os-icon-plus"></i>
-              </div>  
-     
               <!--------------------
               END - Chat Popup Box
               -------------------->
@@ -62,5 +58,4 @@
     </div>
 @endsection
 @section('scripts')
-   <script src="{{asset('js/promotions.js')}}"></script>
 @endsection

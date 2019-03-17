@@ -26,6 +26,14 @@ $('#formRepartir').on('submit',function(e){
                   dataType: 'json',
                   success:function(response) {
                     $('#attModal').modal('hide');
+                    $('#success-mess').html('<div class="alert alert-success">' +
+                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                            '<strong><i class="fa fa-check"></i></strong> Répartition Effectuée</div>');
+                        $(".alert-success").delay(500).show(10, function () {
+                            $(this).delay(3000).hide(10, function () {
+                                $(this).remove();
+                            });
+                        }); // /.alert
                   }
               });
 });

@@ -17,8 +17,10 @@ class CreateAbsencesTable extends Migration
             $table->increments('id');
             $table->integer('etudiant_id')->unsigned();
             $table->integer('instance_id')->unsigned();
+            $table->integer('justification_id')->unsigned()->nullable();
             $table-> foreign('etudiant_id')->references('id')->on('etudiants');
             $table-> foreign('instance_id')->references('id')->on('instances');
+            $table-> foreign('justification_id')->references('id')->on('justifications');
             $table->timestamps();
         });
     }

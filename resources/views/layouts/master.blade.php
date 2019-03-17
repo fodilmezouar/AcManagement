@@ -505,7 +505,7 @@
         @endif
         @if(stristr(Auth::user()->role,'2'))
         <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
-          <a href="{{url('repartieTache')}}">
+          <a href="{{url('repartirTache')}}">
             <div class="icon-w">
               <div class="os-icon os-icon-layout"></div>
             </div>
@@ -523,6 +523,14 @@
           </a>
         </li>
         @endif
+        <li class="selected has-sub-menu {{ $active ==  'mesModulesCharge' ? 'active':''}}">
+          <a href="{{url('mesModulesCharge/'.Auth::user()->id)}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Mes Modules</span>
+          </a>
+        </li>
         <li class="sub-header">
           <span>Gestion Absences</span>
           @if(stristr(Auth::user()->role,'3'))
@@ -541,7 +549,17 @@
             <div class="icon-w">
               <div class="os-icon os-icon-layout"></div>
             </div>
-            <span>Mes Modules</span>
+            <span>Mes Affectations</span>
+          </a>
+        </li>
+        @endif
+         @if(stristr(Auth::user()->role,'3'))
+        <li class="selected has-sub-menu {{ $active ==  'Justificatif' ? 'active':''}}">
+          <a href="{{url('mesModules/justifier/'.Auth::user()->id)}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Joindre Justificatif</span>
           </a>
         </li>
         @endif

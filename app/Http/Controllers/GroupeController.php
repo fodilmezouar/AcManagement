@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Groupe;
 use App\Etudiant;
 use App\Promotion;
+use App\Affectation;
+use App\Seance;
 class GroupeController extends Controller
 {
 	public function import(Request $request) 
@@ -33,7 +35,7 @@ class GroupeController extends Controller
                             <button aria-label='Close' class='close supp' type='button' data-target='#suppGroupModal' data-toggle='modal' role='".$groupe->id."'><i class='os-icon os-icon-ui-15'></i></button>
                             <button aria-label='Close' class='close edit' type='button' data-target='#editGroupModal' data-toggle='modal' role='".$groupe->id."'><i class='os-icon os-icon-ui-49'></i></button>
                           </div>
-                          <a class='element-box el-tablo' href='#' style='background-color: #e1e1e1;'>
+                          <a class='element-box el-tablo' href='".url('promotions/groupes/liste/'.$groupe->id)."' style='background-color: #e1e1e1;'>
                             <div class='value' id='libelle'>
                               ".$groupe->libelle."
                             </div>
@@ -48,6 +50,11 @@ class GroupeController extends Controller
     public function suppGroupe(Request $request){
        $groupeId = $request->input('groupeId');
        Etudiant::where('groupe_id','=',$groupeId)->delete();
+       $affects = Affectation::where('groupe_id','=',$groupeId)->get();
+       foreach ($affects as $aff) {
+         Seance::where('affectation_id','=',$aff->id)->delete();
+         $aff->delete();
+       }
        Groupe::find($groupeId)->delete();
        $valid['success'] = array('success' => false, 'messages' => array());
            $valid['success'] = true;

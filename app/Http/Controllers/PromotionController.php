@@ -9,13 +9,15 @@ use App\Filiere;
 use App\Groupe;
 use App\Etudiant;
 use App\Module;
+use App\User;
 class PromotionController extends Controller
 {
     public function getGroupes($promoId){
-      $nomPromo = Promotion::find($promoId)->libelle;
+      $promo = Promotion::find($promoId);
+      $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$promo->filiere_id)->where('role','like','%2%')->get();
       $groupes = Groupe::where('promotion_id','=',$promoId)->orderBy('id')->get();
       $modules = Module::where('promotion_id','=',$promoId)->orderBy('id')->get();
-      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'modules' => $modules,'nomPromo'=>$nomPromo]);
+      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'modules' => $modules,'nomPromo'=>$promo->libelle,"enseignants"=>$enseignants]);
     }
     public function getPromos()
     {

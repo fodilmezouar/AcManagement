@@ -5,10 +5,10 @@
 @section('content')
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
+              <a href="/home">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">G - Préliminaire</a>
+              G - Préliminaire
             </li>
             <li class="breadcrumb-item">
               <span>Promotions</span>
@@ -28,9 +28,12 @@
                     Promotions
                   </h5>
                   <div class="form-desc">
+                   <div id="remove-messages-promo"></div>
                   </div>
+
                   <!-- promotions -->
                   <div class="row" id="contentPromos">
+
                     @foreach($promos as $promo)
 
                         <div class="col-sm-3 col-xxxl-3 block" role="{{$promo->id}}">
@@ -59,7 +62,7 @@
               </div><!--------------------
               START - Chat Popup Box
               -------------------->
-              <div class="floated-chat-btn" data-target="#exampleModal1" data-toggle="modal">
+              <div class="floated-chat-btn" data-target="#exampleModal1" data-toggle="modal" id="floated-add">
                 <i class="os-icon os-icon-plus"></i>
               </div>  
       <!-- modal add promotion-->
@@ -74,6 +77,7 @@
           </div>
        <form id="formPromos" method="POST" action="">
           <div class="modal-body">
+            <div id="add-prom-messages"></div>
               <div class="form-group">
                 <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModal">
               </div>
@@ -143,6 +147,7 @@
           </div>
        <form id="formPromosEdit" method="POST" action="">
           <div class="modal-body">
+             <div id="edit-prom-messages"></div>
               <div class="form-group">
                 <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModalEdit">
               </div>

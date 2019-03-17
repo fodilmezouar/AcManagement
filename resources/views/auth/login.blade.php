@@ -7,13 +7,13 @@
           <a href="index.html"><img alt="" src="img/logo-big.png"></a>
         </div>
         <h4 class="auth-header">
-          Login Form
+          Login
         </h4>
                     <form method="POST" action="{{ route('login') }}">
                         {{csrf_field()}}
 
                         <div class="form-group">
-                            <label for="email">{{ __('E-Mail Address') }}</label>
+                            <label for="email">{{ __('EMail') }}</label>
 
                                 <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required autofocus>
                                 <div class="pre-icon os-icon os-icon-user-male-circle"></div>
@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="password">{{ __('Password') }}</label>
+                            <label for="password">{{ __('Mot de Passe') }}</label>
 
                                 <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
                                 <div class="pre-icon os-icon os-icon-fingerprint"></div>

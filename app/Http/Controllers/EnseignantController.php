@@ -139,13 +139,21 @@ class EnseignantController extends Controller
         return response()->json($valid);
     }
     public function repartirRoles($id){
-      $enseignants = User::where('grade','!=',NULL)->get();
+      $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$id)->get();
       return view('gPrel.repartitionRole')->with('enseignants',$enseignants);
     }
     public function validerRepartition(Request $request){
        $enseignant = User::find($request->input('ensId'));
+       
        if(stristr($enseignant->role,'1') || stristr($enseignant->role,'4'))
-        $enseignant->role.=" ".$request->input('aRet');
+        {
+            if(!$request->input('aRet') && stristr($enseignant->role,'1'))
+                    $enseignant->role = "1";
+            else if(!$request->input('aRet') && stristr($enseignant->role,'4'))
+                $enseignant->role = "4";
+            else
+              $enseignant->role.=" ".$request->input('aRet');
+        }
        else
         $enseignant->role = $request->input('aRet');
        $enseignant->save();

@@ -172,7 +172,8 @@ $(function () {
       selectHelper: true,
       droppable: true,
       eventRender: function (event, element) {
-        element.attr('href','getListe/'+event.idSeance);
+        if(event.idSeance)
+           element.attr('href','getListe/'+event.idSeance);
       },
       select: function select(start, end, allDay) {
         var title;
@@ -238,7 +239,15 @@ $(function () {
                   dataType: 'json',
                   success:function(response) {
                      if(response.success == true) {
-                           //alert(response.messages);
+                      $('#emploiModal').modal('hide');
+                          $('#success-mess').html('<div class="alert alert-success">' +
+                            '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
+                            '<strong><i class="fa fa-check"></i></strong> Vous venez de valider votre emploie du temps</div>');
+                        $(".alert-success").delay(500).show(10, function () {
+                            $(this).delay(3000).hide(10, function () {
+                                $(this).remove();
+                            });
+                        }); // /.alert
                     }  // if
                     else {
                       alert('error');
@@ -297,6 +306,7 @@ $(function () {
   if ($('.select2').length) {
     $('.select2').select2();
   }
+   $('#basicExample').select2();
 
   // #9. CKEDITOR ACTIVATION
 

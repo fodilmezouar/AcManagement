@@ -5,10 +5,10 @@
 @section('content')
           <ul class="breadcrumb">
             <li class="breadcrumb-item">
-              <a href="index.html">Home</a>
+              <a href="/home">Home</a>
             </li>
             <li class="breadcrumb-item">
-              <a href="index.html">G - Préliminaire</a>
+              G - Préliminaire
             </li>
             <li class="breadcrumb-item">
               <a href="{{url('promotions')}}">Promotions</a>

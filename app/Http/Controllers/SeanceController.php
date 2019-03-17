@@ -32,6 +32,7 @@ class SeanceController extends Controller
     	$idEns = $request->input('ensId');
     	$seances = DB::table('seances')
             ->join('affectations', 'seances.affectation_id', '=', 'affectations.id')
+            ->where('affectations.enseignant_id',"=",$idEns)
             ->select('seances.id','seances.jour', 'seances.heureDebut', 'seances.heureFin','seances.affectation_id','type')
             ->get();
         $tab = array();

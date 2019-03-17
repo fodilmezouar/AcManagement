@@ -12,6 +12,7 @@ use App\Affectation;
 use App\Etudiant;
 use App\Seance;
 use App\Instance;
+use App\Groupe;
 class ModuleController extends Controller
 {
     public function addModule(Request $request) 
@@ -43,6 +44,11 @@ class ModuleController extends Controller
     }
     public function suppModule(Request $request){
        $moduleId = $request->input('moduleId');
+       $affects = Affectation::where('module_id','=',$moduleId)->get();
+       foreach ($affects as $aff) {
+         Seance::where('affectation_id','=',$aff->id)->delete();
+         $aff->delete();
+       }
        Module::find($moduleId)->delete();
        $valid['success'] = array('success' => false, 'messages' => array());
            $valid['success'] = true;
@@ -81,17 +87,75 @@ class ModuleController extends Controller
               ");
             return view('gAbs.modulesEns')->with('modules',$modules);
     }
+    public function modulesCharge($idEns){
+            $modules = Module::where('enseignant_id','=',$idEns)->get();
+            return view('gPrel.moduleEns')->with('modules',$modules);
+    }
+    public function modulesAssistantJustifier($idEns){
+            $modules = DB::select("SELECT modules.id ,libelle FROM 
+              (SELECT DISTINCT affectations.module_id from affectations WHERE affectations.enseignant_id = ".$idEns.") AS affs ,modules WHERE 
+              affs.module_id = modules.id
+              ");
+            return view('gAbs.modulesEns')->with(['modules'=>$modules,'justifier'=>"oui"]);
+    }
     public function getGroupes($idModule,$idEns){
+           $nomMod = Module::find($idModule)->libelle;
            $groupesEns = DB::select("SELECT affectations.id as affId,groupes.id as grId,libelle,td,tp FROM affectations , groupes WHERE affectations.enseignant_id = ".$idEns." AND
               affectations.module_id = ".$idModule." AND affectations.groupe_id = groupes.id");
-            return view('gAbs.groupesEns')->with('groupesEns',$groupesEns);
+            return view('gAbs.groupesEns')->with(['groupesEns'=>$groupesEns,"nomMod"=>$nomMod]);
+    }
+     public function getGroupesCharge($idModule,$idEns){
+           $nomMod = Module::find($idModule)->libelle;
+           $module =  Module::find($idModule);
+           $groupes = Groupe::where('promotion_id','=',$module->promotion_id)->orderBy('id','asc')->get();
+            return view('gPrel.groupesCharge')->with(['groupes'=>$groupes,"nomMod"=>$nomMod,"module"=>$module]);
+    }
+    public function getGroupesJustifier($idModule,$idEns){
+           $nomMod = Module::find($idModule)->libelle;
+           $groupesEns = DB::select("SELECT affectations.id as affId,groupes.id as grId,libelle,td,tp FROM affectations , groupes WHERE affectations.enseignant_id = ".$idEns." AND
+              affectations.module_id = ".$idModule." AND affectations.groupe_id = groupes.id");
+            return view('gAbs.groupesEns')->with(['groupesEns'=>$groupesEns,"nomMod"=>$nomMod,"justifier"=>"oui"]);
     }
     
     public function getListeAbs($idModule,$idAff,$type){
            $affectation = Affectation::find($idAff);
            $students = Etudiant::where('groupe_id','=',$affectation->groupe_id)->get();
            $seance = Seance::where('affectation_id','=',$idAff)->where('type','=',$type)->get();
-           $instances = Instance::where('seance_id','=',$seance->get(0)->id)->orderBy('id','asc')->get();
-            return view('gAbs.listeAbsComplete')->with(['students'=>$students,'instances'=>$instances]);
+           $seance = $seance->get(0);
+           $seanceId= null;
+           if($seance)
+                $seanceId = $seance->id;
+           $instances = Instance::where('seance_id','=',$seanceId)->orderBy('id','asc')->get();
+           $module = Module::find($idModule);
+            return view('gAbs.listeAbsComplete')->with(['students'=>$students,'instances'=>$instances,"seanceId"=>$seanceId,"seance"=>$seance,"module"=>$module,'type'=>$type]);
+    }
+    public function getListeAbsCharge($idModule,$idGrp,$type){
+           $affectation = Affectation::where("module_id","=",$idModule)->where("groupe_id","=",$idGrp)->where($type,"=","1")->get();
+           $affectation= $affectation->get(0);
+           $affId = null;
+           if($affectation)
+             $affId = $affectation->id;
+           $students = Etudiant::where('groupe_id','=',$idGrp)->orderBy('id','asc')->get();
+           $seance = Seance::where('affectation_id','=',$affId)->where('type','=',$type)->get();
+           $seance = $seance->get(0);
+           $seanceId= null;
+           if($seance)
+                $seanceId = $seance->id;
+           $instances = Instance::where('seance_id','=',$seanceId)->orderBy('id','asc')->get();
+
+           $module = Module::find($idModule);
+            return view('gPrel.listeAbsCompleteCharge')->with(['students'=>$students,'instances'=>$instances,"seanceId"=>$seanceId,"seance"=>$seance,"module"=>$module,"type"=>$type]);
+    }
+     public function getListeAbsJustifier($idModule,$idAff,$type){
+            $affectation = Affectation::find($idAff);
+           $students = Etudiant::where('groupe_id','=',$affectation->groupe_id)->get();
+           $seance = Seance::where('affectation_id','=',$idAff)->where('type','=',$type)->get();
+           $seance = $seance->get(0);
+           $seanceId= null;
+           if($seance)
+                $seanceId = $seance->id;
+           $instances = Instance::where('seance_id','=',$seanceId)->orderBy('id','asc')->get();
+           $module = Module::find($idModule);
+            return view('gAbs.listeAbsComplete')->with(['students'=>$students,'instances'=>$instances,"seanceId"=>$seanceId,"seance"=>$seance,"module"=>$module,'type'=>$type,"justifier"=>"oui"]);
     }
 }
