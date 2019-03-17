@@ -25,7 +25,7 @@ Route::post('promotions/modules/ajoutModule','ModuleController@addModule');
 Route::post('promotions/modules/suppModule','ModuleController@suppModule');
 Route::post('promotions/modules/editModule','ModuleController@editModule');
 Route::get('promotions/modules/attModule/{idModule}','ModuleController@attacherModule');
-Route::post('valide/attachement','ModuleController@validerAttachement');
+Route::post('promotions/modules/attModule/valide/yes','ModuleController@validerAttachement');
 
 Route::get('getEnseignant','EnseignantController@getEnseignant');
 Route::post('enseignant/createEnseignant','EnseignantController@createEnseignant');
@@ -35,8 +35,9 @@ Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignan
 
 Route::get('repartieTache/{id}','AffectationController@attacherGroupe');
 Route::get('repartieTache','AffectationController@getIndexAffect');
-Route::post('test/valider','AffectationController@validerAffectation');
+Route::post('repartieTache/valider','AffectationController@validerAffectation');
 Route::post('enseignants/repartitionRole/validerRepartition','EnseignantController@validerRepartition');
+
 
 Auth::routes();
 
@@ -56,15 +57,15 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('enseignant','EnseignantController@enseignantView');
     Route::get('calendrier/{idEns}','AffectationController@affectationEnseignant');
     Route::get('mesModules/{idEns}','ModuleController@modulesAssistant');
-    Route::get('mesModulesCharge/{idEns}','ModuleController@modulesCharge');
-    Route::get('mesModules/justifier/{idEns}','ModuleController@modulesAssistantJustifier');
     Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence');
     Route::get('mesModules/groupes/{idMod}/{ensId}','ModuleController@getGroupes');
-    Route::get('mesModulesCharge/groupes/{idMod}/{ensId}','ModuleController@getGroupesCharge');
-    Route::get('mesModules/justifier/groupes/{idMod}/{ensId}','ModuleController@getGroupesJustifier');
     Route::get('mesModules/groupes/{idMod}/{idAff}/{type}','ModuleController@getListeAbs');
-    Route::get('mesModulesCharge/groupes/{idMod}/{idGrp}/{type}','ModuleController@getListeAbsCharge');
-    Route::get('mesModules/justifier/groupes/{idMod}/{idAff}/{type}','ModuleController@getListeAbsJustifier');
+    Route::get('anonymat','PaquetsController@getPromos');
+    Route::get('exams/{id}','ExamsController@getExam');
+    Route::post('exams/ajoutExam','ExamsController@ajoutExam');
+    Route::post('exams/suppExam','ExamsController@suppExam');
+    Route::post('exams/editExam','ExamsController@editExam');
+    Route::get('enseignant/paquets','EnseignantController@getPaquets');
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles');
@@ -73,5 +74,14 @@ Route::post('calendrier/valideCalendar/valide','SeanceController@valideCalendar'
 Route::post('calendrier/seances/mesSeances','SeanceController@getSeanceEns');
 //Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence');
 Route::post('calendrier/getListe/absences/valider','AbsenceController@validerAbsence');
-Route::get('absences/getAbsEtudiant','AbsenceController@getAbsEtudiant');
-Route::post('validJustificatif','AbsenceController@validJustificatif');
+
+Route::get('exams/anonymat/{id}','PaquetsController@getPaquets');
+Route::post('exams/anonymat/import/add','PaquetsController@import');
+Route::post('exams/anonymat/paquets/suppPaquet','PaquetsController@suppPaquet');
+Route::post('exams/anonymat/paquets/editPaquet','PaquetsController@editPaquet');
+Route::get('anonymat/paquets/liste/{idPaquet}','PaquetsController@getCopies');
+Route::post('exams/ajoutExam','ExamsController@ajoutExam');
+Route::post('exams/suppExam','ExamsController@suppExam');
+Route::post('exams/editExam','ExamsController@editExam');
+Route::get('enseignant/paquets/liste/{idPaquet}','EnseignantController@getCopies');
+

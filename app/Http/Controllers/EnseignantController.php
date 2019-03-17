@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 
+use App\Exams;
 use App\Filiere;
+use App\Paquets;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Module;
+use App\Copies;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
@@ -161,5 +165,25 @@ class EnseignantController extends Controller
        $valid['success'] = true;
        $valid['messages'] = "yes babe";
        return response()->json($valid);   
+    }
+    public function getPaquets(){
+        $userId = Auth::id();
+        $test = Module::where('enseignant_id',$userId)->exists();
+        $examId=0;
+        $paquets = array();
+        if($test) {
+            $moduleId = Module::select('id')->where('enseignant_id', $userId)->get()->first()->id;
+            if (Exams::where('module_id',$moduleId)->exists()) {
+                $examId = Exams::select('id')->where('module_id', $moduleId)->get()->first()->id;
+                $paquets = Paquets::where('exam_id',$examId)->get();
+            }
+        }
+        return view('gPrel.paquetExam')->with(['paquets' => $paquets,'idExam'=>$examId]);
+    }
+    public function getCopies($idPaquet){
+        $paquet = Paquets::find($idPaquet);
+        $promo = Module::find($paquet->exam_id);
+        $copies = Copies::where('paquetId','=',$idPaquet)->get();
+        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id]);
     }
 }
