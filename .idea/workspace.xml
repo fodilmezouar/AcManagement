@@ -6,17 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="00f598a2-481f-4a8e-802c-c86f7375d1b9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/EnseignantController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/EnseignantController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/ExamsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/ExamsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PaquetsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PaquetsController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2019_03_16_294545_create_paquets_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2019_03_16_294545_create_paquets_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/exams.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/exams.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/paquets.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/paquets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/gPrel/exam.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gPrel/exam.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/gPrel/paquet.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gPrel/paquet.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/gPrel/paquets.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gPrel/paquets.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/gPrel/paquetsG.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/gPrel/paquetsG.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/layouts/master.blade.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,8 +22,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/routes/web.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1275">
-              <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
+            <state relative-caret-position="160">
+              <caret line="36" column="25" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="25" />
               <folding>
                 <element signature="e#7#389#0#PHP" expanded="true" />
               </folding>
@@ -42,34 +32,15 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/gPrel/paquetsG.blade.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1715">
-              <caret line="121" column="18" selection-start-line="121" selection-start-column="18" selection-end-line="121" selection-end-column="18" />
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_14_180627_justifications.php">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/gPrel/paquetExam.blade.php">
+        <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_16_181703_create_exams_table.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="39" column="87" selection-start-line="39" selection-start-column="87" selection-end-line="39" selection-end-column="87" />
-              <folding>
-                <element signature="e#6921#6943#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/PaquetsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="588">
-              <caret line="90" column="4" selection-start-line="90" selection-start-column="4" selection-end-line="95" selection-end-column="5" />
-              <folding>
-                <element signature="e#40#79#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="270">
+              <caret line="20" column="71" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
             </state>
           </provider>
         </entry>
@@ -77,8 +48,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EnseignantController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-34">
-              <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+            <state relative-caret-position="-4">
+              <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+              <folding>
+                <element signature="e#41#55#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -96,44 +70,26 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/gPrel/paquets.blade.php">
+        <entry file="file://$PROJECT_DIR$/app/Etudiant.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="543">
-              <caret line="38" column="75" selection-start-line="38" selection-start-column="75" selection-end-line="38" selection-end-column="75" />
+            <state relative-caret-position="120">
+              <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/views/gPrel/paquet.blade.php">
+        <entry file="file://$PROJECT_DIR$/Merge_branch_'master'_into_ze3bout__#_Conflicts__#_app_Etudiant_php_#_routes_web_php.patch">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="693">
-              <caret line="87" lean-forward="true" selection-end-line="87" />
-            </state>
+            <state relative-caret-position="-31814" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/resources/views/gPrel/examPaquet.blade.php">
+        <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="598">
-              <caret line="52" column="81" selection-start-line="52" selection-start-column="81" selection-end-line="52" selection-end-column="81" />
-              <folding>
-                <element signature="e#2550#2571#0#HTML" expanded="true" />
-                <element signature="e#2768#2788#0#HTML" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/Http/Controllers/ExamsController.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-87">
-              <caret line="24" column="36" lean-forward="true" selection-start-line="24" selection-start-column="36" selection-end-line="24" selection-end-column="36" />
-              <folding>
-                <element signature="e#40#68#0#PHP" expanded="true" />
-              </folding>
+            <state relative-caret-position="489">
+              <caret line="518" column="39" selection-start-line="518" selection-start-column="39" selection-end-line="518" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -171,6 +127,8 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_CHANGES_POLICY" value="SHELVE" />
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -201,10 +159,8 @@
         <option value="$PROJECT_DIR$/database/migrations/2019_03_05_094239_create_etudiants_table.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/paquetsController.php" />
         <option value="$PROJECT_DIR$/resources/views/gPrel/enseignant.blade.php" />
-        <option value="$PROJECT_DIR$/resources/views/layouts/master.blade.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/ModuleController.php" />
         <option value="$PROJECT_DIR$/app/Imports/CopiesImport.php" />
-        <option value="$PROJECT_DIR$/app/Etudiant.php" />
         <option value="$PROJECT_DIR$/app/Copies.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/AffectationController.php" />
         <option value="$PROJECT_DIR$/database/migrations/2019_03_14_144545_create_paquets_table.php" />
@@ -222,9 +178,11 @@
         <option value="$PROJECT_DIR$/resources/views/gPrel/paquetsG.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/gPrel/paquetExam.blade.php" />
         <option value="$PROJECT_DIR$/resources/views/gPrel/paquet.blade.php" />
-        <option value="$PROJECT_DIR$/routes/web.php" />
         <option value="$PROJECT_DIR$/app/Http/Controllers/EnseignantController.php" />
         <option value="$PROJECT_DIR$/resources/views/gPrel/examPaquet.blade.php" />
+        <option value="$PROJECT_DIR$/routes/web.php" />
+        <option value="$PROJECT_DIR$/app/Etudiant.php" />
+        <option value="$PROJECT_DIR$/resources/views/layouts/master.blade.php" />
       </list>
     </option>
   </component>
@@ -459,14 +417,9 @@
       <TestRunner scope="XML" />
       <method v="2" />
     </configuration>
-    <configuration name="084bec0e90c72167e9015028962fc4365c4e00cd.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/storage/framework/views/084bec0e90c72167e9015028962fc4365c4e00cd.php">
+    <configuration name="084bec0e90c72167e9015028962fc4365c4e00cd.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/storage/framework/views/084bec0e90c72167e9015028962fc4365c4e00cd.php">
       <method v="2" />
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="PHP Script.084bec0e90c72167e9015028962fc4365c4e00cd.php" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -489,10 +442,18 @@
       <workItem from="1552740545194" duration="7222000" />
       <workItem from="1552818640192" duration="5392000" />
     </task>
+    <task id="LOCAL-00001" summary="habalniiii zatchi">
+      <created>1552850772502</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552850772502</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115366000" />
+    <option name="totallyTimeSpent" value="115985000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="1440" height="900" extended-state="0" />
@@ -545,21 +506,11 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="habalniiii zatchi" />
+    <option name="LAST_COMMIT_MESSAGE" value="habalniiii zatchi" />
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_05_092339_create_groupes_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="16" column="11" selection-start-line="16" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_08_105850_create_affectations_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="41" selection-start-line="41" selection-end-line="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_07_210753_add_id_filliere_to_users.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="240">
@@ -605,13 +556,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="49" selection-start-column="49" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="505" column="34" selection-start-line="505" selection-start-column="34" selection-end-line="505" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -681,13 +625,6 @@
     <entry file="file://$PROJECT_DIR$/app/Paquets.php">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Etudiant.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="28" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Copies.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -746,13 +683,6 @@
           <folding>
             <element signature="e#40#68#0#PHP" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_16_181703_create_exams_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="20" column="71" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
         </state>
       </provider>
     </entry>
@@ -880,20 +810,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/routes/web.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1275">
-          <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
-          <folding>
-            <element signature="e#7#389#0#PHP" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/Http/Controllers/EnseignantController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-34">
-          <caret line="12" column="15" selection-start-line="12" selection-start-column="15" selection-end-line="12" selection-end-column="15" />
+        <state relative-caret-position="-4">
+          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+          <folding>
+            <element signature="e#41#55#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -915,6 +838,45 @@
             <element signature="e#2550#2571#0#HTML" expanded="true" />
             <element signature="e#2768#2788#0#HTML" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Merge_branch_'master'_into_ze3bout__#_Conflicts__#_app_Etudiant_php_#_routes_web_php.patch">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-31814" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Etudiant.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="8" column="14" selection-start-line="8" selection-start-column="14" selection-end-line="8" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/routes/web.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="36" column="25" selection-start-line="36" selection-start-column="12" selection-end-line="36" selection-end-column="25" />
+          <folding>
+            <element signature="e#7#389#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_16_181703_create_exams_table.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="20" column="71" selection-start-line="20" selection-start-column="71" selection-end-line="20" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/database/migrations/2019_03_14_180627_justifications.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/resources/views/layouts/master.blade.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="489">
+          <caret line="518" column="39" selection-start-line="518" selection-start-column="39" selection-end-line="518" selection-end-column="39" />
         </state>
       </provider>
     </entry>
