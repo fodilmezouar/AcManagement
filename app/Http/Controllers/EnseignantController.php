@@ -3,11 +3,17 @@
 namespace App\Http\Controllers;
 
 
+use App\Exams;
 use App\Filiere;
+use App\Paquets;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Module;
+use App\Copies;
+use App\Corrections;
+use App\Corr_aff;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
@@ -161,5 +167,75 @@ class EnseignantController extends Controller
        $valid['success'] = true;
        $valid['messages'] = "yes babe";
        return response()->json($valid);   
+    }
+    public function getPaquets($moduleId){
+        $userId = Auth::id();
+
+        $examId=0;
+        $paquets = array();
+        $corrA=0;
+            if (Exams::where('module_id',$moduleId)->exists()) {
+                $examId = Exams::select('id')->where('module_id', $moduleId)->get()->first()->id;
+                $paquets = Paquets::where('exam_id',$examId)->get();
+                $corrA = Corr_aff::where('exam_id',$examId)->get();
+            }
+        return view('gPrel.paquetExam')->with(['paquets' => $paquets,'idExam'=>$examId,'corrA'=>$corrA]);
+    }
+    public function getCopies($idPaquet){
+        $userId = Auth::id();
+        $paquet = Paquets::find($idPaquet);
+        $promo = Module::find($paquet->exam_id);
+        $users = User::where('grade','!=',"")->where('id','!=',$userId)->whereNotIn('id',function($query) {
+
+            $query->select('enseignant_id')->from('corrections');
+
+        })->get();
+        $copies = Copies::where('paquetId','=',$idPaquet)->get();
+        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id,'enseignants'=>$users,'idPaquet'=>$idPaquet]);
+    }
+    public function validerAff(Request $request){
+        $corr = new Corrections();
+        $corr->enseignant_id = $request->input('enseignantId');
+        $corr->paquet_id = $request->input('paquetId');
+        $corr->date_affectation = date("Y-m-d");
+        $corr->save();
+        $valid['success'] = array('success' => false, 'messages' => array());
+        $valid['success'] = true;
+        $valid['messages'] = "yes babe";
+        return response()->json($valid);
+    }
+    public function validerDelais(Request $request){
+        $corrA = new Corr_aff();
+        $corrA->delais =  $request->input('delais');
+        $corrA->ecartNote =  $request->input('ecart');
+        $corrA->exam_id =  $request->input('examId');
+        $corrA->save();
+        $valid['success'] = array('success' => false, 'messages' => array());
+        $valid['success'] = true;
+        $valid['messages'] = "yes babe";
+        return response()->json($valid);
+    }
+    public function getInfoEcart($id){
+        $output = array('data' => array());
+        $corrA = Corr_aff::find($id);
+        $output['data'][] = array(
+            $corrA->delais,
+            $corrA->ecartNote
+
+
+        );
+        return response()->json($output);
+    }
+    public function updateDelais(Request $request){
+        $corrA = Corr_aff::find($request->input('examId'));
+        $corrA->delais =  $request->input('delais');
+        $corrA->ecartNote =  $request->input('ecart');
+        $corrA->exam_id =  $request->input('examId');
+        $corrA->save();
+        $valid['success'] = array('success' => false, 'messages' => array());
+        $valid['success'] = true;
+        $valid['messages'] = "yes babe";
+        return response()->json($valid);
+
     }
 }

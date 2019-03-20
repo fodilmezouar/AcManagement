@@ -38,4 +38,10 @@ class Module extends Model
          return $tab[0]->cpt;
       return 0;
 	}
+    //
+    public function module()
+    {
+        return $this->hasMany('App\Exams');
+    }
+
 }

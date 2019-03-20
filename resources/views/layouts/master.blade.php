@@ -513,16 +513,35 @@
             <span>Enseignants</span>
           </a>
         </li>
+          <li class="sub-header">
+            <span>Gestion Anonymat</span>
+          </li>
+          <li class="selected has-sub-menu {{ $active ==  'Anonymat' ? 'active':''}}">
+            <a href="{{url('anonymat')}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Anonymat</span>
+            </a>
+          </li>
         @endif
         @if(stristr(Auth::user()->role,'2'))
         <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
-          <a href="{{url('repartirTache')}}">
+          <a href="{{url('repartieTache')}}">
             <div class="icon-w">
               <div class="os-icon os-icon-layout"></div>
             </div>
             <span>Répartition Taches</span>
           </a>
         </li>
+          <li class="selected has-sub-menu {{ $active ==  'Afecter' ? 'active':''}}">
+            <a href="{{url('mesModulesCharge')}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Afecter les exams</span>
+            </a>
+          </li>
         @endif
         @if(stristr(Auth::user()->role,'1'))
         <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
@@ -574,6 +593,7 @@
           </a>
         </li>
         @endif
+
         @if(stristr(Auth::user()->role,'2'))
         <li class="selected has-sub-menu {{ $active ==  'Exclusion' ? 'active':''}}">
           <a href="{{url('/exclusion/'.Auth::user()->id)}}">
@@ -584,7 +604,24 @@
           </a>
         </li>
         @endif
+
+        @if(stristr(Auth::user()->role,'3'))
+          <li class="sub-menu">
+            <span>Gestion corrections</span>
+          </li>
+          <li class="selected has-sub-menu {{ $active ==  'corr' ? 'active':''}}">
+            <a href="{{url('mesModules/corr/'.Auth::user()->id)}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>mes paquets</span>
+            </a>
+          </li>
+          @endif
+
         </li>
+
+
       </ul>
     </div>
     <!--------------------
@@ -793,7 +830,6 @@
       <script src="{{asset('bower_components/bootstrap/js/dist/carousel.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/collapse.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/dropdown.js')}}"></script>
-      <script src=" https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/modal.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tab.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tooltip.js')}}"></script>
