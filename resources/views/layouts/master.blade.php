@@ -523,6 +523,14 @@
             <span>Répartition Taches</span>
           </a>
         </li>
+          <li class="selected has-sub-menu {{ $active ==  'Afecter' ? 'active':''}}">
+            <a href="{{url('mesModulesCharge')}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Afecter les exams</span>
+            </a>
+          </li>
         @endif
         @if(stristr(Auth::user()->role,'1'))
         <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
@@ -574,7 +582,22 @@
           </a>
         </li>
         @endif
+        @if(stristr(Auth::user()->role,'3'))
+          <li class="sub-menu">
+            <span>Gestion corrections</span>
+          </li>
+          <li class="selected has-sub-menu {{ $active ==  'corr' ? 'active':''}}">
+            <a href="{{url('mesModules/corr/'.Auth::user()->id)}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>mes paquets</span>
+            </a>
+          </li>
+          @endif
         </li>
+
+
       </ul>
     </div>
     <!--------------------

@@ -66,8 +66,117 @@
                             </div>
                         </div>
                     </div>
-                    <!-- promotions -->
+                    <table class="center" style="border-radius: 5px;width: 50%;margin: 0px auto;float: none;">
+                        <tr>
+                            <td>Correcteur 1</td>
+                            <td>
+                                <select class="form-control" id="selectEns1" >
+                                    <option value="" disabled selected>Select your enseignant</option>
+                                    @foreach($enseignants as $enseignant)
+                                        <option value="{{$enseignant->id}}">{{$enseignant->name }}  {{$enseignant->prenom }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                        <td>
+                            <button class="btn btn-outline-primary" data-target="#AffecterModal1" data-toggle="modal">envoyer</button>
+                        </td>
+                        </tr>
+                        <tr>
+                            <td>Correcteur 2</td>
+                            <td>
+                                <select class="form-control" id="selectEns2" placeholder="select">
+                                    <option value="" disabled selected>Select your enseignant</option>
+                                    @foreach($enseignants as $enseignant)
+                                        <option value="{{$enseignant->id}}">{{$enseignant->name }}  {{$enseignant->prenom }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" data-target="#AffecterModal2" data-toggle="modal">envoyer</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Correcteur 3</td>
+                            <td>
+                                <select class="form-control" id="selectEns3" >
+                                    <option value="" disabled selected>Select your enseignant</option>
+                                    @foreach($enseignants as $enseignant)
+                                        <option value="{{$enseignant->id}}">{{$enseignant->name }}  {{$enseignant->prenom }}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <button class="btn btn-outline-primary" data-target="#AffecterModal3" data-toggle="modal" disabled="true">envoyer</button>
+                            </td>
+                        </tr>
+
+                    </table>
+
+
                 </div>
+            </div>
+            <div aria-labelledby="exampleModalLabel" class="modal fade" id="AffecterModal1" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Affecter les paquets
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
+                        </div>
+                        <form id="formAffecter1" method="POST" action="">
+                            <div class="modal-body">
+                                Voulez-vous vraiment affecter ce paquet ?
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="affecterPaquet1"> Affecter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div aria-labelledby="exampleModalLabel" class="modal fade" id="AffecterModal2" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Affecter les paquets
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
+                        </div>
+                        <form id="formAffecter2" method="POST" action="">
+                            <div class="modal-body">
+                                Voulez-vous vraiment affecter ce paquet ?
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="affecterPaquet2"> Affecter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div aria-labelledby="exampleModalLabel" class="modal fade" id="AffecterModal3" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Affecter les paquets
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
+                        </div>
+                        <form id="formAffecter3" method="POST" action="">
+                            <div class="modal-body">
+                                Voulez-vous vraiment affecter ce paquet ?
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="affecterPaquet3"> Affecter</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
             </div><!--------------------
               START - Chat Popup Box
               -------------------->
@@ -75,10 +184,14 @@
             <!--------------------
             END - Chat Popup Box
             -------------------->
+            <input type="hidden" id="paquetId" value="{{$idPaquet}}">
         </div>
     </div>
     </div>
     </div>
     <div class="display-type"></div>
     </div>
+@endsection
+@section('scripts')
+    <script src="{{asset('js/affectCorr.js')}}"></script>
 @endsection

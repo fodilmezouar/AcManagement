@@ -73,12 +73,15 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::post('exams/ajoutExam','ExamsController@ajoutExam');
     Route::post('exams/suppExam','ExamsController@suppExam');
     Route::post('exams/editExam','ExamsController@editExam');
-    Route::get('enseignant/paquets','EnseignantController@getPaquets');
+    Route::get('enseignant/paquets/{moduleId}','EnseignantController@getPaquets');
+    Route::get('mesModulesCharge','ExamsController@modulesCharge');
+    Route::get('mesModulesCharge/exam/{id}','ExamsController@getExamEns');
+    Route::get('enseignant/paquets/getInformationEcart/{id}','EnseignantController@getInfoEcart');
 
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles');
-    Route::get('calendrier/{idEns}','AffectationController@affectationEnseignant');
+Route::get('calendrier/{idEns}','AffectationController@affectationEnseignant');
 Route::post('calendrier/valideCalendar/valide','SeanceController@valideCalendar');
 Route::post('calendrier/seances/mesSeances','SeanceController@getSeanceEns');
 //Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence');
@@ -97,4 +100,7 @@ Route::post('exams/ajoutExam','ExamsController@ajoutExam');
 Route::post('exams/suppExam','ExamsController@suppExam');
 Route::post('exams/editExam','ExamsController@editExam');
 Route::get('enseignant/paquets/liste/{idPaquet}','EnseignantController@getCopies');
+Route::post('enseignant/paquets/liste/valide','EnseignantController@validerAff');
+Route::post('enseignant/paquets/valide','EnseignantController@validerDelais');
+Route::post('enseignant/paquets/update','EnseignantController@updateDelais');
 

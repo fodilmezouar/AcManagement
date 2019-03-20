@@ -28,7 +28,6 @@
                     <h5 class="form-header">
                         Les Paquets
                     </h5>
-                    <div class="pull-right"><?php if (count($paquets)>0){?><button class="btn btn-primary"  data-target="#AffecterModal" data-toggle="modal">Affecter les paquets <i class="icon-feather-arrow-up-right"></i></button><?php }?></div>
                     <div class="form-desc">
                     </div>
                     <!-- promotions -->
@@ -47,24 +46,76 @@
                     </div>
                     <!-- promotions -->
                 </div>
-            </div>
 
+            </div>
+            <?php if(count($corrA) >0){ ?>
+            <div class="align-center"><button class="btn btn-md btn-outline-primary"  data-target="#AffecterModalEdit" data-toggle="modal" onclick="editEcart({{$idExam}});">modifier la délai et l'écart <i class="os-icon os-icon-ui-46"></i></button></div>
+            <?php }else{   ?>
+            <div class="align-center"><button class="btn btn-md btn-outline-primary"  data-target="#AffecterModal" data-toggle="modal">Spécifier la délai et l'écart <i class="os-icon os-icon-ui-46"></i></button></div>
+            <?php }?>
 
             <div aria-labelledby="exampleModalLabel" class="modal fade" id="AffecterModal" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="exampleModalLabel">
-                                Affecter les paquets
+                                Spécification
                             </h5>
                             <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
                         </div>
-                        <form id="formAffecter" method="POST" action="">
+                        <form id="formValider" method="POST" action="">
                             <div class="modal-body">
-                                Voulez-vous vraiment affecter les paquets ?
+                                <div class="row" id="body-editEnse">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">délais</label><input name="delais" id="delais" class="form-control" data-error="Please input your First Name" placeholder="délais" required="required" type="number">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">ecart</label><input name="ecart" id="ecart" class="form-control" data-error="Please input your Last Name" placeholder="ecart" required="required" type="number">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
-                                <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="affecterPaquet"> Affecter</button>
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="valider"> Valider</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+            <div aria-labelledby="exampleModalLabel" class="modal fade" id="AffecterModalEdit" role="dialog" tabindex="-1" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">
+                                Spécification
+                            </h5>
+                            <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
+                        </div>
+                        <form id="EditformValider" method="POST" action="">
+                            <div class="modal-body">
+                                <div class="row" id="body-editEcart">
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">délais</label><input name="Editdelais" id="Editdelais" class="form-control" data-error="Please input your First Name" placeholder="délais" required="required" type="number">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <div class="form-group">
+                                            <label for="">ecart</label><input name="Editecart" id="Editecart" class="form-control" data-error="Please input your Last Name" placeholder="ecart" required="required" type="number">
+                                            <div class="help-block form-text with-errors form-control-feedback"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="valider"> Valider</button>
                             </div>
                         </form>
                     </div>
@@ -91,4 +142,7 @@
     </div>
     <div class="display-type"></div>
     </div>
+@endsection
+@section('scripts')
+    <script src="{{asset('js/ecart.js')}}"></script>
 @endsection

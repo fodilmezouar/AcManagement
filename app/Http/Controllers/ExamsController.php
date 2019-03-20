@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Exams;
 use App\Module;
+use Illuminate\Support\Facades\Auth;
 
 class ExamsController extends Controller
 {
@@ -15,6 +16,18 @@ class ExamsController extends Controller
 
         return view('gPrel.exam')->with(['exams' => $exams,'modules' => $modules]);
 
+    }
+    public function getExamEns($id){
+        $exams = Exams::all();
+        $modules = Module::where('promotion_id',$id)->get();
+
+        return view('gPrel.examCharge')->with(['exams' => $exams,'modules' => $modules]);
+
+    }
+    public function modulesCharge(){
+        $userId = Auth::id();
+        $modules = Module::where('enseignant_id','=',$userId)->get();
+        return view('gPrel.moduleCharge')->with('modules',$modules);
     }
     public function ajoutExam(Request $request){
         $exam = new Exams();
