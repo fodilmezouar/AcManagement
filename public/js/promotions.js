@@ -1,3 +1,7 @@
+
+$('#export').on('click',function(){
+  location.href="/export/"+$('#grpId').val();
+});
 $("#formPromos").on('submit',function(e) {
     e.preventDefault();
     $.ajaxSetup({

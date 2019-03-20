@@ -544,13 +544,42 @@ $(function () {
 
     // init line chart if element exists
     if ($("#lineChart").length) {
-      var lineChart = $("#lineChart");
-
-      // line chart data
-      var lineData = {
-        labels: ["1", "5", "10", "15", "20", "25", "30", "35"],
+     
+      $.ajaxSetup({
+      headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      } 
+    });
+       $.ajax({
+                  url : "/stat/getDataParWeak",
+                  type: "POST",
+                  data: {
+                    "promosId":$('#promosId').val(),
+                    "grpId":$('#grpId').val()
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                    var d = new Date();
+                    var n = d.getMonth() + 1 + 5;
+                    var help = response.messages;
+                    var dataMonth = [];
+                    for (var i = 0; i < n; i++) {
+                      dataMonth[i] = 0;
+                    }
+                    for (var i = 0; i < help.length; i++) {
+                      var obj1 = help[i];
+                      dataMonth[obj1["month"] + 3] = obj1["cpt"];
+                    }
+                    var lbls = [];
+                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma"];
+                    for (var i = 0; i < n; i++) {
+                      lbls[i] = mois[i];
+                    }
+                     var lineChart = $("#lineChart");
+                     var lineData = {
+        labels: lbls,
         datasets: [{
-          label: "Visitors Graph",
+          label: "Abs",
           fill: false,
           lineTension: 0.3,
           backgroundColor: "#fff",
@@ -568,11 +597,10 @@ $(function () {
           pointHoverBorderWidth: 3,
           pointRadius: 5,
           pointHitRadius: 10,
-          data: [27, 20, 44, 24, 29, 22, 43, 52],
+          data: dataMonth,
           spanGaps: false
         }]
       };
-
       // line chart init
       var myLineChart = new Chart(lineChart, {
         type: 'line',
@@ -595,15 +623,208 @@ $(function () {
             yAxes: [{
               display: false,
               ticks: {
-                beginAtZero: true,
-                max: 65
+                //beginAtZero: true,
+                max: 65,
+                min:-80
               }
             }]
           }
         }
       });
-    }
+                  }
+              });
+      // line chart data
+      
 
+      
+    }
+   // init line chart if element exists
+    if ($("#lineChartMe").length) {
+     
+      $.ajaxSetup({
+      headers: {
+       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      } 
+    });
+       $.ajax({
+                  url : "/stat/getDataSoirMatin",
+                  type: "POST",
+                  data: {
+                    "promosId":$('#promosId').val(),
+                    "grpId":$('#grpId').val()
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                    var d = new Date();
+                    var n = d.getMonth() + 1 + 5;
+                    var help = response.messages;
+                    var help2 = response.messages2;
+                    var dataMonth = [];
+                    var dataMonth2 = [];
+                    for (var i = 0; i < n; i++) {
+                      dataMonth[i] = 0;
+                    }
+                    for (var i = 0; i < n; i++) {
+                      dataMonth2[i] = 0;
+                    }
+                    for (var i = 0; i < help.length; i++) {
+                      var obj1 = help[i];
+                      dataMonth[obj1["month"] + 3] = obj1["cpt"];
+                    }
+                    for (var i = 0; i < help2.length; i++) {
+                      var obj1 = help2[i];
+                      dataMonth2[obj1["month"] + 3] = obj1["cpt"];
+                    }
+                    var lbls = [];
+                    var lbls2 = [];
+                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma"];
+                    for (var i = 0; i < n; i++) {
+                      lbls[i] = mois[i];
+                    }
+                    for (var i = 0; i < n; i++) {
+                      lbls2[i] = mois[i];
+                    }
+                     var lineChart = $("#lineChartMe");
+                     var lineData = {
+        labels: lbls,
+        datasets: [{
+          label: "Absences Matin",
+          fill: false,
+          lineTension: 0.3,
+          backgroundColor: "#fff",
+          borderColor: "#047bf8",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "#141E41",
+          pointBorderWidth: 3,
+          pointHoverRadius: 10,
+          pointHoverBackgroundColor: "#FC2055",
+          pointHoverBorderColor: "#fff",
+          pointHoverBorderWidth: 3,
+          pointRadius: 5,
+          pointHitRadius: 10,
+          data: dataMonth,
+          spanGaps: false
+        },
+        {
+          label: "Absences Soir",
+          fill: false,
+          lineTension: 0.3,
+          backgroundColor: "#fff",
+          borderColor: "rgb(167, 105, 0)",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "#141E41",
+          pointBorderWidth: 3,
+          pointHoverRadius: 10,
+          pointHoverBackgroundColor: "#FC2055",
+          pointHoverBorderColor: "#fff",
+          pointHoverBorderWidth: 3,
+          pointRadius: 5,
+          pointHitRadius: 10,
+          data: dataMonth2,
+          spanGaps: false
+        }]
+      };
+      /*var lineData2 = {
+        labels: lbls2,
+        datasets: [{
+          label: "Abs",
+          fill: false,
+          lineTension: 0.3,
+          backgroundColor: "#fff",
+          borderColor: "#047bf8",
+          borderCapStyle: 'butt',
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: 'miter',
+          pointBorderColor: "#fff",
+          pointBackgroundColor: "#141E41",
+          pointBorderWidth: 3,
+          pointHoverRadius: 10,
+          pointHoverBackgroundColor: "#FC2055",
+          pointHoverBorderColor: "#fff",
+          pointHoverBorderWidth: 3,
+          pointRadius: 5,
+          pointHitRadius: 10,
+          data: dataMonth2,
+          spanGaps: false
+        }]
+      };*/
+      // line chart init
+      var myLineChart = new Chart(lineChart, {
+        type: 'line',
+        data: lineData,
+        options: {
+          legend: {
+            display: true
+          },
+          scales: {
+            xAxes: [{
+              ticks: {
+                fontSize: '11',
+                fontColor: '#969da5'
+              },
+              gridLines: {
+                color: 'rgba(0,0,0,0.05)',
+                zeroLineColor: 'rgba(0,0,0,0.05)'
+              }
+            }
+            ],
+            yAxes: [{
+              display: false,
+              ticks: {
+                beginAtZero: true,
+                max: 65,
+                //min:-80
+              },
+            }]
+          }
+        }
+      });
+      // line chart init
+      /*var myLineChart2 = new Chart(lineChart, {
+        type: 'line',
+        data: lineData2,
+        options: {
+          legend: {
+            display: false
+          },
+          scales: {
+            xAxes: [{
+              ticks: {
+                fontSize: '11',
+                fontColor: '#969da5'
+              },
+              gridLines: {
+                color: 'rgba(0,0,0,0.05)',
+                zeroLineColor: 'rgba(0,0,0,0.05)'
+              }
+            }],
+            yAxes: [{
+              display: false,
+              ticks: {
+                //beginAtZero: true,
+                max: 65,
+                min:-100
+              }
+            }]
+          }
+        }
+      });*/
+                  }
+              });
+      // line chart data
+      
+
+      
+    }
     // init donut chart if element exists
     if ($("#barChart1").length) {
       var barChart1 = $("#barChart1");
@@ -697,12 +918,22 @@ $(function () {
     // -----------------
     if ($("#donutChart").length) {
       var donutChart = $("#donutChart");
-
+      var help = $(".dataAbs");
+      var tb = [];
+      for (var i = 0; i < help.length; i++) {
+        tb[i] = parseInt(help[i].innerHTML);
+      }
+      var help2 = $(".dataLbls");
+      var tb2 = [];
+      for (var i = 0; i < help2.length; i++) {
+        tb2[i] = help2[i].innerHTML;
+      }
+      console.log(tb);
       // donut chart data
       var data = {
-        labels: ["Red", "Blue", "Yellow", "Green", "Purple"],
+        labels: tb2,
         datasets: [{
-          data: [300, 50, 100, 30, 70],
+          data: tb,
           backgroundColor: ["#5797fc", "#7e6fff", "#4ecc48", "#ffcc29", "#f37070"],
           hoverBackgroundColor: ["#5797fc", "#7e6fff", "#4ecc48", "#ffcc29", "#f37070"],
           borderWidth: 0

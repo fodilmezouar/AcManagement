@@ -74,6 +74,6 @@ class GroupeController extends Controller
          $groupe = Groupe::find($idGroupe);
          $promo = Promotion::find($groupe->promotion_id);
          $etudiants = Etudiant::where('groupe_id','=',$idGroupe)->get();
-         return view('gPrel.groupe')->with(['etudiants'=>$etudiants,'nomGroupe'=>$groupe->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id]);
+         return view('gPrel.groupe')->with(['etudiants'=>$etudiants,'nomGroupe'=>$groupe->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id,"grpId"=>$idGroupe]);
     }
 }
