@@ -25,7 +25,7 @@
   <link href="{{asset('css/main.css?version=4.4.0')}}" rel="stylesheet">
 </head>
 <body class="menu-position-side menu-side-left full-screen">
-<div class="all-wrapper solid-bg-all">
+<div class="all-wrapper {{ $active == 'home' ? 'with-side-panel' : ''}} solid-bg-all">
   <div class="search-with-suggestions-w">
     <div class="search-with-suggestions-modal">
       <div class="element-search">
@@ -483,6 +483,17 @@
 
       <ul class="main-menu">
         <li class="sub-header">
+          <span>Home</span>
+        </li>
+        <li class="selected has-sub-menu {{ $active ==  'home' ? 'active':'' }}">
+          <a href="{{url('/home')}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Home</span>
+          </a>
+        </li>
+        <li class="sub-header">
           <span>Gestion Préliminaire</span>
         </li>
         @if(stristr(Auth::user()->role,'4'))
@@ -560,6 +571,16 @@
               <div class="os-icon os-icon-layout"></div>
             </div>
             <span>Joindre Justificatif</span>
+          </a>
+        </li>
+        @endif
+        @if(stristr(Auth::user()->role,'2'))
+        <li class="selected has-sub-menu {{ $active ==  'Exclusion' ? 'active':''}}">
+          <a href="{{url('/exclusion/'.Auth::user()->id)}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>G - Exclusion</span>
           </a>
         </li>
         @endif
@@ -753,6 +774,7 @@
       <script src="{{asset('bower_components/moment/moment.js')}}"></script>
       <script src="{{asset('bower_components/select2/dist/js/select2.full.min.js')}}"></script>
       <script src="{{asset('bower_components/jquery-bar-rating/dist/jquery.barrating.min.js')}}"></script>
+      <script src="{{asset('bower_components/chart.js/dist/Chart.min.js')}}"></script>
       <script src="{{asset('bower_components/ckeditor/ckeditor.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap-validator/dist/validator.min.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap-daterangepicker/daterangepicker.js')}}"></script>

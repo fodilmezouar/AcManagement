@@ -86,4 +86,19 @@ class PromotionController extends Controller
            $valid['messages'] = $promo->filiere->libelle;
         return response()->json($valid);
     }
+    public function getDataParWeak(Request $request){
+       $promo = Promotion::find($request->input('promosId'));
+           $valid['success'] = array('success' => false, 'messages' => array());
+           $valid['success'] = true;
+           $valid['messages'] = $promo->absencesParMonth($request->input('grpId'));
+        return response()->json($valid);
+    }
+    public function getDataSoirMatin(Request $request){
+       $promo = Promotion::find($request->input('promosId'));
+           $valid['success'] = array('success' => false, 'messages' => array());
+           $valid['success'] = true;
+      $valid['messages'] = $promo->absencesMatin($request->input('grpId'));
+      $valid['messages2'] = $promo->absencesSoir($request->input('grpId'));
+        return response()->json($valid);
+    }
 }

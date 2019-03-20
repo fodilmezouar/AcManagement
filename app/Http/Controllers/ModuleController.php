@@ -91,12 +91,31 @@ class ModuleController extends Controller
             $modules = Module::where('enseignant_id','=',$idEns)->get();
             return view('gPrel.moduleEns')->with('modules',$modules);
     }
+    public function modulesExclusion($idEns){
+            $modules = Module::where('enseignant_id','=',$idEns)->get();
+            return view('gAbs.modulesExclusion')->with('modules',$modules);
+    }
     public function modulesAssistantJustifier($idEns){
             $modules = DB::select("SELECT modules.id ,libelle FROM 
               (SELECT DISTINCT affectations.module_id from affectations WHERE affectations.enseignant_id = ".$idEns.") AS affs ,modules WHERE 
               affs.module_id = modules.id
               ");
             return view('gAbs.modulesEns')->with(['modules'=>$modules,'justifier'=>"oui"]);
+    }
+    public function getStudentsExclus($idMod){
+            $etudiantsExclus= DB::select("SELECT * FROM 
+              etudiants as ets WHERE groupe_id in (SELECT id FROM groupes where promotion_id = (SELECT promotion_id FROM modules WHERE id = ".$idMod.")) AND
+              5 <= (SELECT count(*) FROM absences as abs where abs.etudiant_id = ets.id AND
+              abs.instance_id in (SELECT id FROM instances as ins where 
+              ins.seance_id in (select id FROM seances where affectation_id in
+              (SELECT id FROM affectations where module_id = ".$idMod.")
+              )
+              )
+              )
+              ");
+            $etudiantsExclus = Etudiant::hydrate($etudiantsExclus);
+            $module = Module::find($idMod);
+            return view('gAbs.listeExclusion')->with(['etudiantsExclus'=>$etudiantsExclus,"module"=>$module]);
     }
     public function getGroupes($idModule,$idEns){
            $nomMod = Module::find($idModule)->libelle;

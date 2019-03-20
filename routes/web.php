@@ -33,10 +33,15 @@ Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
 Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
 
+Route::post('/stat/getDataParWeak','PromotionController@getDataParWeak');
+
+Route::post('/stat/getDataSoirMatin','PromotionController@getDataSoirMatin');
+
 Route::get('repartieTache/{id}','AffectationController@attacherGroupe');
 Route::get('repartieTache','AffectationController@getIndexAffect');
 Route::post('test/valider','AffectationController@validerAffectation');
 Route::post('enseignants/repartitionRole/validerRepartition','EnseignantController@validerRepartition');
+Route::get('export/{grpId}','EtudiantController@export');
 
 Auth::routes();
 
@@ -57,6 +62,8 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('calendrier/{idEns}','AffectationController@affectationEnseignant');
     Route::get('mesModules/{idEns}','ModuleController@modulesAssistant');
     Route::get('mesModulesCharge/{idEns}','ModuleController@modulesCharge');
+    Route::get('exclusion/{idEns}','ModuleController@modulesExclusion');
+    Route::get('exclusion/etudiants/{idMod}','ModuleController@getStudentsExclus');
     Route::get('mesModules/justifier/{idEns}','ModuleController@modulesAssistantJustifier');
     Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence');
     Route::get('mesModules/groupes/{idMod}/{ensId}','ModuleController@getGroupes');

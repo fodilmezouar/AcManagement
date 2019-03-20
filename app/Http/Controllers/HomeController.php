@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Promotion;
+use App\User;
 class HomeController extends Controller
 {
     /**
@@ -21,11 +22,14 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(Request $request)
     {
-
-
-        return view('home');
-
+        $promoId = $request->input('promoId');
+        $promos = Promotion::all();
+        $promosCourant = $promos->get(0);
+        if($promoId)
+            $promosCourant = Promotion::find($promoId);
+        $admins = User::where('role','like','%4%')->get();
+        return view('home')->with(["promos"=>$promos,"promosCourant"=>$promosCourant,'admins'=>$admins]);
     }
 }
