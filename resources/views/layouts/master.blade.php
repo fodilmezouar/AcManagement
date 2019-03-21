@@ -12,6 +12,7 @@
   <link href="favicon.png" rel="shortcut icon">
   <link href="apple-touch-icon.png" rel="apple-touch-icon">
   <link href="{{asset('icon_fonts_assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
+
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
       <link href="{{asset('icon_fonts_assets/feather/style.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
@@ -23,6 +24,7 @@
   <link href="{{asset('bower_components/slick-carousel/slick/slick.css')}}" rel="stylesheet">
   <link href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css">
   <link href="{{asset('css/main.css?version=4.4.0')}}" rel="stylesheet">
+
 </head>
 <body class="menu-position-side menu-side-left full-screen">
 <div class="all-wrapper {{ $active == 'home' ? 'with-side-panel' : ''}} solid-bg-all">

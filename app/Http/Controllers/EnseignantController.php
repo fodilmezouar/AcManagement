@@ -195,9 +195,11 @@ class EnseignantController extends Controller
     }
     public function validerAff(Request $request){
         $corr = new Corrections();
+        $idPaq = $request->input('paquetId');
         $corr->enseignant_id = $request->input('enseignantId');
-        $corr->paquet_id = $request->input('paquetId');
+        $corr->paquet_id = $idPaq;
         $corr->date_affectation = date("Y-m-d");
+        $corr->correcteur = $request->input('correcteur');
         $corr->save();
         $valid['success'] = array('success' => false, 'messages' => array());
         $valid['success'] = true;
