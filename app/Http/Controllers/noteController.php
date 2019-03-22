@@ -21,7 +21,7 @@ class noteController extends Controller
         $correction = Corrections::where('enseignant_id','=',$userId)->where('paquet_id','=',$idPaquet)->get()->first()->correcteur;
         $note = 'notePre'.$correction;
         $copies = Copies::select('id','codeCopie','paquetId',$note.' as note')->where('paquetId','=',$idPaquet)->get();
-        return view('gPrel.saisieNote')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id,'idPaquet'=>$idPaquet,'corr'=>$correction]);
+        return view('gPrel.saisieNote')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'idPaquet'=>$idPaquet,'corr'=>$correction]);
     }
     public function validerNote(Request $request ,$idPaquet){
         $userId = Auth::id();
@@ -44,8 +44,8 @@ class noteController extends Controller
         $userId = Auth::id();
 
 
-            $paquets = DB::select('select paquets.id,paquets.libelle FROM paquets,corrections
-          WHERE corrections.enseignant_id ='.$userId);
+            $paquets = DB::select('select paquets.id,paquets.libelle,paquets.exam_id,modules.libelle as module,corrections.date_affectation as dateAff ,corr_affs.delais FROM paquets,corrections,modules,exams,corr_affs
+          WHERE   paquets.exam_id = exams.id and exams.module_id=modules.id AND corr_affs.exam_id=exams.id AND corrections.paquet_id=paquets.id AND corrections.enseignant_id='.$userId);
 
         return view('gPrel.paquetAssistant')->with(['paquets' => $paquets]);
     }

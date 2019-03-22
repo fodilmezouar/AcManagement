@@ -32,12 +32,25 @@ END - Breadcrumbs
                 <!-- promotions -->
                 <div class="row" id="contentGroupes">
                     @foreach($paquets as $paquet)
+                        <?php
+                        $finalDate =date('Y-m-d', strtotime($paquet->dateAff. ' + '.$paquet->delais.' days'));
+
+                        ?>
                     <div class="col-sm-3 col-xxxl-3 block" role="{{$paquet->id}}">
                         <div>
                         </div>
                         <a class="element-box el-tablo" href="{{url('note/'.$paquet->id)}}" style="background-color: #f2f4f8;">
+                            <div class="trending trending-up" id="annee">
+                                AFFECTÉ {{$paquet->dateAff}}
+                            </div>
                             <div class="value" id="libelle">
                                 {{$paquet->libelle}}
+                            </div>
+                            <div class="trending trending-up-basic">
+                                <span id="filiere">{{$paquet->module}}</span>
+                            </div>
+                            <div class="trending trending-down" id="annee">
+                                DERNIÈRE DÉLAI {{$finalDate}}
                             </div>
                         </a>
                     </div>

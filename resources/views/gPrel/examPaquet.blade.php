@@ -14,7 +14,6 @@
             <a href="{{url('anonymat')}}">Anonymat</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{url('anonymat/'.$idPromo)}}">{{ $nomPromo }}</a>
         </li>
         <li class="breadcrumb-item">
             <span>{{$nomPaquet}}</span>
@@ -52,7 +51,15 @@
                                                 <th rowspan="1" colspan="1">note 2</th>
                                                 <th rowspan="1" colspan="1">note 3</th></tr></tfoot>
                                             <tbody>
+                                            <?php $cor3="disabled"; ?>
                                             @foreach($copies as $copie)
+                                                <?php
+
+                                                    if (abs($copie->notePre1-$copie->notePre2)<$ecart){
+                                                            $cor3="";
+                                                    }
+
+                                                ?>
                                                 <tr role="row">
                                                     <td>{{$copie->codeCopie}}</td>
                                                     <td>{{$copie->notePre1}}</td>
@@ -66,6 +73,18 @@
                             </div>
                         </div>
                     </div>
+                    <?php
+
+                        $cor1="";
+                        $cor2="";
+                        if(in_array(1,$correct)){
+                            $cor1="disabled";
+                        }
+                        if(in_array(2,$correct)){
+                            $cor2="disabled";
+                        }
+
+                    ?>
                     <table class="center" style="border-radius: 5px;width: 50%;margin: 0px auto;float: none;">
                         <tr>
                             <td>Correcteur 1</td>
@@ -78,7 +97,7 @@
                                 </select>
                             </td>
                         <td>
-                            <button class="btn btn-outline-primary" data-target="#AffecterModal1" data-toggle="modal">envoyer</button>
+                            <button class="btn btn-outline-primary" data-target="#AffecterModal1" data-toggle="modal" {{$cor1}}>envoyer</button>
                         </td>
                         </tr>
                         <tr>
@@ -92,7 +111,7 @@
                                 </select>
                             </td>
                             <td>
-                                <button class="btn btn-outline-primary" data-target="#AffecterModal2" data-toggle="modal">envoyer</button>
+                                <button class="btn btn-outline-primary" data-target="#AffecterModal2" data-toggle="modal" {{$cor2}}>envoyer</button>
                             </td>
                         </tr>
                         <tr>
@@ -106,7 +125,7 @@
                                 </select>
                             </td>
                             <td>
-                                <button class="btn btn-outline-primary" data-target="#AffecterModal3" data-toggle="modal" disabled="true">envoyer</button>
+                                <button class="btn btn-outline-primary" data-target="#AffecterModal3" data-toggle="modal" {{$cor3}}>envoyer</button>
                             </td>
                         </tr>
 

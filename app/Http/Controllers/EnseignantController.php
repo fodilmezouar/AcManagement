@@ -185,13 +185,11 @@ class EnseignantController extends Controller
         $userId = Auth::id();
         $paquet = Paquets::find($idPaquet);
         $promo = Module::find($paquet->exam_id);
-        $users = User::where('grade','!=',"")->where('id','!=',$userId)->whereNotIn('id',function($query) {
-
-            $query->select('enseignant_id')->from('corrections');
-
-        })->get();
+        $ecart = Corr_aff::where('exam_id','=',$paquet->exam_id)->get()->first()->ecartNote;
+        $users = User::where('grade','!=',"")->where('id','!=',$userId)->get();
+        $correct = Corrections::where('paquet_id','=',$idPaquet)->pluck('correcteur')->toArray();
         $copies = Copies::where('paquetId','=',$idPaquet)->get();
-        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id,'enseignants'=>$users,'idPaquet'=>$idPaquet]);
+        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'ecart'=>$ecart,'enseignants'=>$users,'idPaquet'=>$idPaquet,'correct'=>$correct]);
     }
     public function validerAff(Request $request){
         $corr = new Corrections();

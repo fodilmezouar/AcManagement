@@ -14,7 +14,6 @@
             <a href="{{url('anonymat')}}">Anonymat</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{url('anonymat/'.$idPromo)}}">{{ $nomPromo }}</a>
         </li>
         <li class="breadcrumb-item">
             <span>{{$nomPaquet}}</span>
