@@ -35,7 +35,7 @@ class GroupeController extends Controller
                             <button aria-label='Close' class='close supp' type='button' data-target='#suppGroupModal' data-toggle='modal' role='".$groupe->id."'><i class='os-icon os-icon-ui-15'></i></button>
                             <button aria-label='Close' class='close edit' type='button' data-target='#editGroupModal' data-toggle='modal' role='".$groupe->id."'><i class='os-icon os-icon-ui-49'></i></button>
                           </div>
-                          <a class='element-box el-tablo' href='".url('promotions/groupes/liste/'.$groupe->id)."' style='background-color: #e1e1e1;'>
+                          <a class='element-box el-tablo' href='".url('promotions/groupes/liste/'.$groupe->id)."' style='background-color: #f2f4f8;'>
                             <div class='value' id='libelle'>
                               ".$groupe->libelle."
                             </div>
@@ -57,8 +57,8 @@ class GroupeController extends Controller
        }
        Groupe::find($groupeId)->delete();
        $valid['success'] = array('success' => false, 'messages' => array());
-           $valid['success'] = true;
-           $valid['messages'] = "yes babe";
+       $valid['success'] = true;
+       $valid['messages'] = "yes babe";
         return response()->json($valid);
     }
     public function editGroupe(Request $request){
@@ -68,6 +68,13 @@ class GroupeController extends Controller
            $valid['success'] = array('success' => false, 'messages' => array());
            $valid['success'] = true;
            $valid['messages'] = "ok babe";
+        return response()->json($valid);
+    }
+    public function getGroupe($groupeId){
+           $students = Etudiant::where("groupe_id","=",$groupeId)->get();
+           $valid['success'] = array('success' => false, 'messages' => array());
+           $valid['success'] = true;
+           $valid['messages'] = $students;
         return response()->json($valid);
     }
     public function getStudents($idGroupe){

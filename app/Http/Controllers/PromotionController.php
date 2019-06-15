@@ -10,15 +10,11 @@ use App\Groupe;
 use App\Etudiant;
 use App\Module;
 use App\User;
+
 class PromotionController extends Controller
 {
-    public function getGroupes($promoId){
-      $promo = Promotion::find($promoId);
-      $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$promo->filiere_id)->where('role','like','%2%')->get();
-      $groupes = Groupe::where('promotion_id','=',$promoId)->orderBy('id')->get();
-      $modules = Module::where('promotion_id','=',$promoId)->orderBy('id')->get();
-      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'modules' => $modules,'nomPromo'=>$promo->libelle,"enseignants"=>$enseignants]);
-    }
+    
+    //give le index promotions page all promos
     public function getPromos()
     {
         $promos = Promotion::orderBy('id')->get();
@@ -41,7 +37,7 @@ class PromotionController extends Controller
                             <button aria-label='Close' class='close supp' type='button' role='".$promo->id."' data-target='#suppModal' data-toggle='modal'><i class='os-icon os-icon-ui-15'></i></button>
                             <button aria-label='Close' class='close edit' type='button' role='".$promo->id."' data-target='#editModal' data-toggle='modal'><i class='os-icon os-icon-ui-49'></i></button>
                           </div>
-                          <a class='element-box el-tablo' href='promotions/".$promo->id."' style='background-color: #e1e1e1;'>
+                          <a class='element-box el-tablo' href='promotions/".$promo->id."' style='background-color: #f2f4f8;'>
                             <div class='label' id='annee'>
                               ".$promo->annee." / ".($promo->annee + 1)."
                             </div>
@@ -56,6 +52,12 @@ class PromotionController extends Controller
            $valid['success'] = array('success' => false, 'messages' => array());
            $valid['success'] = true;
            $valid['messages'] = $fragment;
+        return response()->json($valid);
+    }
+    public function getAll(){
+       $valid['success'] = array('success' => false, 'messages' => array());
+           $valid['success'] = true;
+           $valid['body'] ="d";
         return response()->json($valid);
     }
     public function suppPromo(Request $request){
@@ -74,17 +76,23 @@ class PromotionController extends Controller
 
     public function editPromo(Request $request){
            $promo = Promotion::find($request->input('promoId'));
-           if($promo->libelle)
-               $promo->libelle = $request->input('libelle');
-           if($promo->niveau)
-               $promo->niveau = $request->input('niveau');
-           if($promo->filiere_id)
-             $promo->filiere_id = $request->input('filiereId');
+           $promo->libelle = $request->input('libelle');
+           $promo->niveau = $request->input('niveau');
+           $promo->filiere_id = $request->input('filiereId');
            $promo->save();
            $valid['success'] = array('success' => false, 'messages' => array());
            $valid['success'] = true;
            $valid['messages'] = $promo->filiere->libelle;
         return response()->json($valid);
+    }
+    //recupirer les infos d'une promotions données
+    public function getGroupes($promoId){
+        $promo = Promotion::find($promoId);
+        //on récupere que les chargés de module
+        $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$promo->filiere_id)->where('role','like','%2%')->get();
+      $groupes = Groupe::where('promotion_id','=',$promoId)->orderBy('id')->get();
+      $modules = Module::where('promotion_id','=',$promoId)->orderBy('id')->get();
+      return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'modules' => $modules,'nomPromo'=>$promo->libelle,"enseignants"=>$enseignants]);
     }
     public function getDataParWeak(Request $request){
        $promo = Promotion::find($request->input('promosId'));

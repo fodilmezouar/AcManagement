@@ -16992,7 +16992,7 @@ a.el-tablo:hover .label {
 
 .auth-box-w .logo-w {
   text-align: center;
-  padding: 20%;
+  padding: 20% 20% 10% 20%;
 }
 
 .auth-box-w .auth-header {

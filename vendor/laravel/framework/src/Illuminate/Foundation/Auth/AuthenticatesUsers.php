@@ -131,8 +131,13 @@ trait AuthenticatesUsers
      */
     protected function sendFailedLoginResponse(Request $request)
     {
+        if ( ! User::where('email', $request->email)->first() )
         throw ValidationException::withMessages([
             $this->username() => [trans('auth.failed')],
+        ]);
+        else
+        throw ValidationException::withMessages([
+            $this->userPassword() => [trans('auth.incorrect_password')],
         ]);
     }
 
@@ -145,7 +150,10 @@ trait AuthenticatesUsers
     {
         return 'email';
     }
-
+    public function userPassword()
+    {
+        return 'password';
+    }
     /**
      * Log the user out of the application.
      *

@@ -69,14 +69,12 @@
             </h5>
             <button aria-label="Close" class="close" data-dismiss="modal" type="button"><span aria-hidden="true"> ×</span></button>
           </div>
-       <form id="formGroupSupp" method="POST" action="">
           <div class="modal-body">
               Vous Optez pour cet emploi du temps ?
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="valid"> Valider</button>
           </div>
-        </form>
         </div>
       </div>
     </div>
