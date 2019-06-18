@@ -80,7 +80,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::post('exams/ajoutExam','ExamsController@ajoutExam');
     Route::post('exams/suppExam','ExamsController@suppExam');
     Route::post('exams/editExam','ExamsController@editExam');
-    Route::get('enseignant/paquets/{moduleId}','EnseignantController@getPaquets');
+    Route::get('enseignant/paquets/{examId}/{moduleId}','EnseignantController@getPaquets');
     Route::get('mesModulesCharge','ExamsController@modulesCharge');
     Route::get('mesModulesCharge/exam/{id}','ExamsController@getExamEns');
     Route::get('enseignant/paquets/getInformationEcart/{id}','EnseignantController@getInfoEcart');
@@ -109,7 +109,7 @@ Route::get('anonymat/paquets/liste/{idPaquet}','PaquetsController@getCopies');
 Route::post('exams/ajoutExam','ExamsController@ajoutExam');
 Route::post('exams/suppExam','ExamsController@suppExam');
 Route::post('exams/editExam','ExamsController@editExam');
-Route::get('enseignant/paquets/liste/{idPaquet}','EnseignantController@getCopies');
+Route::get('ens/paquets/liste/{idPaquet}','EnseignantController@getCopies');
 Route::post('enseignant/paquets/liste/valide','EnseignantController@validerAff');
 Route::post('enseignant/paquets/valide','EnseignantController@validerDelais');
 Route::post('enseignant/paquets/update','EnseignantController@updateDelais');

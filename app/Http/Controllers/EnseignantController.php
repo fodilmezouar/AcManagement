@@ -168,20 +168,21 @@ class EnseignantController extends Controller
        $valid['messages'] = "yes babe";
        return response()->json($valid);   
     }
-    public function getPaquets($moduleId){
+    public function getPaquets($examId,$moduleId){
         $userId = Auth::id();
 
-        $examId=0;
+
         $paquets = array();
-        $corrA=0;
+        $corrA=[];
             if (Exams::where('module_id',$moduleId)->exists()) {
-                $examId = Exams::select('id')->where('module_id', $moduleId)->get()->first()->id;
+
                 $paquets = Paquets::where('exam_id',$examId)->get();
                 $corrA = Corr_aff::where('exam_id',$examId)->get();
             }
         return view('gPrel.paquetExam')->with(['paquets' => $paquets,'idExam'=>$examId,'corrA'=>$corrA]);
     }
     public function getCopies($idPaquet){
+
         $userId = Auth::id();
         $paquet = Paquets::find($idPaquet);
         $promo = Module::find($paquet->exam_id);

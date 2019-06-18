@@ -38,7 +38,7 @@
                         @foreach($exams as $exam)
                             <div class="col-sm-3 col-xxxl-3 block" role="{{$exam->id}}">
                                 <input type="hidden" id="{{$exam->id}}" value="{{$exam->module_id}}">
-                                <a class="element-box el-tablo" href="{{url('enseignant/paquets/'.$exam->module->id)}}" style="background-color: #f2f4f8;">
+                                <a class="element-box el-tablo" href="{{url('enseignant/paquets/'.$exam->id.'/'.$exam->module->id)}}" style="background-color: #f2f4f8;">
                                     <div class="trending trending-up" id="annee">
                                         {{$exam->dateExam}}
                                     </div>

@@ -68,6 +68,6 @@ class Etudiant extends Model
         //dd($estEx[0]->nbrAbs." ".$this->nom);
     }
 
-}
+
 }
 
