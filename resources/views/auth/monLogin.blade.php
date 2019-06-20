@@ -27,7 +27,7 @@
           <a href="index.html"><img alt="" src="img/logo-big.png"></a>
         </div>
         <h4 class="auth-header">
-          Login Form
+          Login For
         </h4>
         <form action="">
           <div class="form-group">

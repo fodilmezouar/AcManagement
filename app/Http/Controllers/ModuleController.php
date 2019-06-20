@@ -13,6 +13,8 @@ use App\Etudiant;
 use App\Seance;
 use App\Instance;
 use App\Groupe;
+use App\Notification;
+use Auth;
 class ModuleController extends Controller
 {
     public function addModule(Request $request) 
@@ -27,7 +29,7 @@ class ModuleController extends Controller
                             <button aria-label='Close' class='close editModule' type='button' data-target='#editModuleModal' data-toggle='modal' role='".$module->id."'><i class='os-icon os-icon-ui-49'></i></button>
                             <button aria-label='Close' class='close attModule' type='button' data-target='#attModuleModal' data-toggle='modal' role='".$module->id."'><i class='icon-feather-arrow-up-right'></i></button>
                           </div>
-                          <a class='element-box el-tablo' href='#' style='background-color: #e1e1e1;'>
+                          <a class='element-box el-tablo' href='#' style='background-color: #f2f4f8;'>
                             <div class='value' id='libelleModule'>
                               ".$module->libelle."
                             </div>
@@ -59,13 +61,28 @@ class ModuleController extends Controller
     	$moduleName = Module::find($id)->libelle;
       $promo = Promotion::find(Module::find($id)->promotion_id);
       $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$promo->filiere_id)->where('role','like','%2%')->get();
-    	return view('gPrel.attachement')->with(['enseignants'=>$enseignants,'idModule'=>$id,'moduleName'=>$moduleName,'promoName'=>$promo->libelle,'promoId'=>$promo->id]);
+      $notifications = Notification::where("id_receiver","=",Auth::id())->orderBy('id','DESC')->get();
+        $cpt = 0;
+           foreach($notifications as $notif){
+             if($notif->est_lit == 0){
+               $cpt++;
+             }
+           }
+      return view('gPrel.attachement')->with(['notifications'=>$notifications,'cpt'=>$cpt,'enseignants'=>$enseignants,'idModule'=>$id,'moduleName'=>$moduleName,'promoName'=>$promo->libelle,'promoId'=>$promo->id]);
     }
     //role 1 chef , 2 charge , 3 assistant
     public function validerAttachement(Request $request){
     	$module = Module::find($request->input('moduleId'));
     	$module->enseignant_id = $request->input('enseignantId');
-    	$module->save(); 
+      $module->save(); 
+      $notif = new Notification();
+      $notif->id_sender = Auth::id();;
+      $notif->id_receiver = $module->enseignant_id;
+      $notif->message = "new Module ".$module->libelle;
+      $notif->date_notif = date("Y-m-d");
+      $notif->type = 1;
+      $notif->url = "http://127.0.0.1:8001/mesModulesCharge/".$module->enseignant_id;
+      $notif->save();
     	$valid['success'] = array('success' => false, 'messages' => array());
         $valid['success'] = true;
         $valid['messages'] = "yes babe";
@@ -85,15 +102,24 @@ class ModuleController extends Controller
               (SELECT DISTINCT affectations.module_id from affectations WHERE affectations.enseignant_id = ".$idEns.") AS affs ,modules WHERE 
               affs.module_id = modules.id
               ");
-            return view('gAbs.modulesEns')->with('modules',$modules);
+              $notifications = Notification::where("id_receiver","=",Auth::id())->orderBy('id','DESC')->get();
+        $cpt = 0;
+           foreach($notifications as $notif){
+             if($notif->est_lit == 0){
+               $cpt++;
+             }
+           }
+            return view('gAbs.modulesEns')->with(['modules'=>$modules,'notifications'=>$notifications,'cpt'=>$cpt]);
     }
     public function modulesCharge($idEns){
+           Notification::where("id_receiver","=",Auth::id())->where('type','=',1)->where('est_lit','=',0)->update(['est_lit'=>1]);
+           
             $modules = Module::where('enseignant_id','=',$idEns)->get();
-            return view('gPrel.moduleEns')->with('modules',$modules);
+            return view('gPrel.moduleEns')->with(['modules'=>$modules]);
     }
     public function modulesExclusion($idEns){
             $modules = Module::where('enseignant_id','=',$idEns)->get();
-            return view('gAbs.modulesExclusion')->with('modules',$modules);
+            return view('gAbs.modulesExclusion')->with(['modules',$modules]);
     }
     public function modulesAssistantJustifier($idEns){
             $modules = DB::select("SELECT modules.id ,libelle FROM 
@@ -175,6 +201,7 @@ class ModuleController extends Controller
                 $seanceId = $seance->id;
            $instances = Instance::where('seance_id','=',$seanceId)->orderBy('id','asc')->get();
            $module = Module::find($idModule);
+           $notifications = Notification::where("id_receiver","=",Auth::id())->orderBy('id','DESC')->get();
             return view('gAbs.listeAbsComplete')->with(['students'=>$students,'instances'=>$instances,"seanceId"=>$seanceId,"seance"=>$seance,"module"=>$module,'type'=>$type,"justifier"=>"oui"]);
     }
 }

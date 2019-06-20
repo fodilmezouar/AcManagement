@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Opis\Closure\SerializableClosure;
 use Illuminate\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 
 class SerializedQuery
@@ -37,7 +38,7 @@ class SerializedQuery
     public $with = [];
 
     /**
-     * @param Builder|\Illuminate\Database\Eloquent\Builder $builder
+     * @param Builder|Relation|EloquentBuilder $builder
      */
     public function __construct($builder)
     {
@@ -46,7 +47,7 @@ class SerializedQuery
         $this->connection = $builder->getConnection()->getName();
         $this->with       = $this->serializeEagerLoads($builder);
 
-        if ($builder instanceof EloquentBuilder) {
+        if ($builder instanceof EloquentBuilder || $builder instanceof Relation) {
             $this->model = get_class($builder->getModel());
         }
     }
@@ -112,6 +113,8 @@ class SerializedQuery
      */
     private function serializeEagerLoads($builder): array
     {
+        $this->ensureSecurityProvider();
+
         return collect(method_exists($builder, 'getEagerLoads') ? $builder->getEagerLoads() : [])
             ->map(function (Closure $constraint) {
                 return new SerializableClosure($constraint);
@@ -123,8 +126,23 @@ class SerializedQuery
      */
     private function eagerLoads(): array
     {
+        $this->ensureSecurityProvider();
+
         return collect($this->with)->map(function (SerializableClosure $closure) {
             return $closure->getClosure();
         })->toArray();
+    }
+
+    /**
+     * If there's no security provider, this means the deferred
+     * QueueServiceProvider wasn't loaded yet. Let's load it now.
+     */
+    private function ensureSecurityProvider()
+    {
+        if (null !== SerializableClosure::getSecurityProvider()) {
+            return;
+        }
+
+        app()->loadDeferredProvider('queue');
     }
 }

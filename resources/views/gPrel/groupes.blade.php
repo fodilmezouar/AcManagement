@@ -89,7 +89,7 @@
                             <button aria-label="Close" class="close editModule" type="button" data-target="#editModuleModal" data-toggle="modal" role="{{$module->id}}"><i class="os-icon os-icon-ui-49"></i></button>
                             <button aria-label="Close" class="close attModule" type="button" data-target="#attModuleModal" data-toggle="modal" role="{{$module->id}}" id="{{$module->enseignant_id}}"><i class="icon-feather-arrow-up-right"></i></button>
                           </div>
-                          <a class="element-box el-tablo" href="" style="background-color: #f2f4f8;">
+                          <a class="element-box el-tablo" href="#" style="background-color: #f2f4f8;">
                             <div class="value" id="libelleModule">
                               {{$module->libelle}}
                             </div>
