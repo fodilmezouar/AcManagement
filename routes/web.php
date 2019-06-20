@@ -10,9 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+/**notification*/
+/**  notification **/
 
+Route::get('event', function () {
+    return view("test");
+});
 /* ---- Gestion Prel ----- */
     /*--- Promotions --- */
+Route::get('configuration','FiliereController@setConfig');
+Route::post('config/setFiliere','FiliereController@setFiliere');
 Route::get('promotions','PromotionController@getPromos');
 Route::post('promotions/ajoutPromo','PromotionController@ajoutPromo');
 Route::post('promotions/suppPromo','PromotionController@suppPromo');

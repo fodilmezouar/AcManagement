@@ -51,7 +51,6 @@ class EnseignantController extends Controller
    
     public function enseignantView(){
         $modules = Filiere::all();
-
         return view('gPrel.enseignant',['modules' => $modules]);
     }
     public function getEnseignant(){
@@ -186,7 +185,7 @@ class EnseignantController extends Controller
     }
     public function repartirRoles($id){
       $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$id)->get();
-      return view('gPrel.repartitionRole')->with('enseignants',$enseignants);
+      return view('gPrel.repartitionRole')->with(['enseignants'=>$enseignants]);
     }
     public function validerRepartition(Request $request){
        $enseignant = User::find($request->input('ensId'));

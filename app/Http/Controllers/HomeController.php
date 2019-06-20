@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Promotion;
 use App\User;
+use App\Notification;
+use Auth;
 class HomeController extends Controller
 {
     /**
@@ -30,6 +32,13 @@ class HomeController extends Controller
         if($promoId)
             $promosCourant = Promotion::find($promoId);
         $admins = User::where('role','like','%4%')->get();
-        return view('home')->with(["promos"=>$promos,"promosCourant"=>$promosCourant,'admins'=>$admins]);
+        $notifications = Notification::where("id_receiver","=",Auth::id())->orderBy('id','DESC')->get();
+        $cpt = 0;
+           foreach($notifications as $notif){
+             if($notif->est_lit == 0){
+               $cpt++;
+             }
+           }
+        return view('home')->with(["promos"=>$promos,"promosCourant"=>$promosCourant,'admins'=>$admins,'notifications'=>$notifications,'cpt'=>$cpt]);
     }
 }

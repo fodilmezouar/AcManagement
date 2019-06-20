@@ -13,6 +13,9 @@ use App\Instance;
 use App\Justification;
 use App\Groupe;
 use App\Module;
+use App\Notification;
+use App\User;
+use Auth;
 class AbsenceController extends Controller
 {
     public function getListeAbsence($idSc){

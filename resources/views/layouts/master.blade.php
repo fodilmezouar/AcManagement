@@ -544,9 +544,11 @@
             </a>
           </li>
         @endif
+        @if(stristr(Auth::user()->role,'2'))
         <li class="sub-header">
+
           <span>Gestion Absences</span>
-          @if(stristr(Auth::user()->role,'2'))
+          
         <li class="selected has-sub-menu {{ $active ==  'mesModulesCharge' ? 'active':''}}">
           <a href="{{url('mesModulesCharge/'.Auth::user()->id)}}">
             <div class="icon-w">
@@ -611,8 +613,19 @@
             </a>
           </li>
           @endif
-
+           @if(stristr(Auth::user()->role,'4'))
+            <li class="sub-header" style="border-top: 1px solid rgba(0, 0, 0, 0.05);margin-top: 5em;">
+          <li class="selected has-sub-menu {{ $active ==  'configuration' ? 'active':''}}">
+          <a href="{{url('configuration')}}">
+            <div class="icon-w">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+            </div>
+            <span>Configuration</span>
+          </a>
+           </li>
         </li>
+        @endif
+        
 
 
       </ul>
@@ -636,72 +649,29 @@
           START - Messages Link in secondary top menu
           -------------------->
           <div class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
-            <i class="os-icon os-icon-mail-14"></i>
+          <i class="os-icon os-icon-others-43"></i>
             <div class="new-messages-count">
-              12
+              {{Auth::user()->countNotifNonLit()}}
             </div>
             <div class="os-dropdown light message-list">
               <ul>
+              @foreach(Auth::user()->notifications() as $notif)
                 <li>
-                  <a href="#">
+                  <a href="{{$notif->url}}">
                     <div class="user-avatar-w">
-                      <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
+                      <img alt="" src="{{asset('/uploads/photo/'.$notif->getSender()->photo)}}">
                     </div>
                     <div class="message-content">
                       <h6 class="message-from">
-                        John Mayers
+                        {{$notif->getSender()->name}} {{$notif->getSender()->prenom}}
                       </h6>
                       <h6 class="message-title">
-                        Account Update
+                        {{$notif->message}} -{{$notif->date_notif}}
                       </h6>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="#">
-                    <div class="user-avatar-w">
-                      <img alt="" src="{{asset('img/avatar2.jpg')}}">
-                    </div>
-                    <div class="message-content">
-                      <h6 class="message-from">
-                        Phil Jones
-                      </h6>
-                      <h6 class="message-title">
-                        Secutiry Updates
-                      </h6>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="user-avatar-w">
-                      <img alt="" src="{{asset('img/avatar3.jpg')}}">
-                    </div>
-                    <div class="message-content">
-                      <h6 class="message-from">
-                        Bekky Simpson
-                      </h6>
-                      <h6 class="message-title">
-                        Vacation Rentals
-                      </h6>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="user-avatar-w">
-                      <img alt="" src="{{asset('img/avatar4.jpg')}}">
-                    </div>
-                    <div class="message-content">
-                      <h6 class="message-from">
-                        Alice Priskon
-                      </h6>
-                      <h6 class="message-title">
-                        Payment Confirmation
-                      </h6>
-                    </div>
-                  </a>
-                </li>
+                @endforeach
               </ul>
             </div>
           </div>

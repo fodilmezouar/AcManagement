@@ -37,11 +37,12 @@
                     Drag And Drop les affectations que vous correspond
                   </div>
                   <div class="row">
-
+                  @if($existEncore)
                    <div id='external-events' class="col-sm-3" style="margin-top:50px;">
   <h6 class="element-header">Mes Affectations
   </h6>
   <input type="hidden" value="{{Auth::user()->id}}" id="idEns">
+  <div id="eventsAffect">
    @foreach($affectations as $affectation)
    @if($affectation->td == "1" || $affectation->tp == "1")
      @if($affectation->td == "1")
@@ -49,14 +50,20 @@
         </div>
        @endif
         @if($affectation->tp == "1")
-          <div class='fc-event' id="{{$affectation->id}}" style="margin-bottom: 5px;padding: 10px;">{{$affectation->module->libelle}} {{$affectation->groupe->libelle}} tp
+          <div class='fc-event' id="{{$affectation->id}}" style="margin-bottom: 5px;padding: 10px;cursor:pointer;">{{$affectation->module->libelle}} {{$affectation->groupe->libelle}} tp
           </div>
         @endif
 
      @endif
         
    @endforeach
-   <div class="floated-chat-btn" data-target="#emploiModal" data-toggle="modal" >
+   </div>
+    <!-- fin supp groupe -->
+</div>
+@endif
+
+                  <div id="fullCalendar" class="{{$existEncore ? 'col-sm-9' : 'col-sm-12'}}"></div>
+                  <div class="floated-chat-btn" data-target="#emploiModal" data-toggle="modal" >
                 <i class="icon-feather-arrow-up-right"></i>
               </div>
               <!-- modal supp groupe-->
@@ -78,9 +85,6 @@
         </div>
       </div>
     </div>
-    <!-- fin supp groupe -->
-</div>
-                  <div id="fullCalendar" class="col-sm-9"></div>
      </div>              
                 </div>
               </div>

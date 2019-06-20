@@ -161,6 +161,15 @@ $(function () {
          }
     }
     calendar = $("#fullCalendar").fullCalendar({
+      drop:function(){
+         $(this).remove();
+        if($('#eventsAffect').children().length == 0)
+            {
+              $('#external-events').remove();
+              $('#fullCalendar').removeClass('col-sm-9');
+              $('#fullCalendar').addClass('col-sm-12');
+            }
+      },
       header: {
         left: "prev,next today",
         center: "title",
@@ -169,6 +178,8 @@ $(function () {
       defaultView: 'agendaWeek',
       selectHelper: true,
       droppable: true,
+      weekends: true,
+      //firstDay:0,
       eventRender: function (event, element) {
         if(event.idSeance)
            element.attr('href','getListe/'+event.idSeance);

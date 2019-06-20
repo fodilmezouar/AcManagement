@@ -10,7 +10,7 @@ use App\Groupe;
 use App\Etudiant;
 use App\Module;
 use App\User;
-
+use Auth;
 class PromotionController extends Controller
 {
     
@@ -28,7 +28,7 @@ class PromotionController extends Controller
            $promo->libelle = $request->input('libelle');
            $promo->niveau = $request->input('niveau');
            $promo->annee = date("Y");
-           $promo->filiere_id = $request->input('filiereId');
+           $promo->filiere_id = Filiere::all()->get(0)->id;
            $promo->save();
            $fragment = "<div class='col-sm-3 col-xxxl-3 block' role='".$promo->id."'>
                         <input type='hidden' id='".$promo->id."' value='".$promo->filiere_id."'>
@@ -78,7 +78,7 @@ class PromotionController extends Controller
            $promo = Promotion::find($request->input('promoId'));
            $promo->libelle = $request->input('libelle');
            $promo->niveau = $request->input('niveau');
-           $promo->filiere_id = $request->input('filiereId');
+           //$promo->filiere_id = $request->input('filiereId');
            $promo->save();
            $valid['success'] = array('success' => false, 'messages' => array());
            $valid['success'] = true;

@@ -37,7 +37,7 @@ class DotenvVariables extends AbstractVariables
      *
      * @return string|null
      */
-    public function get($name)
+    protected function getInternal($name)
     {
         foreach ($this->adapters as $adapter) {
             $result = $adapter->get($name);
@@ -55,14 +55,8 @@ class DotenvVariables extends AbstractVariables
      *
      * @return void
      */
-    public function set($name, $value = null)
+    protected function setInternal($name, $value = null)
     {
-        // Don't overwrite existing environment variables if we're immutable
-        // Ruby's dotenv does this with `ENV[key] ||= value`.
-        if ($this->isImmutable() && $this->get($name) !== null) {
-            return;
-        }
-
         foreach ($this->adapters as $adapter) {
             $adapter->set($name, $value);
         }
@@ -75,13 +69,8 @@ class DotenvVariables extends AbstractVariables
      *
      * @return void
      */
-    public function clear($name)
+    protected function clearInternal($name)
     {
-        // Don't clear anything if we're immutable.
-        if ($this->isImmutable()) {
-            return;
-        }
-
         foreach ($this->adapters as $adapter) {
             $adapter->clear($name);
         }

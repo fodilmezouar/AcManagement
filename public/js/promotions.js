@@ -46,7 +46,7 @@ $("#formPromos").on('submit',function(e) {
         handleError("#libelleModal");
     else
     {
-    var filiereId = $("#filiereModal").val();
+    //var filiereId = $("#filiereModal").val();
     var niveau = $("#niveauModal").val();
                 $.ajax({
                   url : "promotions/ajoutPromo",
@@ -54,7 +54,7 @@ $("#formPromos").on('submit',function(e) {
                   data: {
                     "libelle":libelle,
                     "niveau":niveau,
-                    "filiereId":filiereId
+                    //"filiereId":filiereId
                   },
                   dataType: 'json',
                   success:function(response) {
@@ -110,7 +110,7 @@ $("#formPromosEdit").on('submit',function(e) {
         handleError('#libelleModalEdit');
     else
      {
-      var filiereId = $("#filiereModalEdit").val();
+      //var filiereId = $("#filiereModalEdit").val();
       var niveau = $("#niveauModalEdit").val();
       var promoId = $('#promoIdInput').val();
            $.ajax({
@@ -119,7 +119,7 @@ $("#formPromosEdit").on('submit',function(e) {
                   data: {
                     "libelle":libelle,
                     "niveau":niveau,
-                    "filiereId":filiereId,
+                    //"filiereId":filiereId,
                     "promoId":promoId
                   },
                   dataType: 'json',
