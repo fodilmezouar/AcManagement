@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Copies;
+use App\Corr_aff;
 use App\Corrections;
 use App\Module;
 use App\Paquets;
@@ -20,13 +21,18 @@ class noteController extends Controller
         $promo = Module::find($paquet->exam_id);
         $correction = Corrections::where('enseignant_id','=',$userId)->where('paquet_id','=',$idPaquet)->get()->first()->correcteur;
         $note = 'notePre'.$correction;
-        $copies = Copies::select('id','codeCopie','paquetId',$note.' as note')->where('paquetId','=',$idPaquet)->get();
+        if($correction ==3){
+            $copies = Copies::select('id', 'codeCopie', 'paquetId', $note . ' as note',DB::raw('ABS(notePre1-notePre2) '))->where('paquetId', '=', $idPaquet)->where(DB::raw('ABS(notePre1-notePre2) '),'>',3)->get();
+        }else {
+            $copies = Copies::select('id','codeCopie','paquetId',$note.' as note')->where('paquetId','=',$idPaquet)->get();
+        }
         return view('gPrel.saisieNote')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'idPaquet'=>$idPaquet,'corr'=>$correction]);
     }
     public function validerNote(Request $request ,$idPaquet){
         $userId = Auth::id();
         $correction = Corrections::where('enseignant_id','=',$userId)->where('paquet_id','=',$idPaquet)->get()->first()->correcteur;
-
+        $idExam = Paquets::where('id','=',$idPaquet)->get()->first()->exam_id;
+        $ecart = Corr_aff::where('id','=',$idExam)->get()->first()->ecartNote;
         $code = $request->input('id');
         $copie = Copies::where('codeCopie','=',$code)->get()->first();
         if($correction == 1)
@@ -35,9 +41,25 @@ class noteController extends Controller
             $copie->notePre2 =$request->input('note');
         if($correction == 3)
             $copie->notePre3 =$request->input('note');
+        if(!empty($copie->notePre1) && !empty($copie->notePre2)){
+            if(abs(($copie->notePre1-$copie->notePre2))<=$ecart) {
+                $copie->noteFinal = ($copie->notePre1 + $copie->notePre2) / 2;
+            }else{
+                if(!empty($copie->notePre3)){
+                    if(abs(($copie->notePre1-$copie->notePre3))< abs(($copie->notePre2-$copie->notePre3))){
+                        $copie->noteFinal = $copie->notePre1;
+                    }else{
+                        $copie->noteFinal = $copie->notePre2;
+                    }
+                }
+            }
+        }
+
+
         $copie->save();
 
-        return response()->json("test");
+
+        return response()->json($ecart);
 
     }
     public function getPaquets(){

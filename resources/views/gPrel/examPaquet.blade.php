@@ -45,26 +45,38 @@
                                                 <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 86px;">code Copie</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 62px;">note 1</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 62px;">note 2</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 21px;">note 3</th></tr></thead><tfoot><tr>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 21px;">note 3</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 21px;">Moyenne</th></tr></thead><tfoot><tr>
                                                 <th rowspan="1" colspan="1" >code Copie</th>
                                                 <th rowspan="1" colspan="1">note 1</th>
                                                 <th rowspan="1" colspan="1">note 2</th>
-                                                <th rowspan="1" colspan="1">note 3</th></tr></tfoot>
+                                                <th rowspan="1" colspan="1">note 3</th>
+                                                <th rowspan="1" colspan="1">Moyenne</th>
+                                            </tr></tfoot>
                                             <tbody>
-                                            <?php $cor3="disabled"; ?>
+                                            <?php $cor3="disabled";  ?>
                                             @foreach($copies as $copie)
                                                 <?php
 
                                                     if (abs($copie->notePre1-$copie->notePre2)<$ecart){
                                                             $cor3="";
+                                                            $warning="";
+                                                    }else{
+                                                        $cor3="disabled"; $warning="color: red";
+                                                    }
+                                                    if ($copie->notePre3 >0){
+
+                                                        $warning="";
                                                     }
 
                                                 ?>
-                                                <tr role="row">
+                                                <tr role="row" style="{{$warning}}" >
+                                                    {{$warning}}
                                                     <td>{{$copie->codeCopie}}</td>
                                                     <td>{{$copie->notePre1}}</td>
                                                     <td>{{$copie->notePre2}}</td>
                                                     <td>{{$copie->notePre3}}</td>
+                                                    <td>{{$copie->noteFinal}}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody></table></div></div>

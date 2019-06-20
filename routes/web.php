@@ -110,7 +110,7 @@ Route::post('exams/ajoutExam','ExamsController@ajoutExam');
 Route::post('exams/suppExam','ExamsController@suppExam');
 Route::post('exams/editExam','ExamsController@editExam');
 Route::get('ens/paquets/liste/{idPaquet}','EnseignantController@getCopies');
-Route::post('enseignant/paquets/liste/valide','EnseignantController@validerAff');
+Route::post('ens/paquets/liste/valide','EnseignantController@validerAff');
 Route::post('enseignant/paquets/valide','EnseignantController@validerDelais');
 Route::post('enseignant/paquets/update','EnseignantController@updateDelais');
 
