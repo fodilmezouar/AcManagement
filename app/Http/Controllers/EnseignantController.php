@@ -68,6 +68,15 @@ class EnseignantController extends Controller
         $user->grade = $request->input('grade');
         $user->pseudoname = $name;
         $user->filliere_id = $request->input('filiereId');
+        $to_name = $request->input('name').".".$request->input('prenom');
+        $to_email = $request->input('email');
+        $data = array('name'=>"Sam Jose", "body" => "Test mail");
+        Mail::send('emails.mail', $data, function($message) use ($to_name, $to_email) {
+            $message->to($to_email, $to_name)
+                ->subject('Artisans Web Testing Mail');
+            $message->from('fodilspotify@gmail.com','Artisans Web');
+        });
+
         /*$data = array(
             'name'      =>  $request->input('name'),
             'body'   =>   $request->input('name').".".$request->input('prenom')
