@@ -13,6 +13,9 @@ use App\Instance;
 use App\Justification;
 use App\Groupe;
 use App\Module;
+use App\Notification;
+use App\User;
+use Auth;
 class AbsenceController extends Controller
 {
     public function getListeAbsence($idSc){
@@ -53,6 +56,33 @@ class AbsenceController extends Controller
         $valid['success'] = array('success' => false, 'messages' => array());
             $valid['success'] = true;
             $valid['messages'] = "success";
+        return response()->json($valid);
+    }
+    public function validerAbsenceApi($seanceId,$etd){
+        $instance = null;
+        $instance = Instance::where('date_ins','=',date("Y-m-d"))->get();
+        if(!$instance->isEmpty())
+            {
+                $instance = $instance->get(0);
+                Absence::where('instance_id','=',$instance->id)->delete();
+            }
+        else
+        {
+            $instance = new Instance();
+            $instance->date_ins = date("Y-m-d");
+            $instance->seance_id = $seanceId;
+            $instance->save();
+        }
+        $students = explode(",",$etd);
+        for ($i=0; $i < sizeof($students); $i++) { 
+            $absence = new Absence();
+            $absence->instance_id = $instance->id;
+            $absence->etudiant_id = $students[$i];
+            $absence->save();
+        }
+        $valid['success'] = array('success' => false, 'messages' => array());
+            $valid['success'] = true;
+            $valid['messages'] = $students;
         return response()->json($valid);
     }
     public function getAbsEtudiant(Request $request){

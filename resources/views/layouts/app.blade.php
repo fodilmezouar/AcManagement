@@ -88,5 +88,16 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+    <script>
+        $(document).ready(function(){
+               $("#show-password").on("change",function(e){
+                   if($(this).is(':checked'))
+                      $("#password").attr("type","text");
+                    else
+                      $("#password").attr("type","password");
+               });
+        });
+    </script>
 </body>
 </html>

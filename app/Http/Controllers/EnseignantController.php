@@ -18,13 +18,39 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
-
+use App\Http\Resources\UserResource;
 class EnseignantController extends Controller
 {
     //
+     public function index()
+    {
+        $users = User::orderBy('created_at', 'desc')->paginate(10);
+        return new UserResource(User::find(1));
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+
+         $user = new User();
+        $user->name = $request->input('name');
+        $$user->password = $request->input('password');
+
+        if($user->save()) {
+            return new UserResource($user);
+        }
+
+    }
+
+   
     public function enseignantView(){
         $modules = Filiere::all();
-
         return view('gPrel.enseignant',['modules' => $modules]);
     }
     public function getEnseignant(){
@@ -68,16 +94,15 @@ class EnseignantController extends Controller
         $user->grade = $request->input('grade');
         $user->pseudoname = $name;
         $user->filliere_id = $request->input('filiereId');
-        /*$data = array(
-            'name'      =>  $request->input('name'),
-            'body'   =>   $request->input('name').".".$request->input('prenom')
+        $data = array(
+            'password'      =>  $request->input('email'),
         );
-        Mail::send('dynamic_email_template',$data,function ($message)
+        /*Mail::send('dynamic_email_template',$data,function ($message)
         {
             $name = Input::get('name').".".Input::get('prenom');
             $message->to(Input::get('email'),Input::get('name'))->subject('You password is :'.$name.time());
         });*/
-
+        //Mail::to('saidiboumi98@gmail.com').send(new SendMail($data));
 
 
        /* $to_name = $request->input('name');
@@ -95,6 +120,20 @@ class EnseignantController extends Controller
         $valid['success'] = true;
         $valid['messages'] = "Ajout réussi";
         return response()->json($valid);
+    }
+    public function isAuth($email,$password){
+      $data = ["email"=>$email,"password"=>$password];
+       $valid['success'] = array('success' => false);
+       if(Auth::attempt($data))
+       {
+        $valid['success'] = true;
+        $valid['id'] = Auth::user()->id;
+        $valid['name'] = Auth::user()->name;
+        $valid['prenom'] = Auth::user()->prenom;
+       }
+     else
+        $valid['success'] = false;
+       return response()->json($valid);
     }
     public function getInfoEns($id){
         $output = array('data' => array());
@@ -146,7 +185,7 @@ class EnseignantController extends Controller
     }
     public function repartirRoles($id){
       $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$id)->get();
-      return view('gPrel.repartitionRole')->with('enseignants',$enseignants);
+      return view('gPrel.repartitionRole')->with(['enseignants'=>$enseignants]);
     }
     public function validerRepartition(Request $request){
        $enseignant = User::find($request->input('ensId'));

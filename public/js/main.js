@@ -1,5 +1,4 @@
 'use strict';
-
 /*
 
 Main javascript functions to init most of the elements
@@ -162,15 +161,25 @@ $(function () {
          }
     }
     calendar = $("#fullCalendar").fullCalendar({
+      drop:function(){
+         $(this).remove();
+        if($('#eventsAffect').children().length == 0)
+            {
+              $('#external-events').remove();
+              $('#fullCalendar').removeClass('col-sm-9');
+              $('#fullCalendar').addClass('col-sm-12');
+            }
+      },
       header: {
         left: "prev,next today",
         center: "title",
         right: "agendaWeek"
       },
       defaultView: 'agendaWeek',
-      selectable: true,
       selectHelper: true,
       droppable: true,
+      weekends: true,
+      //firstDay:0,
       eventRender: function (event, element) {
         if(event.idSeance)
            element.attr('href','getListe/'+event.idSeance);
@@ -215,7 +224,11 @@ $(function () {
           var startHour = event.start.format("HH:mm:ss");
           var jour = event.start.day() + 1;
           var endHour = event.end.format("HH:mm:ss");
+          var scId = "-1";
+          if(event.idSeance)
+             scId = event.idSeance;
           seances[i++] = {
+                "seanceId":scId,
                 "startHour":startHour,
                 "endHour":endHour,
                 "jour":jour,
@@ -230,7 +243,7 @@ $(function () {
      } 
     });
         $.ajax({
-                  url : "valideCalendar/valide",
+                  url : "/valideCalendar/valide",
                   type: "POST",
                   data:{
                       "seances":seances,
@@ -238,7 +251,6 @@ $(function () {
                   },
                   dataType: 'json',
                   success:function(response) {
-                     if(response.success == true) {
                       $('#emploiModal').modal('hide');
                           $('#success-mess').html('<div class="alert alert-success">' +
                             '<button type="button" class="close" data-dismiss="alert">&times;</button>' +
@@ -246,12 +258,9 @@ $(function () {
                         $(".alert-success").delay(500).show(10, function () {
                             $(this).delay(3000).hide(10, function () {
                                 $(this).remove();
+                                //location.href = location.href;
                             });
                         }); // /.alert
-                    }  // if
-                    else {
-                      alert('error');
-                    }
                   }
               });
   });

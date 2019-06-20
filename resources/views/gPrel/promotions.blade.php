@@ -78,19 +78,11 @@
        <form id="formPromos" method="POST" action="">
           <div class="modal-body">
             <div id="add-prom-messages"></div>
-              <div class="form-group">
-                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModal">
-              </div>
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="filiereModal"> Filiére</label>
-                    <select class="form-control" id="filiereModal">
-                       @foreach($filieres as $filiere)
-                           <option value="{{$filiere->id}}">{{$filiere->libelle}}</option>
-                       @endforeach
-                    </select>
-                  </div>
+                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModal">
+              </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
@@ -148,19 +140,12 @@
        <form id="formPromosEdit" method="POST" action="">
           <div class="modal-body">
              <div id="edit-prom-messages"></div>
-              <div class="form-group">
-                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModalEdit">
-              </div>
+              
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="filiereModal"> Filiére</label>
-                    <select class="form-control" id="filiereModalEdit">
-                       @foreach($filieres as $filiere)
-                           <option value="{{$filiere->id}}">{{$filiere->libelle}}</option>
-                       @endforeach
-                    </select>
-                  </div>
+                <label for="libelleModal"> Libellé</label><input class="form-control" placeholder="Enter Libellé" type="text" id="libelleModalEdit">
+              </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">

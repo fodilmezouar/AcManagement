@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Module;
 use App\User;
 use App\Groupe;
+use App\Seance;
 use App\Affectation;
 use App\Promotion;
 use Auth;
@@ -61,7 +62,39 @@ class AffectationController extends Controller
 
    public function affectationEnseignant($idEns){
       $affectations = Affectation::where('enseignant_id','=',$idEns)->orderBy('id','asc')->get();
-      return view('gAbs.calendrier')->with('affectations',$affectations);
+      $existEncore = false;
+      $resteEncore = [];
+      $i = 0;
+      $j = 0;
+      foreach($affectations as $affect){
+          if($affect->td == 1)
+             {
+                 
+                 $seance = Seance::where('affectation_id','=',$affect->id)->where('type','=','td')->get();
+                 if($seance->count() == 0)
+                    {
+                        $resteEncore[$i++] = $affect;
+                        $existEncore = true;
+                    }
+             }
+             if($affect->tp == 1)
+             {
+                 $seance = Seance::where('affectation_id','=',$affect->id)->where('type','=','tp')->get();
+                 if($seance->count() == 0)
+                    {
+                        if($j == $i)
+                           {
+                               $resteEncore[$i++] = $affect;
+                               $j++; 
+                           }
+                        $existEncore = true;
+                    }
+                    
+             }
+             if($i != $j)
+                $j = $i;
+      }
+      return view('gAbs.calendrier')->with(['affectations'=>$resteEncore,'existEncore'=>$existEncore]);
    }
 
 

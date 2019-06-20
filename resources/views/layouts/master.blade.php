@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Admin Dashboard HTML Template</title>
+  <title>Ac Management</title>
   <meta charset="utf-8">
   <meta content="ie=edge" http-equiv="x-ua-compatible">
   <meta content="template language" name="keywords">
@@ -9,7 +9,7 @@
   <meta content="Tamerlan Soziev" name="author">
   <meta content="Admin dashboard html template" name="description">
   <meta content="width=device-width, initial-scale=1" name="viewport">
-  <link href="favicon.png" rel="shortcut icon">
+  <link href="{{asset('img/logo.jpg')}}" rel="shortcut icon">
   <link href="apple-touch-icon.png" rel="apple-touch-icon">
   <link href="{{asset('icon_fonts_assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 
@@ -158,7 +158,7 @@
     -------------------->
     <div class="menu-mobile menu-activated-on-click color-scheme-dark">
       <div class="mm-logo-buttons-w">
-        <a class="mm-logo" href="index.html"><img src="{{asset('img/logo.png')}}"><span>Clean Admin</span></a>
+        <a class="mm-logo" href="index.html"><img src="{{asset('img/logo.jpg')}}"><span>Ac Management</span></a>
         <div class="mm-buttons">
           <div class="content-panel-open">
             <div class="os-icon os-icon-grid-circles"></div>
@@ -178,14 +178,7 @@
               {{Auth::user()->name}} {{Auth::user()->prenom}}
             </div>
             <div class="logged-user-role">
-              
-              @if(stristr(Auth::user()->role,"1"))
-                  Chef Département
-              @elseif(Auth::user()->role == "4")
-                  Administrator
-              @else
-                  Enseignant
-              @endif
+              Enseignant
             </div>
           </div>
         </div>
@@ -221,7 +214,7 @@
         <a class="logo" href="index.html">
           <div class="logo-element"></div>
           <div class="logo-label">
-            Clean Admin
+            Ac Management
           </div>
         </a>
       </div>
@@ -235,13 +228,8 @@
               {{Auth::user()->name}} {{Auth::user()->prenom}}
             </div>
             <div class="logged-user-role">
-              @if(Auth::user()->role == "4")
-                  Administrator
-              @elseif(stristr(Auth::user()->role,"1"))
-                  Chef Département
-              @else
-                  Enseignant
-              @endif
+              <!--role user ms je pense c pas nécissaire -->
+              Enseignant
             </div>
           </div>
           <div class="logged-user-toggler-arrow">
@@ -480,7 +468,7 @@
         -------------------->
       </div>
       <div class="element-search autosuggest-search-activator">
-        <input placeholder="Start typing to search..." type="text">
+        <input placeholder="Rechercher..." type="text">
       </div>
 
       <ul class="main-menu">
@@ -515,6 +503,26 @@
             <span>Enseignants</span>
           </a>
         </li>
+        @if(stristr(Auth::user()->role,'1'))
+        <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
+          <a href="{{url('enseignants/repartitionRole/'.Auth::user()->filliere_id)}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Répartition Roles</span>
+          </a>
+        </li>
+        @endif
+        @if(stristr(Auth::user()->role,'2'))
+        <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
+          <a href="{{url('repartieTache')}}">
+            <div class="icon-w">
+              <div class="os-icon os-icon-layout"></div>
+            </div>
+            <span>Affecter Groupes</span>
+          </a>
+        </li>
+        @endif
           <li class="sub-header">
             <span>Gestion Anonymat</span>
           </li>
@@ -528,14 +536,7 @@
           </li>
         @endif
         @if(stristr(Auth::user()->role,'2'))
-        <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
-          <a href="{{url('repartieTache')}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Répartition Taches</span>
-          </a>
-        </li>
+        
           <li class="selected has-sub-menu {{ $active ==  'Afecter' ? 'active':''}}">
             <a href="{{url('mesModulesCharge')}}">
               <div class="icon-w">
@@ -545,16 +546,11 @@
             </a>
           </li>
         @endif
-        @if(stristr(Auth::user()->role,'1'))
-        <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
-          <a href="{{url('enseignants/repartitionRole/'.Auth::user()->filliere_id)}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Répartition Roles</span>
-          </a>
-        </li>
-        @endif
+        @if(stristr(Auth::user()->role,'2'))
+        <li class="sub-header">
+
+          <span>Gestion Absences</span>
+          
         <li class="selected has-sub-menu {{ $active ==  'mesModulesCharge' ? 'active':''}}">
           <a href="{{url('mesModulesCharge/'.Auth::user()->id)}}">
             <div class="icon-w">
@@ -563,8 +559,7 @@
             <span>Mes Modules</span>
           </a>
         </li>
-        <li class="sub-header">
-          <span>Gestion Absences</span>
+        @endif
           @if(stristr(Auth::user()->role,'3'))
         <li class="selected has-sub-menu {{ $active ==  'Calendrier' ? 'active':''}}">
           <a href="{{url('calendrier/'.Auth::user()->id)}}">
@@ -620,8 +615,19 @@
             </a>
           </li>
           @endif
-
+           @if(stristr(Auth::user()->role,'4'))
+            <li class="sub-header" style="border-top: 1px solid rgba(0, 0, 0, 0.05);margin-top: 5em;">
+          <li class="selected has-sub-menu {{ $active ==  'configuration' ? 'active':''}}">
+          <a href="{{url('configuration')}}">
+            <div class="icon-w">
+              <i class="fa fa-cog" aria-hidden="true"></i>
+            </div>
+            <span>Configuration</span>
+          </a>
+           </li>
         </li>
+        @endif
+        
 
 
       </ul>
@@ -639,78 +645,35 @@
         -------------------->
         <div class="top-menu-controls">
           <div class="element-search autosuggest-search-activator">
-            <input placeholder="Start typing to search..." type="text">
+            <input placeholder="Rechercher..." type="text">
           </div>
           <!--------------------
           START - Messages Link in secondary top menu
           -------------------->
           <div class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
-            <i class="os-icon os-icon-mail-14"></i>
+          <i class="os-icon os-icon-others-43"></i>
             <div class="new-messages-count">
-              12
+              {{Auth::user()->countNotifNonLit()}}
             </div>
             <div class="os-dropdown light message-list">
               <ul>
+              @foreach(Auth::user()->notifications() as $notif)
                 <li>
-                  <a href="#">
+                  <a href="{{$notif->url}}">
                     <div class="user-avatar-w">
-                      <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
+                      <img alt="" src="{{asset('/uploads/photo/'.$notif->getSender()->photo)}}">
                     </div>
                     <div class="message-content">
                       <h6 class="message-from">
-                        John Mayers
+                        {{$notif->getSender()->name}} {{$notif->getSender()->prenom}}
                       </h6>
                       <h6 class="message-title">
-                        Account Update
+                        {{$notif->message}} -{{$notif->date_notif}}
                       </h6>
                     </div>
                   </a>
                 </li>
-                <li>
-                  <a href="#">
-                    <div class="user-avatar-w">
-                      <img alt="" src="{{asset('img/avatar2.jpg')}}">
-                    </div>
-                    <div class="message-content">
-                      <h6 class="message-from">
-                        Phil Jones
-                      </h6>
-                      <h6 class="message-title">
-                        Secutiry Updates
-                      </h6>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="user-avatar-w">
-                      <img alt="" src="{{asset('img/avatar3.jpg')}}">
-                    </div>
-                    <div class="message-content">
-                      <h6 class="message-from">
-                        Bekky Simpson
-                      </h6>
-                      <h6 class="message-title">
-                        Vacation Rentals
-                      </h6>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a href="#">
-                    <div class="user-avatar-w">
-                      <img alt="" src="{{asset('img/avatar4.jpg')}}">
-                    </div>
-                    <div class="message-content">
-                      <h6 class="message-from">
-                        Alice Priskon
-                      </h6>
-                      <h6 class="message-title">
-                        Payment Confirmation
-                      </h6>
-                    </div>
-                  </a>
-                </li>
+                @endforeach
               </ul>
             </div>
           </div>
@@ -809,6 +772,10 @@
       -------------------->
       @yield('content')
       <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
+      <script
+  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+  crossorigin="anonymous"></script>
       <script src="{{asset('bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
       <script src="{{asset('bower_components/moment/moment.js')}}"></script>
       <script src="{{asset('bower_components/select2/dist/js/select2.full.min.js')}}"></script>
@@ -836,6 +803,7 @@
       <script src="{{asset('bower_components/bootstrap/js/dist/tab.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tooltip.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/popover.js')}}"></script>
+
       <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
       <script src="{{asset('js/demo_customizer.js?version=4.4.0')}}"></script>
       <script src="{{asset('js/main.js?version=4.4.0')}}"></script>
