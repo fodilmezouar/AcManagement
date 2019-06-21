@@ -93,13 +93,20 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::post('exams/ajoutExam','ExamsController@ajoutExam');
     Route::post('exams/suppExam','ExamsController@suppExam');
     Route::post('exams/editExam','ExamsController@editExam');
-    Route::get('enseignant/paquets/{moduleId}','EnseignantController@getPaquets');
+    Route::get('enseignant/paquets/{examId}/{moduleId}','EnseignantController@getPaquets');
     Route::get('mesModulesCharge','ExamsController@modulesCharge');
     Route::get('mesModulesCharge/exam/{id}','ExamsController@getExamEns');
     Route::get('enseignant/paquets/getInformationEcart/{id}','EnseignantController@getInfoEcart');
+
     Route::get("affectations",function(){
            return view('gprel.affect');
     });
+
+    Route::get('note/{idPaquet}','noteController@getCopies');
+    Route::post('note/valider/{id}','noteController@validerNote');
+    Route::get('mesModules/corr/{idEns}','noteController@getPaquets');
+
+
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles');
@@ -121,8 +128,8 @@ Route::get('anonymat/paquets/liste/{idPaquet}','PaquetsController@getCopies');
 Route::post('exams/ajoutExam','ExamsController@ajoutExam');
 Route::post('exams/suppExam','ExamsController@suppExam');
 Route::post('exams/editExam','ExamsController@editExam');
-Route::get('enseignant/paquets/liste/{idPaquet}','EnseignantController@getCopies');
-Route::post('enseignant/paquets/liste/valide','EnseignantController@validerAff');
+Route::get('ens/paquets/liste/{idPaquet}','EnseignantController@getCopies');
+Route::post('ens/paquets/liste/valide','EnseignantController@validerAff');
 Route::post('enseignant/paquets/valide','EnseignantController@validerDelais');
 Route::post('enseignant/paquets/update','EnseignantController@updateDelais');
 

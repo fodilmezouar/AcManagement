@@ -12,7 +12,8 @@ $("#formAffecter1").on('submit',function(e) {
         type: "POST",
         data: {
             "paquetId":paquetId,
-            "enseignantId":$('#selectEns1').val()
+            "enseignantId":$('#selectEns1').val(),
+            'correcteur':1
         },
         dataType: 'json',
         success:function(response) {
@@ -36,7 +37,8 @@ $("#formAffecter2").on('submit',function(e) {
         type: "POST",
         data: {
             "paquetId":paquetId,
-            "enseignantId":$('#selectEns2').val()
+            "enseignantId":$('#selectEns2').val(),
+            'correcteur':2
         },
         dataType: 'json',
         success:function(response) {
@@ -59,7 +61,8 @@ $("#formAffecter3").on('submit',function(e) {
         type: "POST",
         data: {
             "paquetId":paquetId,
-            "enseignantId":$('#selectEns3').val()
+            "enseignantId":$('#selectEns3').val(),
+            'correcteur':3
         },
         dataType: 'json',
         success:function(response) {

@@ -22,7 +22,7 @@
         <div class="content-box">
             <div class="element-wrapper">
                 <h6 class="element-header">
-                    Anonymat
+                    Paquets
                 </h6>
                 <div class="element-box">
                     <h5 class="form-header">
@@ -36,7 +36,7 @@
                             <div class="col-sm-3 col-xxxl-3 block" role="{{$paquet->id}}">
                                 <div>
                                 </div>
-                                <a class="element-box el-tablo" href="{{url('enseignant/paquets/liste/'.$paquet->id)}}" style="background-color: #f2f4f8;">
+                                <a class="element-box el-tablo" href="{{url('ens/paquets/liste/'.$paquet->id)}}" style="background-color: #f2f4f8;">
                                     <div class="value" id="libelle">
                                         {{$paquet->libelle}}
                                     </div>

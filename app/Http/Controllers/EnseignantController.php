@@ -207,36 +207,37 @@ class EnseignantController extends Controller
        $valid['messages'] = "yes babe";
        return response()->json($valid);   
     }
-    public function getPaquets($moduleId){
+    public function getPaquets($examId,$moduleId){
         $userId = Auth::id();
 
-        $examId=0;
+
         $paquets = array();
-        $corrA=0;
+        $corrA=[];
             if (Exams::where('module_id',$moduleId)->exists()) {
-                $examId = Exams::select('id')->where('module_id', $moduleId)->get()->first()->id;
+
                 $paquets = Paquets::where('exam_id',$examId)->get();
                 $corrA = Corr_aff::where('exam_id',$examId)->get();
             }
         return view('gPrel.paquetExam')->with(['paquets' => $paquets,'idExam'=>$examId,'corrA'=>$corrA]);
     }
     public function getCopies($idPaquet){
+
         $userId = Auth::id();
         $paquet = Paquets::find($idPaquet);
         $promo = Module::find($paquet->exam_id);
-        $users = User::where('grade','!=',"")->where('id','!=',$userId)->whereNotIn('id',function($query) {
-
-            $query->select('enseignant_id')->from('corrections');
-
-        })->get();
+        $ecart = Corr_aff::where('exam_id','=',$paquet->exam_id)->get()->first()->ecartNote;
+        $users = User::where('grade','!=',"")->where('id','!=',$userId)->get();
+        $correct = Corrections::where('paquet_id','=',$idPaquet)->pluck('correcteur')->toArray();
         $copies = Copies::where('paquetId','=',$idPaquet)->get();
-        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id,'enseignants'=>$users,'idPaquet'=>$idPaquet]);
+        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'ecart'=>$ecart,'enseignants'=>$users,'idPaquet'=>$idPaquet,'correct'=>$correct]);
     }
     public function validerAff(Request $request){
         $corr = new Corrections();
+        $idPaq = $request->input('paquetId');
         $corr->enseignant_id = $request->input('enseignantId');
-        $corr->paquet_id = $request->input('paquetId');
+        $corr->paquet_id = $idPaq;
         $corr->date_affectation = date("Y-m-d");
+        $corr->correcteur = $request->input('correcteur');
         $corr->save();
         $valid['success'] = array('success' => false, 'messages' => array());
         $valid['success'] = true;

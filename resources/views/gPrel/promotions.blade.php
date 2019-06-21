@@ -50,7 +50,7 @@
                             <div class="value" id="libelle">
                               {{$promo->libelle}}
                             </div>
-                            <div class="trending trending-down-basic">
+                            <div class="trending trending-up">
                               <span id="filiere">{{$promo->filiere->libelle}}</span>
                             </div>
                           </a>

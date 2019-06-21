@@ -458,6 +458,7 @@ class ComposerStaticInitee49cd8d1dae11652bbc04cacb5705da
     );
 
     public static $classMap = array (
+        'AddCorrToCorrections' => __DIR__ . '/../..' . '/database/migrations/2019_03_21_132824_add_corr_to_corrections.php',
         'AddIdFilliereToUsers' => __DIR__ . '/../..' . '/database/migrations/2019_03_07_210753_add_id_filliere_to_users.php',
         'App\\Absence' => __DIR__ . '/../..' . '/app/Absence.php',
         'App\\Affectation' => __DIR__ . '/../..' . '/app/Affectation.php',
