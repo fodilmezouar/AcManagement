@@ -181,8 +181,27 @@ $(function () {
       weekends: true,
       //firstDay:0,
       eventRender: function (event, element) {
+        
         if(event.idSeance)
-           element.attr('href','getListe/'+event.idSeance);
+           {
+             //element.attr('href','getListe/'+event.idSeance);
+             element.on('click',function (param) {  
+              var tab = $('th:nth-child('+($(this).parents('td').index()+1)+')').html().substring(9).replace('</span>',"").trim().split('/');
+              
+              var month = parseInt(tab[0]);
+              var jour = parseInt(tab[1]);
+              var dateComplete = ""+new Date().getFullYear()+'-';
+              if(month<10)
+                dateComplete+="0"+month+'-';
+              else 
+                dateComplete+=month+'-';
+                if(jour<10)
+                dateComplete+="0"+jour;
+              else 
+                dateComplete+=jour;
+              location.href='getListe/'+event.idSeance+'/date/'+dateComplete;
+             });
+           }
       },
       select: function select(start, end, allDay) {
         var title;
@@ -261,6 +280,7 @@ $(function () {
                                 //location.href = location.href;
                             });
                         }); // /.alert
+                        location.href = location.href;
                   }
               });
   });
@@ -580,7 +600,7 @@ $(function () {
                       dataMonth[obj1["month"] + 3] = obj1["cpt"];
                     }
                     var lbls = [];
-                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma"];
+                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma","juin","juil","Aout"];
                     for (var i = 0; i < n; i++) {
                       lbls[i] = mois[i];
                     }
@@ -664,10 +684,12 @@ $(function () {
                   },
                   dataType: 'json',
                   success:function(response) {
+                  
                     var d = new Date();
                     var n = d.getMonth() + 1 + 5;
                     var help = response.messages;
                     var help2 = response.messages2;
+                    console.log(help);
                     var dataMonth = [];
                     var dataMonth2 = [];
                     for (var i = 0; i < n; i++) {
@@ -686,7 +708,7 @@ $(function () {
                     }
                     var lbls = [];
                     var lbls2 = [];
-                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma"];
+                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma","juin","juil","Aout"];
                     for (var i = 0; i < n; i++) {
                       lbls[i] = mois[i];
                     }

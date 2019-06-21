@@ -18,19 +18,21 @@ use App\User;
 use Auth;
 class AbsenceController extends Controller
 {
-    public function getListeAbsence($idSc){
-    	$seance = Seance::find($idSc);
+    public function getListeAbsence($idSc,$dat){
+        $seance = Seance::find($idSc);
         $affect = Affectation::find($seance->affectation_id);
         $groupeLib = Groupe::find($affect->groupe_id)->libelle;
         $moduleName = Module::find($affect->module_id)->libelle;
-        $date = date("Y-m-d");
+        $date = $dat;
         $etudiants = Etudiant::where("groupe_id","=",$affect->groupe_id)->orderBy('id','asc')->get();
     	return view('gAbs.listeAbsence')->with(['etudiants'=>$etudiants,'seanceId'=>$idSc,"groupeLib"=>$groupeLib,"type"=>$seance->type,"ensId" => $affect->enseignant_id,"moduleName"=>$moduleName,"date"=>$date]);
     }
     public function validerAbsence(Request $request){
         $instance = null;
         $idSeance = $request->input('seanceId');
-        $instance = Instance::where('date_ins','=',date("Y-m-d"))->get();
+        $dateSc = $request->input('dateSc');
+       $sc = Seance::find($idSeance);
+        $instance = Instance::where('seance_id','=',$idSeance)->get();
         if(!$instance->isEmpty())
             {
                 $instance = $instance->get(0);
@@ -39,7 +41,7 @@ class AbsenceController extends Controller
         else
         {
             $instance = new Instance();
-            $instance->date_ins = date("Y-m-d");
+            $instance->date_ins = $dateSc;
             $instance->seance_id = $idSeance;
             $instance->save();
         }
