@@ -11,12 +11,14 @@ $('#liste').on('submit',function(e){
     	tab[i] = absences[i].id;
     }
     var seanceId = $('#seanceId').val();
+    var dateSc = $('#date').val();
     $.ajax({
-                  url : "absences/valider",
+                  url : "/calendrier/getListe/absences/valider",
                   type: "POST",
                   data: {
                     "seanceId":seanceId,
-                    "students":tab
+                    "students":tab,
+                    "dateSc":dateSc
                   },
                   dataType: 'json',
                   success:function(response) {
@@ -73,7 +75,7 @@ $('#formJustification').on('submit',function(e){
                   data:formData,
                   dataType: 'json',
                   success:function(response) {
-                     alert('cc');
+                     location.href = location.href;
                   }
               });
 });

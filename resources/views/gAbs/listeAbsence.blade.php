@@ -50,7 +50,7 @@
                                </td>
                                <?php 
                                   $checked="";
-                                  if($etudiant->hasAbs($seanceId))
+                                  if($etudiant->hasAbs($seanceId,$date))
                                     $checked="checked";
                                 ?>
                                <td>
@@ -91,7 +91,10 @@
           </div>
        <form id="liste" method="POST" action="">
           <div class="modal-body">
-              Voulez vous valider la liste des absences ?
+          <div class="form-group">
+                <label for="libelleModal"> Date</label><input class="form-control" placeholder="Date" type="date" id="date" name="date" value={{$date}}>
+                
+              </div>
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" data-dismiss="modal" type="button"> Fermer</button><button class="btn btn-primary" type="submit" id="validListe"> Valider</button>

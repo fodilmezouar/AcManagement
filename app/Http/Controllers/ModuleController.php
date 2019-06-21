@@ -119,7 +119,7 @@ class ModuleController extends Controller
     }
     public function modulesExclusion($idEns){
             $modules = Module::where('enseignant_id','=',$idEns)->get();
-            return view('gAbs.modulesExclusion')->with(['modules',$modules]);
+            return view('gAbs.modulesExclusion')->with(['modules'=>$modules]);
     }
     public function modulesAssistantJustifier($idEns){
             $modules = DB::select("SELECT modules.id ,libelle FROM 
