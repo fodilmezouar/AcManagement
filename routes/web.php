@@ -79,7 +79,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('exclusion/{idEns}','ModuleController@modulesExclusion')->middleware('can:isCharge');
     Route::get('exclusion/etudiants/{idMod}','ModuleController@getStudentsExclus')->middleware('can:isCharge');
     Route::get('mesModules/justifier/{idEns}','ModuleController@modulesAssistantJustifier')->middleware('can:isAss');
-    Route::get('calendrier/getListe/{idSeance}','AbsenceController@getListeAbsence')->middleware('can:isAss');
+    Route::get('calendrier/getListe/{idSeance}/date/{date}','AbsenceController@getListeAbsence')->middleware('can:isAss');
     Route::get('mesModules/groupes/{idMod}/{ensId}','ModuleController@getGroupes')->middleware('can:isAss');
     Route::get('mesModulesCharge/groupes/{idMod}/{ensId}','ModuleController@getGroupesCharge')->middleware('can:isCharge');
     Route::get('mesModules/justifier/groupes/{idMod}/{ensId}','ModuleController@getGroupesJustifier')->middleware('can:isAss');
@@ -97,7 +97,9 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('mesModulesCharge','ExamsController@modulesCharge');
     Route::get('mesModulesCharge/exam/{id}','ExamsController@getExamEns');
     Route::get('enseignant/paquets/getInformationEcart/{id}','EnseignantController@getInfoEcart');
-
+    Route::get("affectations",function(){
+           return view('gprel.affect');
+    });
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles');

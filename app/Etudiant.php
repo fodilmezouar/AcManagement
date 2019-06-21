@@ -11,9 +11,9 @@ class Etudiant extends Model
 {
     protected $guarded = [];
 
-    public function hasAbs($scId)
+    public function hasAbs($scId,$dat)
     {
-        $instance = Instance::where('seance_id', '=', $scId)->where('date_ins', '=', date('Y-m-d'))->get();
+        $instance = Instance::where('seance_id', '=', $scId)->where('date_ins', '=', $dat)->get();
         if ($instance->isEmpty())
             return false;
         else {
