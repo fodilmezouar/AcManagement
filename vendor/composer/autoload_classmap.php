@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddCorrToCorrections' => $baseDir . '/database/migrations/2019_03_21_132824_add_corr_to_corrections.php',
     'AddIdFilliereToUsers' => $baseDir . '/database/migrations/2019_03_07_210753_add_id_filliere_to_users.php',
     'App\\Absence' => $baseDir . '/app/Absence.php',
     'App\\Affectation' => $baseDir . '/app/Affectation.php',

@@ -14,7 +14,6 @@
             <a href="{{url('anonymat')}}">Anonymat</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{{url('anonymat/'.$idPromo)}}">{{ $nomPromo }}</a>
         </li>
         <li class="breadcrumb-item">
             <span>{{$nomPaquet}}</span>
@@ -46,18 +45,38 @@
                                                 <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 86px;">code Copie</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 62px;">note 1</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 62px;">note 2</th>
-                                                <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 21px;">note 3</th></tr></thead><tfoot><tr>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 21px;">note 3</th>
+                                                <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 21px;">Moyenne</th></tr></thead><tfoot><tr>
                                                 <th rowspan="1" colspan="1" >code Copie</th>
                                                 <th rowspan="1" colspan="1">note 1</th>
                                                 <th rowspan="1" colspan="1">note 2</th>
-                                                <th rowspan="1" colspan="1">note 3</th></tr></tfoot>
+                                                <th rowspan="1" colspan="1">note 3</th>
+                                                <th rowspan="1" colspan="1">Moyenne</th>
+                                            </tr></tfoot>
                                             <tbody>
+                                            <?php $cor3="disabled";  ?>
                                             @foreach($copies as $copie)
-                                                <tr role="row">
+                                                <?php
+
+                                                    if (abs($copie->notePre1-$copie->notePre2)<$ecart){
+                                                            $cor3="";
+                                                            $warning="";
+                                                    }else{
+                                                        $cor3="disabled"; $warning="color: red";
+                                                    }
+                                                    if ($copie->notePre3 >0){
+
+                                                        $warning="";
+                                                    }
+
+                                                ?>
+                                                <tr role="row" style="{{$warning}}" >
+                                                    {{$warning}}
                                                     <td>{{$copie->codeCopie}}</td>
                                                     <td>{{$copie->notePre1}}</td>
                                                     <td>{{$copie->notePre2}}</td>
                                                     <td>{{$copie->notePre3}}</td>
+                                                    <td>{{$copie->noteFinal}}</td>
                                                 </tr>
                                             @endforeach
                                             </tbody></table></div></div>
@@ -66,6 +85,18 @@
                             </div>
                         </div>
                     </div>
+                    <?php
+
+                        $cor1="";
+                        $cor2="";
+                        if(in_array(1,$correct)){
+                            $cor1="disabled";
+                        }
+                        if(in_array(2,$correct)){
+                            $cor2="disabled";
+                        }
+
+                    ?>
                     <table class="center" style="border-radius: 5px;width: 50%;margin: 0px auto;float: none;">
                         <tr>
                             <td>Correcteur 1</td>
@@ -78,7 +109,7 @@
                                 </select>
                             </td>
                         <td>
-                            <button class="btn btn-outline-primary" data-target="#AffecterModal1" data-toggle="modal">envoyer</button>
+                            <button class="btn btn-outline-primary" data-target="#AffecterModal1" data-toggle="modal" {{$cor1}}>envoyer</button>
                         </td>
                         </tr>
                         <tr>
@@ -92,7 +123,7 @@
                                 </select>
                             </td>
                             <td>
-                                <button class="btn btn-outline-primary" data-target="#AffecterModal2" data-toggle="modal">envoyer</button>
+                                <button class="btn btn-outline-primary" data-target="#AffecterModal2" data-toggle="modal" {{$cor2}}>envoyer</button>
                             </td>
                         </tr>
                         <tr>
@@ -106,7 +137,7 @@
                                 </select>
                             </td>
                             <td>
-                                <button class="btn btn-outline-primary" data-target="#AffecterModal3" data-toggle="modal" disabled="true">envoyer</button>
+                                <button class="btn btn-outline-primary" data-target="#AffecterModal3" data-toggle="modal" {{$cor3}}>envoyer</button>
                             </td>
                         </tr>
 
