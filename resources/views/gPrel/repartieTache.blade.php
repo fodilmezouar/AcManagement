@@ -31,7 +31,7 @@
                     <div class="row" id="contentModules">
                         @foreach($modules as $module)
                             <div class="col-sm-3 col-xxxl-3 blockModule" role="{{$module->id}}">
-                                <a class="element-box el-tablo" href="repartieTache/{{$module->id}}" style="background-color: #f2f4f8;">
+                                <a class="element-box el-tablo" href="/affectations/{{$module->id}}" style="background-color: #f2f4f8;">
                                     <div class="value">
                                         {{$module->libelle}}
                                     </div>

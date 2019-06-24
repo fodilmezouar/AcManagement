@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendMail;
+use App\Groupe;
 use App\Http\Resources\UserResource;
 class EnseignantController extends Controller
 {
@@ -277,5 +278,12 @@ class EnseignantController extends Controller
         $valid['messages'] = "yes babe";
         return response()->json($valid);
 
+    }
+    public function affectGroupes($moduleId){
+        $enseignants = User::where('role','like','%3%')->orderBy('id')->take(4)->get();
+        $module = Module::find($moduleId);
+        $groupes = Groupe::where('promotion_id','=',$module->promotion_id)->orderBy('id')->get();
+
+        return view('gprel.affect')->with(['assistants'=>$enseignants,'groupes'=>$groupes,'module'=>$module]);
     }
 }

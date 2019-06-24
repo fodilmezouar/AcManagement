@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\User;
 class Affectation extends Model
 {
     public function groupe()
@@ -13,5 +13,8 @@ class Affectation extends Model
 	public function module()
 	{
 		return $this->belongsTo('App\Module','module_id');
+	}
+	public function getEnseignant(){
+		return User::find($this->enseignant_id);
 	}
 }

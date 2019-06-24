@@ -1104,19 +1104,115 @@ $(function () {
       return false;
     }
   });
-
+  var affectTable = [];
+  var indexAffect = 0;
+  var tdAffect = 0;
+  var tpAffect = 0;
+  var moduleId = $('#moduleId').val();
+  var grpId = 0;
+  var ensId = 0;
+  var copied = false;
   // #15. CRM PIPELINE
   if ($('.pipeline').length) {
+   
     // INIT DRAG AND DROP FOR PIPELINE ITEMS
-    var dragulaObj = dragula($('.pipeline-body').toArray(), {}).on('drag', function () {}).on('drop', function (el) {}).on('over', function (el, container) {
+    var dragulaObj = dragula($('.pipeline-body').toArray(), {
+      copy: function (el, source) {
+        if(el.classList.length == 2)
+         copied = true;
+        else
+         copied = false;
+      return copied;
+    }
+  },).on('drag', function () {}).on('drop', function (el) {
+      el.classList.remove("col-lg-3");
+      if(copied)
+      {grpId = el.parentNode.parentNode.parentNode.id;
+      ensId = el.id;
+          
+           if(!el.getElementsByTagName('input')[0].checked)
+                 el.getElementsByClassName('TD')[0].parentNode.removeChild(el.getElementsByClassName('TD')[0]);
+            else tdAffect = 1;
+            if(!el.getElementsByTagName('input')[1].checked)
+                 el.getElementsByClassName('TP')[0].parentNode.removeChild(el.getElementsByClassName('TP')[0]);
+            else tpAffect = 1;
+          el.getElementsByTagName('input')[0].parentNode.removeChild(el.getElementsByTagName('input')[0]);
+          el.getElementsByTagName('input')[0].parentNode.removeChild(el.getElementsByTagName('input')[0]);
+          $.ajaxSetup({
+            headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           } 
+          });
+                        $.ajax({
+                          url : "/validAffect",
+                          type: "GET",
+                          data: {
+                            "affect":{
+                              "ensId":ensId,
+                              "grpId":grpId,
+                              "moduleId":moduleId,
+                              "td":tdAffect,
+                              "tp":tpAffect
+                            }
+                          },
+                          dataType: 'json',
+                          success:function(response) {
+                          }
+                      });}
+              else{
+                var newGrp = el.parentNode.parentNode.parentNode.id;
+    $.ajaxSetup({
+      headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     } 
+    });
+                  $.ajax({
+                    url : "/updateAffect",
+                    type: "GET",
+                    data: {
+                      "idAffect":el.id,
+                      "newGrp":newGrp
+                    },
+                    dataType: 'json',
+                    success:function(response) {
+                    }
+                });
+              }
+    }).on('over', function (el, container) {
       $(container).closest('.pipeline-body').addClass('over');
     }).on('out', function (el, container, source) {
-
       var new_pipeline_body = $(container).closest('.pipeline-body');
       new_pipeline_body.removeClass('over');
       var old_pipeline_body = $(source).closest('.pipeline-body');
     });
   }
+  var dragulaObj = dragula($('.pipeline-bod').toArray(), {},).on('drag', function () {}).on('drop', function (el) {
+    el.classList.remove("col-lg-3");
+    var newGrp = el.parentNode.parentNode.parentNode.id;
+    $.ajaxSetup({
+      headers: {
+    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+     } 
+    });
+                  $.ajax({
+                    url : "/updateAffect",
+                    type: "GET",
+                    data: {
+                      "idAffect":el.id,
+                      "newGrp":newGrp
+                    },
+                    dataType: 'json',
+                    success:function(response) {
+                    }
+                });
+  }).on('over', function (el, container) {
+    $(container).closest('.pipeline-bod').addClass('over');
+  }).on('out', function (el, container, source) {
+
+    var new_pipeline_body = $(container).closest('.pipeline-bod');
+    new_pipeline_body.removeClass('over');
+    var old_pipeline_body = $(source).closest('.pipeline-bod');
+  });
 
   // #16. OUR OWN CUSTOM DROPDOWNS 
   $('.os-dropdown-trigger').on('mouseenter', function () {

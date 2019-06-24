@@ -14,9 +14,39 @@ use DB;
 
 class AffectationController extends Controller
 {
+    public function validAffect(Request $request){
+        $dataAffect = $request->input('affect');
+        $grpId = $dataAffect['grpId'];
+        $ensId = $dataAffect['ensId'];
+        $moduleId = $dataAffect['moduleId'];
+         $td = $dataAffect['td'];
+        $tp = $dataAffect['tp'];
+        $affectNew = new Affectation();
+        $affectNew->groupe_id = $grpId;
+        $affectNew->enseignant_id = $ensId;
+        $affectNew->module_id = $moduleId;
+        $affectNew->td = $td;
+        $affectNew->tp = $tp;
+        $affectNew->date_affectation = date('Y-m-d');
+        $affectNew->save();
+        $valid['success'] = array('success' => false, 'messages' => array());
+        $valid['success'] = true;
+        $valid['messages'] = "success";
+        return response()->json($valid);
+    }
+    public function updateAffect(Request $request){
+        $idAffect = $request->input('idAffect');
+        $affectation = Affectation::find($idAffect);
+        $affectation->groupe_id = $request->input('newGrp');
+        $affectation->save();
+        $valid['success'] = array('success' => false, 'messages' => array());
+        $valid['success'] = true;
+        $valid['messages'] = "success";
+        return response()->json($valid);
+    }
     //
     public function attacherGroupe($id){
-
+        /*
         $userId = Auth::id();
         $enseignants = User::where('grade','!=',NULL)->where('role','3')->where('id','!=',$userId)
                             ->get();
@@ -28,7 +58,11 @@ class AffectationController extends Controller
         $nombreGroupe = Groupe::where('promotion_id',$idPromotion->id)->select(DB::raw('count(distinct id) as count'))
             ->get()->first();
         return view('gPrel.affectation')->with(['enseignants'=>$enseignants,'idModule'=>$id,'groupes'=>$groupes,
-            'nombreG'=>$nombreGroupe->count,'nombreEns'=>$nombreEnseignant->count]);
+            'nombreG'=>$nombreGroupe->count,'nombreEns'=>$nombreEnseignant->count]);*/
+            $enseignants = User::where('role','like','%3%')->orderBy('id')->take(4)->get();
+            $module = Module::find($id);
+        $groupes = Groupe::where('promotion_id','=',$module->promotion_id)->orderBy('id')->get();
+        return view('gprel.affect')->with(['assistants'=>$enseignants,'groupes'=>$groupes]);
     }
     public function validerAffectation(Request $request){
         $nombreG  = $request->input('nombreG');
