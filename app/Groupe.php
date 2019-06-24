@@ -4,7 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
-
+use App\User;
+use App\Affectation;
 class Groupe extends Model
 {
 	public function weekCourant(){
@@ -26,5 +27,8 @@ class Groupe extends Model
       if(sizeof($tab) >= 1)
       return $tab[0]->cpt;
   return 0;
-    }
+	}
+	public function affectations($moduleId){
+		return Affectation::where('groupe_id','=',$this->id)->where('module_id','=',$moduleId)->get();
+	}
 }
