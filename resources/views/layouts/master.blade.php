@@ -24,7 +24,11 @@
   <link href="{{asset('bower_components/slick-carousel/slick/slick.css')}}" rel="stylesheet">
   <link href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css">
   <link href="{{asset('css/main.css?version=4.4.0')}}" rel="stylesheet">
+<<<<<<< HEAD
+  <link href="{{asset('bower_components/dragula.js/dist/dragula.min.css')}}" rel="stylesheet">
+=======
 
+>>>>>>> 286db9c7ab8b4e9dabd568ba445cc8cec30cd96f
 </head>
 <body class="menu-position-side menu-side-left full-screen">
 <div class="all-wrapper {{ $active == 'home' ? 'with-side-panel' : ''}} solid-bg-all">
@@ -962,7 +966,7 @@
       <script src="{{asset('bower_components/bootstrap/js/dist/tab.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/tooltip.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/popover.js')}}"></script>
-
+      <script src="{{asset('bower_components/dragula.js/dist/dragula.min.js')}}"></script>
       <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
       <script src="{{asset('js/demo_customizer.js?version=4.4.0')}}"></script>
       <script src="{{asset('js/main.js?version=4.4.0')}}"></script>
