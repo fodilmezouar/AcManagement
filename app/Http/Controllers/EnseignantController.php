@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 
 use App\Exams;
 use App\Filiere;
+use App\Groupe;
 use App\Paquets;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -228,8 +229,14 @@ class EnseignantController extends Controller
         $ecart = Corr_aff::where('exam_id','=',$paquet->exam_id)->get()->first()->ecartNote;
         $users = User::where('grade','!=',"")->where('id','!=',$userId)->get();
         $correct = Corrections::where('paquet_id','=',$idPaquet)->pluck('correcteur')->toArray();
+        $ensCorrectionId=null;
+        for($i=0;$i<sizeof($correct);$i++) {
+            $ensCorrectionId[] = Corrections::where('paquet_id', '=', $idPaquet)->where('correcteur', '=',$correct[$i])->get()->first()->enseignant_id;
+        }
+
         $copies = Copies::where('paquetId','=',$idPaquet)->get();
-        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'ecart'=>$ecart,'enseignants'=>$users,'idPaquet'=>$idPaquet,'correct'=>$correct]);
+        return view('gPrel.examPaquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'ecart'=>$ecart,'enseignants'=>$users,'idPaquet'=>$idPaquet,'correct'=>$correct,
+            'enseignant_id'=>$ensCorrectionId]);
     }
     public function validerAff(Request $request){
         $corr = new Corrections();
@@ -277,5 +284,11 @@ class EnseignantController extends Controller
         $valid['messages'] = "yes babe";
         return response()->json($valid);
 
+    }
+    public function affectGroupes($moduleId){
+        $enseignants = User::where('role','like','%3%')->orderBy('id')->take(4)->get();
+        $module = Module::find($moduleId);
+        $groupes = Groupe::where('promotion_id','=',$module->promotion_id)->orderBy('id')->get();
+        return view('gprel.affect')->with(['assistants'=>$enseignants,'groupes'=>$groupes,'module'=>$module]);
     }
 }

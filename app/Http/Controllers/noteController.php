@@ -73,5 +73,12 @@ class noteController extends Controller
         return view('gPrel.paquetAssistant')->with(['paquets' => $paquets]);
     }
 
+    public function getCopiesCorriger($idExam){
+        $userId = Auth::id();
+       $copies = DB::select("SELECT  etudiants.nom ,etudiants.prenom,etudiants.naissance,copies.noteFinal FROM `copies`,paquets,exams,etudiants WHERE copies.paquetId=paquets.id and paquets.exam_id=$idExam AND exams.id=paquets.exam_id AND etudiants.id=copies.etudiantId
+      ");
+
+       return view('gPrel.notesFinal')->with(['copies'=>$copies]);
+    }
 
 }

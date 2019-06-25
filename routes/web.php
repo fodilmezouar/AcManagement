@@ -97,10 +97,10 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('mesModulesCharge','ExamsController@modulesCharge');
     Route::get('mesModulesCharge/exam/{id}','ExamsController@getExamEns');
     Route::get('enseignant/paquets/getInformationEcart/{id}','EnseignantController@getInfoEcart');
-<<<<<<< HEAD
-    Route::get("affectations/{moduleId}","EnseignantController@affectGroupes");
-=======
 
+    Route::get("affectations/{moduleId}","EnseignantController@affectGroupes");
+
+    Route::get('modules/exam/{id}','noteController@getCopiesCorriger');
     Route::get("affectations",function(){
            return view('gprel.affect');
     });
@@ -110,7 +110,6 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('mesModules/corr/{idEns}','noteController@getPaquets');
 
 
->>>>>>> 286db9c7ab8b4e9dabd568ba445cc8cec30cd96f
 });
 Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
 //Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles');

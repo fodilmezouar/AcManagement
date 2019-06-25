@@ -222,6 +222,7 @@
     </div>
     <div class="display-type"></div>
     </div>
+
 @endsection
 @section('scripts')
     <script src="{{asset('js/affectCorr.js')}}"></script>
