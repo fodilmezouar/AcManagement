@@ -40,7 +40,7 @@
                             <div id="dataTable1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4">
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <table id="dataTable1" width="100%" class="table table-striped table-lightfont dataTable" role="grid" aria-describedby="dataTable1_info" style="width: 100%;"><thead><tr role="row">
+                                        <table id="dataTable1" width="100%" class="table table-striped table-lightfont"><thead><tr role="row">
                                                 <th class="sorting_asc" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 86px;">Nom</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 92px;">Prenom</th>
                                                 <th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 92px;">Date de naissance</th>
@@ -67,3 +67,13 @@
                         </div>
                     </div>
                     @endsection
+                    @section('scripts')
+                        <script src="{{asset('js/notes.js')}}"></script>
+                        <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.colVis.min.js"></script>
+                        <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+                        <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+                        <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.flash.min.js"></script>
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+                        <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.html5.min.js"></script>
+                        <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.print.min.js"></script>
+@endsection
