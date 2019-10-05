@@ -25,9 +25,7 @@
                     Anonymat
                 </h6>
                 <div class="element-box">
-                    <div class="pull-right">
-                        <button class="btn-outline-danger">Décoder les paquets</button>
-                    </div>
+
                     <h5 class="form-header">
                         Les Paquets
                     </h5>

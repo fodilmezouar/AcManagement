@@ -48,7 +48,12 @@
                                     <div class="trending trending-up">
                                         <span id="filiere">{{$exam->module->libelle}}</span>
                                     </div>
+
                                 </a>
+                                <div class="element element-info">
+                                    <a class="btn btn-danger" href="{{url('modules/exam/'.$exam->id)}}">Afficher</a>
+                                </div>
+
                             </div>
                         @endforeach
                     </div>

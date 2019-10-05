@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Exams;
 use App\Module;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ExamsController extends Controller
 {
@@ -18,7 +19,9 @@ class ExamsController extends Controller
 
     }
     public function getExamEns($id){
-        $exams = Exams::all();
+
+        $exams = Exams::whereYear('dateExam','>=',now()->year)->get();
+
         $modules = Module::where('promotion_id',$id)->get();
 
         return view('gPrel.examCharge')->with(['exams' => $exams,'modules' => $modules]);
