@@ -5,7 +5,7 @@ $('#liste').on('submit',function(e){
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    var absences = $('input:checked');
+    var absences = $("input:checkbox:not(:checked)");
     var tab = [];
     for (var i = 0; i < absences.length; i++) {
     	tab[i] = absences[i].id;

@@ -33,7 +33,7 @@ Main javascript functions to init most of the elements
 // ------------------------------------
 // HELPER FUNCTIONS TO TEST FOR SPECIFIC DISPLAY SIZE (RESPONSIVE HELPERS)
 // ------------------------------------
-
+var nvScs= [];
 function is_display_type(display_type) {
   return $('.display-type').css('content') == display_type || $('.display-type').css('content') == '"' + display_type + '"';
 }
@@ -112,6 +112,7 @@ $(function () {
     });
 
   });
+  
   if ($("#fullCalendar").length) {
     var calendar, d, date, m, y;
 
@@ -130,7 +131,6 @@ $(function () {
     });
     var ensId = $('#ensId').val();
     var scs;
-    var nvScs=[];
         $.ajax({
                   url : "seances/mesSeances",
                   type: "POST",
@@ -139,6 +139,7 @@ $(function () {
                   },
                   dataType: 'json',
                   success:function(response) {
+                    var helpPasses = response.passes;
                     scs = response.messages;
                      if(response.success == true) {
                           var courant = moment().day() + 1;
@@ -150,15 +151,37 @@ $(function () {
         else
           nv[i] = moment().subtract(deff,'days');
     }
-    
+    console.log();
     for (var i = 0; i < scs.length; i++) {
+      if(scs[i]['jour'] > new Date().getDay()+1)
          nvScs[i] ={
            title: scs[i]['title'],
            start: nv[i].format("dddd")+", "+nv[i].format("MMMM")+" "+nv[i].format("DD")+", "+nv[i].format("YYYY")+" "+scs[i]['start'],
            end: nv[i].format("dddd")+", "+nv[i].format("MMMM")+" "+nv[i].format("DD")+", "+nv[i].format("YYYY")+" "+scs[i]['end'],
            idAffect:scs[i]['idAffect'],
-           idSeance:scs[i]['idSeance']
-         }
+           idSeance:scs[i]['idSeance'],
+           color: "#7C7E7F"
+         };
+      else
+        nvScs[i] ={
+           title: scs[i]['title'],
+           start: nv[i].format("dddd")+", "+nv[i].format("MMMM")+" "+nv[i].format("DD")+", "+nv[i].format("YYYY")+" "+scs[i]['start'],
+           end: nv[i].format("dddd")+", "+nv[i].format("MMMM")+" "+nv[i].format("DD")+", "+nv[i].format("YYYY")+" "+scs[i]['end'],
+           idAffect:scs[i]['idAffect'],
+           idSeance:scs[i]['idSeance'],
+           color: "#00f"
+         };
+    }
+
+    for (var i = 0; i < helpPasses.length; i++) {
+         nvScs.push({
+           title: helpPasses[i]['title'],
+           start: helpPasses[i]['dateInstance']+" "+helpPasses[i]['start'],
+           end: helpPasses[i]['dateInstance']+" "+helpPasses[i]['end'],
+           idAffect:helpPasses[i]['idAffect'],
+           idSeance:helpPasses[i]['idSeance'],
+           color:"#000"
+         });
     }
     calendar = $("#fullCalendar").fullCalendar({
       drop:function(){
@@ -179,6 +202,7 @@ $(function () {
       selectHelper: true,
       droppable: true,
       weekends: true,
+      selectable:true,
       //firstDay:0,
       eventRender: function (event, element) {
         
@@ -199,7 +223,8 @@ $(function () {
                 dateComplete+="0"+jour;
               else 
                 dateComplete+=jour;
-              location.href='getListe/'+event.idSeance+'/date/'+dateComplete;
+              if(new Date(dateComplete) <= new Date())
+                 location.href='getListe/'+event.idSeance+'/date/'+dateComplete;
              });
            }
       },
@@ -600,7 +625,7 @@ $(function () {
                       dataMonth[obj1["month"] + 3] = obj1["cpt"];
                     }
                     var lbls = [];
-                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma","juin","juil","Aout"];
+                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma","juin","juil","Aout","Sep","Oct"];
                     for (var i = 0; i < n; i++) {
                       lbls[i] = mois[i];
                     }
@@ -708,7 +733,7 @@ $(function () {
                     }
                     var lbls = [];
                     var lbls2 = [];
-                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma","juin","juil","Aout"];
+                    var mois = ["Sep", "Oct", "Nov", "Dec", "Jan", "Fev", "Mar", "Av","Ma","juin","juil","Aout","Sep","Oct"];
                     for (var i = 0; i < n; i++) {
                       lbls[i] = mois[i];
                     }
@@ -1112,6 +1137,7 @@ $(function () {
   var grpId = 0;
   var ensId = 0;
   var copied = false;
+  var src ;
   // #15. CRM PIPELINE
   if ($('.pipeline').length) {
    
@@ -1138,6 +1164,7 @@ $(function () {
             else tpAffect = 1;
           el.getElementsByTagName('input')[0].parentNode.removeChild(el.getElementsByTagName('input')[0]);
           el.getElementsByTagName('input')[0].parentNode.removeChild(el.getElementsByTagName('input')[0]);
+            
           $.ajaxSetup({
             headers: {
           'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -1178,6 +1205,8 @@ $(function () {
                     }
                 });
               }
+              tdAffect=0;
+              tpAffect = 0;
     }).on('over', function (el, container) {
       $(container).closest('.pipeline-body').addClass('over');
     }).on('out', function (el, container, source) {

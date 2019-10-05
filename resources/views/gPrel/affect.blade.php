@@ -6,71 +6,15 @@
   <input type="hidden" value="{{$module->id}}" id="moduleId"/>
           <div class="content-i">
             <div class="content-box">
-              <div class="control-header">
-                <div class="row align-items-center">
-                  <div class="col-8 col-lg-7">
-                    <form action="" class="form-inline">
-                      <div class="form-group mr-4">
-                        <label class="mr-2" for="">Category</label><select class="form-control-sm">
-                          <option>
-                            Management
-                          </option>
-                          <option>
-                            Sales Team
-                          </option>
-                        </select>
-                      </div>
-                      <div class="form-group d-none d-md-flex">
-                        <label class="mr-2" for="">Order By</label><select class="form-control-sm">
-                          <option>
-                            Date
-                          </option>
-                          <option>
-                            Lead Count
-                          </option>
-                        </select>
-                      </div>
-                    </form>
-                  </div>
-                  <div class="col-4 col-lg-5 text-right">
-                    <a class="btn btn-sm btn-link btn-upper mr-4 d-none d-lg-inline-block" href="#"><i class="os-icon os-icon-ui-44"></i><span>Download CSV</span></a><a class="btn btn-sm btn-primary btn-upper" href="#"><i class="os-icon os-icon-ui-22"></i><span>Add New Lead</span></a>
-                  </div>
-                </div>
-              </div>
               <div class="pipeline white lined-primary">
                       <div class="pipeline-header">
                         <h5 class="pipeline-name">
-                          Idea Proposed
+                          Affectation Groupes
                         </h5>
                         <div class="pipeline-header-numbers">
-                          <div class="pipeline-value">
-                            $45,367
-                          </div>
-                          <div class="pipeline-count">
-                            14 leads
-                          </div>
                         </div>
                         <div class="pipeline-settings os-dropdown-trigger">
                           <i class="os-icon os-icon-hamburger-menu-1"></i>
-                          <div class="os-dropdown">
-                            <div class="icon-w">
-                              <i class="os-icon os-icon-ui-46"></i>
-                            </div>
-                            <ul>
-                              <li>
-                                <a href="#"><i class="os-icon os-icon-ui-49"></i><span>Edit Record</span></a>
-                              </li>
-                              <li>
-                                <a href="#"><i class="os-icon os-icon-grid-10"></i><span>Duplicate Item</span></a>
-                              </li>
-                              <li>
-                                <a href="#"><i class="os-icon os-icon-ui-15"></i><span>Remove Item</span></a>
-                              </li>
-                              <li>
-                                <a href="#"><i class="os-icon os-icon-ui-44"></i><span>Archive Project</span></a>
-                              </li>
-                            </ul>
-                          </div>
                         </div>
                       </div>
                       <div class="pipeline-body row">

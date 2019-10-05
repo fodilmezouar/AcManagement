@@ -18,7 +18,7 @@ class Etudiant extends Model
             return false;
         else {
             $instance = $instance->get(0);
-            $absence = Absence::where('etudiant_id', '=', $this->id)->get();
+            $absence = Absence::where('etudiant_id', '=', $this->id)->where("instance_id","=",$instance->id)->get();
             return !$absence->isEmpty();
         }
     }

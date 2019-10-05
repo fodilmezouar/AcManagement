@@ -257,6 +257,7 @@ $("#formModulesAtt").on('submit',function(e) {
                     $('.blockModule[role="'+moduleId+'"] #affOption').html('<span style="color:green;">affecté</span>');
                     $('#attModuleModal').modal('hide');
                     alertM('#messSuccessBody',' Module Affecté');
+                    $('#affOption').html('<span style="color:green;">affecté</span>');
                   }
               });
    }

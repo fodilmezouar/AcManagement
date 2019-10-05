@@ -74,7 +74,7 @@
                           if($seance && $student->isExclu($seance->id))
                              $st = "background-color: red;";
                          ?>
-                           <tr role="row" class="block" id="{{$student->id}}" style="{{$st}}">
+                           <tr role="row" class="block" id="{{$student->id}}" style="{{$st}} ">
                                <td>
                                    {{$student->nom}} {{$student->prenom}}
                                </td>
