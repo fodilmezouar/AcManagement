@@ -24,9 +24,10 @@
   <link href="{{asset('bower_components/slick-carousel/slick/slick.css')}}" rel="stylesheet">
   <link href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css">
   <link href="{{asset('css/main.css?version=4.4.0')}}" rel="stylesheet">
-
   <link href="{{asset('bower_components/dragula.js/dist/dragula.min.css')}}" rel="stylesheet">
 
+
+  <link href="{{asset('bower_components/dragula.js/dist/dragula.min.css')}}" rel="stylesheet">
 
 
 </head>

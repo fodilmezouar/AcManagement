@@ -12,7 +12,9 @@
 */
 /**notification*/
 /**  notification **/
-
+Route::get('/',function(){
+   return view('auth.login');
+});
 Route::get('event', function () {
     return view("test");
 });
@@ -44,7 +46,9 @@ Route::get('enseignant/createEnseignant','EnseignantController@createEnseignant'
 Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
 Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
-
+Route::post('/etudiants/edit','EtudiantController@editEtudiant');
+Route::post('/etudiants/supp','EtudiantController@deleteEtudiant');
+Route::post('/etudiants/add','EtudiantController@addEtudiant');
 Route::post('/stat/getDataParWeak','PromotionController@getDataParWeak');
 
 Route::post('/stat/getDataSoirMatin','PromotionController@getDataSoirMatin');
@@ -100,6 +104,9 @@ Route::group( ['middleware' => 'auth' ], function()
 
     Route::get("affectations/{moduleId}","EnseignantController@affectGroupes");
 
+
+    Route::get("affectations/{moduleId}","EnseignantController@affectGroupes");
+
     Route::get('modules/exam/{id}','noteController@getCopiesCorriger');
     Route::get("affectations",function(){
            return view('gprel.affect');
@@ -108,6 +115,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('note/{idPaquet}','noteController@getCopies');
     Route::post('note/valider/{id}','noteController@validerNote');
     Route::get('mesModules/corr/{idEns}','noteController@getPaquets');
+
 
 
 });

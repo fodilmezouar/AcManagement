@@ -1,6 +1,6 @@
 @extends('layouts.master',['active'=>'Repartition'])
    <!--------------------
-          START - Breadcrumbs
+          START - Breadcrumbsd
           -------------------->
 @section('content')
    <input type="hidden" id="seanceId" value="{{$seanceId}}">
@@ -41,7 +41,7 @@
                   <div class="row" id="contentPromos">
                       <!-- table etudiants -->
                        <div class="table-responsive">
-                    <div id="dataTable1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4"><div class="row"><div class="col-sm-12"><table id="dataTable1" width="100%" class="table table-striped dataTable" role="grid" aria-describedby="dataTable1_info" style="width: 100%;margin:auto; "><thead><tr role="row"><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width:25%;">Nom</th><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Prenom</th><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Absence</th></tr></thead><tfoot><tr><th rowspan="1" colspan="1">Nom</th><th rowspan="1" colspan="1">Prénom</th><th rowspan="1" colspan="1">Absence</th></tr></tfoot>
+                    <div id="dataTable1_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4"><div class="row"><div class="col-sm-12"><table id="dataTable1" width="100%" class="table table-striped dataTable" role="grid" aria-describedby="dataTable1_info" style="width: 100%;margin:auto; "><thead><tr role="row"><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width:25%;">Nom</th><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Prenom</th><th class="sorting" tabindex="0" aria-controls="dataTable1" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 25%;">Présence</th></tr></thead><tfoot><tr><th rowspan="1" colspan="1">Nom</th><th rowspan="1" colspan="1">Prénom</th><th rowspan="1" colspan="1">Présence</th></tr></tfoot>
                       <tbody>
                         @foreach($etudiants as $etudiant)
                            <tr role="row" class="block" id="{{$etudiant->id}}">
@@ -49,13 +49,14 @@
                                    {{$etudiant->nom}}
                                </td>
                                <?php 
-                                  $checked="";
-                                  if($etudiant->hasAbs($seanceId,$date))
-                                    $checked="checked";
+                                  $checked="checked";
+                                  if(!$hasInstance || $etudiant->hasAbs($seanceId,$date))
+                                    $checked="";
                                 ?>
                                <td>
                                   {{$etudiant->prenom}}
                                </td>
+
                                <td><input type="checkbox" name="" id="{{$etudiant->id}}" {{$checked}}></td>
                            </tr>
                            @endforeach

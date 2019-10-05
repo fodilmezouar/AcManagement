@@ -20,12 +20,13 @@ class AbsenceController extends Controller
 {
     public function getListeAbsence($idSc,$dat){
         $seance = Seance::find($idSc);
+        $hasInstance = !Instance::where("seance_id","=",$seance->id)->get()->isEmpty();
         $affect = Affectation::find($seance->affectation_id);
         $groupeLib = Groupe::find($affect->groupe_id)->libelle;
         $moduleName = Module::find($affect->module_id)->libelle;
         $date = $dat;
         $etudiants = Etudiant::where("groupe_id","=",$affect->groupe_id)->orderBy('id','asc')->get();
-    	return view('gAbs.listeAbsence')->with(['etudiants'=>$etudiants,'seanceId'=>$idSc,"groupeLib"=>$groupeLib,"type"=>$seance->type,"ensId" => $affect->enseignant_id,"moduleName"=>$moduleName,"date"=>$date]);
+    	return view('gAbs.listeAbsence')->with(['etudiants'=>$etudiants,'seanceId'=>$idSc,"groupeLib"=>$groupeLib,"type"=>$seance->type,"ensId" => $affect->enseignant_id,"moduleName"=>$moduleName,"date"=>$date,"hasInstance"=>$hasInstance]);
     }
     public function validerAbsence(Request $request){
         $instance = null;

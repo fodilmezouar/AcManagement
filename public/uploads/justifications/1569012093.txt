@@ -1,0 +1,60 @@
+document = {"_id" : "serie/acm/Won95", "type": "Book","title": "Modern Database Systems", "year": 1995, "publisher": "ACM Press and Addison-Wesley", "authors":["Won Kim","Yun jin"],"source": "DBLP"}
+
+db.publication.insert(document);
+
+Elle s'est inserée deux fois! malgré les memes variables;
+
+db.publication.update({"_id" : "serie/acm/Won95"},{"_id" : "serie/acm/Won95", "article": "Book","title": "Modern Database Systems", "year": 1995, "publisher": "ACM Press and Addison-Wesley", "authors":["Won Kim","Yun jin"],"source": "DBLP"})
+
+db.publication.update({"authors": "Yun jin"},{"_id" : "serie/acm/Won95", "article": "Book","title": "Modern Database Systems", "year": 1995, "publisher": "ACM Press and Addison-Wesley", "authors":["Won Kim","LAFENDI Noureddine"],"source": "DBLP"})
+
+db.publication.remove({});
+
+C:\Users\Pctec\Desktop\Math & Informatique\mongodb-win32-x86_64-2008plus-ssl-4.0.4\bin mongoimport.exe --db PubScientifique --collection publication --file publi.json
+
+-------------------------------------------TP4----------------------------------------------------------
+
+1) db.publication.find({type : "Book"}).pretty();
+
+2) db.publication.find({year :{$gte:2011}}).pretty();
+
+3) db.publication.find({type: "Book" ,year :{$gte:2014}}, {title:1,_id:0}).pretty();
+
+4) db.publication.find({url:{$exists: false}}).pretty();
+
+5) db.publication.find({publisher:{$exists: true}},{editor:1,_id:0}).pretty();
+
+6) db.publication.count({editor:{$exists:true}});
+
+7) db.publication.count({editor: "Spinger"});
+ db.publication.count({type:"Book",editor:{$exists:true},editor:"Spinger"})
+
+8) db.publication.find({authors:"Mourad Debbabi"},{title:1,authors:1,_id:0}).pretty()
+
+9) db.publication.count({authors:"Mourad Debbabi"})
+
+10) db.publication.find({"authors.0":"Mourad Debbabi"}).count()
+
+sans fonction d'aggregation
+
+11) db.publication.find({type:"Article",authors:"Mourad Debbabi"}).sort({"booktitle":1,"pages":1}).pretty()
+
+avec fonction d'aggregation
+ 
+db.publication.aggregate([{$match:{authors:"Mourad Debbabi",type:"Article"}},{
+$sort:{"pages.0":1,"booktitle":1}}]).pretty()
+
+12)  db.publication.find({type:"Article",authors:"Mourad Debbabi"},{title:1,pages:1
+,_id:0}).sort({"booktitle":1,"pages":1}).pretty()
+
+13) db.publication.aggregate([{$match:{"year":2013}},{$group:{_id:"$type",nbr: { $sum: 1 }}}])
+
+14) db.publication.aggregate([{$unwind:"$authors"},{$group:{_id:"$authors",nbrPublications: { $sum: 1 }}} , {$sort:{nbrPublications:1}}])
+
+15) db.publication.aggregate([{$unwind:"$authors"},{$group:{_id:"$authors",nbrPublications: { $sum: 1 }}} , {$match:{nbrPublications:{$gte:40}}}])
+
+16) db.publication.update({type:"Phd"},{$set:{"mention":"Honorable"}},{multi:1})
+
+17) db.publication.aggregate([ {$unwind:"$authors"}, {$limit: 91445}, {$group:{ _id:"$authors", "publications": { "$push": "$$ROOT" }, "nombre_pub":{ $sum: 1 } }}, { $out : "auteurs" }, ])
+
+18) db.publication.aggregate([{$match:{_id:"phd/ch/Woehrle2010"}},{$lookup:{from:"jury",localField:"_id",foreignField:"jury_Phd",as:"informations_Phd"}},{$out:"complement_jury"}]);
