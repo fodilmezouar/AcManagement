@@ -20,9 +20,10 @@ class noteController extends Controller
         $paquet = Paquets::find($idPaquet);
         $promo = Module::find($paquet->exam_id);
         $correction = Corrections::where('enseignant_id','=',$userId)->where('paquet_id','=',$idPaquet)->get()->first()->correcteur;
+        $ecart = Corr_aff::where('exam_id','=',$paquet->exam_id)->get()->first()->ecartNote;
         $note = 'notePre'.$correction;
         if($correction ==3){
-            $copies = Copies::select('id', 'codeCopie', 'paquetId', $note . ' as note',DB::raw('ABS(notePre1-notePre2) '))->where('paquetId', '=', $idPaquet)->where(DB::raw('ABS(notePre1-notePre2) '),'>',3)->get();
+            $copies = Copies::select('id', 'codeCopie', 'paquetId', $note . ' as note',DB::raw('ABS(notePre1-notePre2) '))->where('paquetId', '=', $idPaquet)->where(DB::raw('ABS(notePre1-notePre2) '),'>',$ecart)->get();
         }else {
             $copies = Copies::select('id','codeCopie','paquetId',$note.' as note')->where('paquetId','=',$idPaquet)->get();
         }
@@ -72,5 +73,12 @@ class noteController extends Controller
         return view('gPrel.paquetAssistant')->with(['paquets' => $paquets]);
     }
 
+    public function getCopiesCorriger($idExam){
+        $userId = Auth::id();
+       $copies = DB::select("SELECT  etudiants.nom ,etudiants.prenom,etudiants.naissance,copies.noteFinal FROM `copies`,paquets,exams,etudiants WHERE copies.paquetId=paquets.id and paquets.exam_id=$idExam AND exams.id=paquets.exam_id AND etudiants.id=copies.etudiantId
+      ");
+
+       return view('gPrel.notesFinal')->with(['copies'=>$copies]);
+    }
 
 }

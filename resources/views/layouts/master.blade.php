@@ -14,7 +14,7 @@
   <link href="{{asset('icon_fonts_assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
 
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
-      <link href="{{asset('icon_fonts_assets/feather/style.css')}}" rel="stylesheet">
+  <link href="{{asset('icon_fonts_assets/feather/style.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/dropzone/dist/dropzone.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css')}}" rel="stylesheet">
@@ -25,6 +25,11 @@
   <link href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css">
   <link href="{{asset('css/main.css?version=4.4.0')}}" rel="stylesheet">
   <link href="{{asset('bower_components/dragula.js/dist/dragula.min.css')}}" rel="stylesheet">
+
+
+  <link href="{{asset('bower_components/dragula.js/dist/dragula.min.css')}}" rel="stylesheet">
+
+
 </head>
 <body class="menu-position-side menu-side-left full-screen">
 <div class="all-wrapper {{ $active == 'home' ? 'with-side-panel' : ''}} solid-bg-all">
@@ -246,11 +251,11 @@
                 </div>
                 <div class="logged-user-role">
                   @if(Auth::user()->role == "4")
-                        Administrator
+                    Administrator
                   @elseif(stristr(Auth::user()->role,"1"))
-                        Chef Département
+                    Chef Département
                   @else
-                        Enseignant
+                    Enseignant
                   @endif
                 </div>
               </div>
@@ -300,14 +305,14 @@
                     <a href="{{url('promotions')}}">Promotions</a>
                   </li>
                 </ul>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      John Mayers
-                    </h6>
-                    <h6 class="message-title">
-                      Account Update
-                    </h6>
-                  </div>
+                <div class="message-content">
+                  <h6 class="message-from">
+                    John Mayers
+                  </h6>
+                  <h6 class="message-title">
+                    Account Update
+                  </h6>
+                </div>
                 </a>
               </li>
               <li>
@@ -487,42 +492,42 @@
           <span>Gestion Préliminaire</span>
         </li>
         @if(stristr(Auth::user()->role,'4'))
-        <li class="selected has-sub-menu {{ $active ==  'Promotions' ? 'active':'' }}">
-          <a href="{{url('promotions')}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Promotions</span>
-          </a>
-        </li>
-        <li class="selected has-sub-menu {{ $active ==  'Enseignants' ? 'active':''}}">
-          <a href="{{url('enseignant')}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Enseignants</span>
-          </a>
-        </li>
-        @if(stristr(Auth::user()->role,'1'))
-        <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
-          <a href="{{url('enseignants/repartitionRole/'.Auth::user()->filliere_id)}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Répartition Roles</span>
-          </a>
-        </li>
-        @endif
-        @if(stristr(Auth::user()->role,'2'))
-        <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
-          <a href="{{url('repartieTache')}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Affecter Groupes</span>
-          </a>
-        </li>
-        @endif
+          <li class="selected has-sub-menu {{ $active ==  'Promotions' ? 'active':'' }}">
+            <a href="{{url('promotions')}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Promotions</span>
+            </a>
+          </li>
+          <li class="selected has-sub-menu {{ $active ==  'Enseignants' ? 'active':''}}">
+            <a href="{{url('enseignant')}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Enseignants</span>
+            </a>
+          </li>
+          @if(stristr(Auth::user()->role,'1'))
+            <li class="selected has-sub-menu {{ $active ==  'Repartition' ? 'active':''}}">
+              <a href="{{url('enseignants/repartitionRole/'.Auth::user()->filliere_id)}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layout"></div>
+                </div>
+                <span>Répartition Roles</span>
+              </a>
+            </li>
+          @endif
+          @if(stristr(Auth::user()->role,'2'))
+            <li class="selected has-sub-menu {{ $active ==  'Affectation' ? 'active':''}}">
+              <a href="{{url('repartieTache')}}">
+                <div class="icon-w">
+                  <div class="os-icon os-icon-layout"></div>
+                </div>
+                <span>Affecter Groupes</span>
+              </a>
+            </li>
+          @endif
           <li class="sub-header">
             <span>Gestion Anonymat</span>
           </li>
@@ -536,7 +541,7 @@
           </li>
         @endif
         @if(stristr(Auth::user()->role,'2'))
-        
+
           <li class="selected has-sub-menu {{ $active ==  'Afecter' ? 'active':''}}">
             <a href="{{url('mesModulesCharge')}}">
               <div class="icon-w">
@@ -547,59 +552,59 @@
           </li>
         @endif
         @if(stristr(Auth::user()->role,'2'))
-        <li class="sub-header">
+          <li class="sub-header">
 
-          <span>Gestion Absences</span>
-          
-        <li class="selected has-sub-menu {{ $active ==  'mesModulesCharge' ? 'active':''}}">
-          <a href="{{url('mesModulesCharge/'.Auth::user()->id)}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Mes Modules</span>
-          </a>
-        </li>
-        @endif
-          @if(stristr(Auth::user()->role,'3'))
-        <li class="selected has-sub-menu {{ $active ==  'Calendrier' ? 'active':''}}">
-          <a href="{{url('calendrier/'.Auth::user()->id)}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Mon Calendrier</span>
-          </a>
-        </li>
+            <span>Gestion Absences</span>
+
+          <li class="selected has-sub-menu {{ $active ==  'mesModulesCharge' ? 'active':''}}">
+            <a href="{{url('mesModulesCharge/'.Auth::user()->id)}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Mes Modules</span>
+            </a>
+          </li>
         @endif
         @if(stristr(Auth::user()->role,'3'))
-        <li class="selected has-sub-menu {{ $active ==  'mesModules' ? 'active':''}}">
-          <a href="{{url('mesModules/'.Auth::user()->id)}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Mes Affectations</span>
-          </a>
-        </li>
+          <li class="selected has-sub-menu {{ $active ==  'Calendrier' ? 'active':''}}">
+            <a href="{{url('calendrier/'.Auth::user()->id)}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Mon Calendrier</span>
+            </a>
+          </li>
         @endif
-         @if(stristr(Auth::user()->role,'3'))
-        <li class="selected has-sub-menu {{ $active ==  'Justificatif' ? 'active':''}}">
-          <a href="{{url('mesModules/justifier/'.Auth::user()->id)}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>Joindre Justificatif</span>
-          </a>
-        </li>
+        @if(stristr(Auth::user()->role,'3'))
+          <li class="selected has-sub-menu {{ $active ==  'mesModules' ? 'active':''}}">
+            <a href="{{url('mesModules/'.Auth::user()->id)}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Mes Affectations</span>
+            </a>
+          </li>
+        @endif
+        @if(stristr(Auth::user()->role,'3'))
+          <li class="selected has-sub-menu {{ $active ==  'Justificatif' ? 'active':''}}">
+            <a href="{{url('mesModules/justifier/'.Auth::user()->id)}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>Joindre Justificatif</span>
+            </a>
+          </li>
         @endif
 
         @if(stristr(Auth::user()->role,'2'))
-        <li class="selected has-sub-menu {{ $active ==  'Exclusion' ? 'active':''}}">
-          <a href="{{url('/exclusion/'.Auth::user()->id)}}">
-            <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
-            </div>
-            <span>G - Exclusion</span>
-          </a>
-        </li>
+          <li class="selected has-sub-menu {{ $active ==  'Exclusion' ? 'active':''}}">
+            <a href="{{url('/exclusion/'.Auth::user()->id)}}">
+              <div class="icon-w">
+                <div class="os-icon os-icon-layout"></div>
+              </div>
+              <span>G - Exclusion</span>
+            </a>
+          </li>
         @endif
 
         @if(stristr(Auth::user()->role,'3'))
@@ -614,20 +619,20 @@
               <span>mes paquets</span>
             </a>
           </li>
-          @endif
-           @if(stristr(Auth::user()->role,'4'))
-            <li class="sub-header" style="border-top: 1px solid rgba(0, 0, 0, 0.05);margin-top: 5em;">
-          <li class="selected has-sub-menu {{ $active ==  'configuration' ? 'active':''}}">
-          <a href="{{url('configuration')}}">
-            <div class="icon-w">
-              <i class="fa fa-cog" aria-hidden="true"></i>
-            </div>
-            <span>Configuration</span>
-          </a>
-           </li>
-        </li>
         @endif
-        
+        @if(stristr(Auth::user()->role,'4'))
+          <li class="sub-header" style="border-top: 1px solid rgba(0, 0, 0, 0.05);margin-top: 5em;">
+          <li class="selected has-sub-menu {{ $active ==  'configuration' ? 'active':''}}">
+            <a href="{{url('configuration')}}">
+              <div class="icon-w">
+                <i class="fa fa-cog" aria-hidden="true"></i>
+              </div>
+              <span>Configuration</span>
+            </a>
+          </li>
+          </li>
+        @endif
+
 
 
       </ul>
@@ -651,28 +656,28 @@
           START - Messages Link in secondary top menu
           -------------------->
           <div class="messages-notifications os-dropdown-trigger os-dropdown-position-left">
-          <i class="os-icon os-icon-others-43"></i>
+            <i class="os-icon os-icon-others-43"></i>
             <div class="new-messages-count">
               {{Auth::user()->countNotifNonLit()}}
             </div>
             <div class="os-dropdown light message-list">
               <ul>
-              @foreach(Auth::user()->notifications() as $notif)
-                <li>
-                  <a href="{{$notif->url}}">
-                    <div class="user-avatar-w">
-                      <img alt="" src="{{asset('/uploads/photo/'.$notif->getSender()->photo)}}">
-                    </div>
-                    <div class="message-content">
-                      <h6 class="message-from">
-                        {{$notif->getSender()->name}} {{$notif->getSender()->prenom}}
-                      </h6>
-                      <h6 class="message-title">
-                        {{$notif->message}} -{{$notif->date_notif}}
-                      </h6>
-                    </div>
-                  </a>
-                </li>
+                @foreach(Auth::user()->notifications() as $notif)
+                  <li>
+                    <a href="{{$notif->url}}">
+                      <div class="user-avatar-w">
+                        <img alt="" src="{{asset('/uploads/photo/'.$notif->getSender()->photo)}}">
+                      </div>
+                      <div class="message-content">
+                        <h6 class="message-from">
+                          {{$notif->getSender()->name}} {{$notif->getSender()->prenom}}
+                        </h6>
+                        <h6 class="message-title">
+                          {{$notif->message}} -{{$notif->date_notif}}
+                        </h6>
+                      </div>
+                    </a>
+                  </li>
                 @endforeach
               </ul>
             </div>
@@ -710,161 +715,161 @@
           <!--------------------
               START - Color Scheme Toggler
               -------------------->
-              <div class="floated-colors-btn second-floated-btn">
-                <div class="os-toggler-w">
-                  <div class="os-toggler-i">
-                    <div class="os-toggler-pill"></div>
-                  </div>
-                </div>
-                <span>Dark </span><span>Colors</span>
+          <div class="floated-colors-btn second-floated-btn">
+            <div class="os-toggler-w">
+              <div class="os-toggler-i">
+                <div class="os-toggler-pill"></div>
               </div>
-              <!--------------------
-              END - Color Scheme Toggler
-              --------------------><!--------------------
+            </div>
+            <span>Dark </span><span>Colors</span>
+          </div>
+          <!--------------------
+          END - Color Scheme Toggler
+          --------------------><!--------------------
               START - Demo Customizer
               -------------------->
-              <div class="floated-customizer-btn third-floated-btn">
-                <div class="icon-w">
-                  <i class="os-icon os-icon-ui-46"></i>
-                </div>
-                <span>Customizer</span>
+          <div class="floated-customizer-btn third-floated-btn">
+            <div class="icon-w">
+              <i class="os-icon os-icon-ui-46"></i>
+            </div>
+            <span>Customizer</span>
+          </div>
+          <div class="floated-customizer-panel">
+            <div class="fcp-content">
+              <div class="close-customizer-btn">
+                <i class="os-icon os-icon-x"></i>
               </div>
-              <div class="floated-customizer-panel">
-                <div class="fcp-content">
-                  <div class="close-customizer-btn">
-                    <i class="os-icon os-icon-x"></i>
+              <div class="fcp-group">
+                <div class="fcp-group-header">
+                  Menu Settings
+                </div>
+                <div class="fcp-group-contents">
+                  <div class="fcp-field">
+                    <label for="">Menu Position</label><select class="menu-position-selector">
+                      <option value="left">
+                        Left
+                      </option>
+                      <option value="right">
+                        Right
+                      </option>
+                      <option value="top">
+                        Top
+                      </option>
+                    </select>
                   </div>
-                  <div class="fcp-group">
-                    <div class="fcp-group-header">
-                      Menu Settings
-                    </div>
-                    <div class="fcp-group-contents">
-                      <div class="fcp-field">
-                        <label for="">Menu Position</label><select class="menu-position-selector">
-                          <option value="left">
-                            Left
-                          </option>
-                          <option value="right">
-                            Right
-                          </option>
-                          <option value="top">
-                            Top
-                          </option>
-                        </select>
-                      </div>
-                      <div class="fcp-field">
-                        <label for="">Menu Style</label><select class="menu-layout-selector">
-                          <option value="compact">
-                            Compact
-                          </option>
-                          <option value="full">
-                            Full
-                          </option>
-                          <option value="mini">
-                            Mini
-                          </option>
-                        </select>
-                      </div>
-                      <div class="fcp-field with-image-selector-w">
-                        <label for="">With Image</label><select class="with-image-selector">
-                          <option value="yes">
-                            Yes
-                          </option>
-                          <option value="no">
-                            No
-                          </option>
-                        </select>
-                      </div>
-                      <div class="fcp-field">
-                        <label for="">Menu Color</label>
-                        <div class="fcp-colors menu-color-selector">
-                          <div class="color-selector menu-color-selector color-bright selected"></div>
-                          <div class="color-selector menu-color-selector color-dark"></div>
-                          <div class="color-selector menu-color-selector color-light"></div>
-                          <div class="color-selector menu-color-selector color-transparent"></div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="fcp-field">
+                    <label for="">Menu Style</label><select class="menu-layout-selector">
+                      <option value="compact">
+                        Compact
+                      </option>
+                      <option value="full">
+                        Full
+                      </option>
+                      <option value="mini">
+                        Mini
+                      </option>
+                    </select>
                   </div>
-                  <div class="fcp-group">
-                    <div class="fcp-group-header">
-                      Sub Menu
-                    </div>
-                    <div class="fcp-group-contents">
-                      <div class="fcp-field">
-                        <label for="">Sub Menu Style</label><select class="sub-menu-style-selector">
-                          <option value="flyout">
-                            Flyout
-                          </option>
-                          <option value="inside">
-                            Inside/Click
-                          </option>
-                          <option value="over">
-                            Over
-                          </option>
-                        </select>
-                      </div>
-                      <div class="fcp-field">
-                        <label for="">Sub Menu Color</label>
-                        <div class="fcp-colors">
-                          <div class="color-selector sub-menu-color-selector color-bright selected"></div>
-                          <div class="color-selector sub-menu-color-selector color-dark"></div>
-                          <div class="color-selector sub-menu-color-selector color-light"></div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="fcp-field with-image-selector-w">
+                    <label for="">With Image</label><select class="with-image-selector">
+                      <option value="yes">
+                        Yes
+                      </option>
+                      <option value="no">
+                        No
+                      </option>
+                    </select>
                   </div>
-                  <div class="fcp-group">
-                    <div class="fcp-group-header">
-                      Other Settings
-                    </div>
-                    <div class="fcp-group-contents">
-                      <div class="fcp-field">
-                        <label for="">Full Screen?</label><select class="full-screen-selector">
-                          <option value="yes">
-                            Yes
-                          </option>
-                          <option value="no">
-                            No
-                          </option>
-                        </select>
-                      </div>
-                      <div class="fcp-field">
-                        <label for="">Show Top Bar</label><select class="top-bar-visibility-selector">
-                          <option value="yes">
-                            Yes
-                          </option>
-                          <option value="no">
-                            No
-                          </option>
-                        </select>
-                      </div>
-                      <div class="fcp-field">
-                        <label for="">Above Menu?</label><select class="top-bar-above-menu-selector">
-                          <option value="yes">
-                            Yes
-                          </option>
-                          <option value="no">
-                            No
-                          </option>
-                        </select>
-                      </div>
-                      <div class="fcp-field">
-                        <label for="">Top Bar Color</label>
-                        <div class="fcp-colors">
-                          <div class="color-selector top-bar-color-selector color-bright selected"></div>
-                          <div class="color-selector top-bar-color-selector color-dark"></div>
-                          <div class="color-selector top-bar-color-selector color-light"></div>
-                          <div class="color-selector top-bar-color-selector color-transparent"></div>
-                        </div>
-                      </div>
+                  <div class="fcp-field">
+                    <label for="">Menu Color</label>
+                    <div class="fcp-colors menu-color-selector">
+                      <div class="color-selector menu-color-selector color-bright selected"></div>
+                      <div class="color-selector menu-color-selector color-dark"></div>
+                      <div class="color-selector menu-color-selector color-light"></div>
+                      <div class="color-selector menu-color-selector color-transparent"></div>
                     </div>
                   </div>
                 </div>
               </div>
-              <!--------------------
-              END - Demo Customizer
-              -------------------->
+              <div class="fcp-group">
+                <div class="fcp-group-header">
+                  Sub Menu
+                </div>
+                <div class="fcp-group-contents">
+                  <div class="fcp-field">
+                    <label for="">Sub Menu Style</label><select class="sub-menu-style-selector">
+                      <option value="flyout">
+                        Flyout
+                      </option>
+                      <option value="inside">
+                        Inside/Click
+                      </option>
+                      <option value="over">
+                        Over
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fcp-field">
+                    <label for="">Sub Menu Color</label>
+                    <div class="fcp-colors">
+                      <div class="color-selector sub-menu-color-selector color-bright selected"></div>
+                      <div class="color-selector sub-menu-color-selector color-dark"></div>
+                      <div class="color-selector sub-menu-color-selector color-light"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="fcp-group">
+                <div class="fcp-group-header">
+                  Other Settings
+                </div>
+                <div class="fcp-group-contents">
+                  <div class="fcp-field">
+                    <label for="">Full Screen?</label><select class="full-screen-selector">
+                      <option value="yes">
+                        Yes
+                      </option>
+                      <option value="no">
+                        No
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fcp-field">
+                    <label for="">Show Top Bar</label><select class="top-bar-visibility-selector">
+                      <option value="yes">
+                        Yes
+                      </option>
+                      <option value="no">
+                        No
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fcp-field">
+                    <label for="">Above Menu?</label><select class="top-bar-above-menu-selector">
+                      <option value="yes">
+                        Yes
+                      </option>
+                      <option value="no">
+                        No
+                      </option>
+                    </select>
+                  </div>
+                  <div class="fcp-field">
+                    <label for="">Top Bar Color</label>
+                    <div class="fcp-colors">
+                      <div class="color-selector top-bar-color-selector color-bright selected"></div>
+                      <div class="color-selector top-bar-color-selector color-dark"></div>
+                      <div class="color-selector top-bar-color-selector color-light"></div>
+                      <div class="color-selector top-bar-color-selector color-transparent"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!--------------------
+          END - Demo Customizer
+          -------------------->
           <!--------------------
               START - User avatar and menu in secondary top menu
               -------------------->
@@ -932,9 +937,9 @@
       @yield('content')
       <script src="{{asset('bower_components/jquery/dist/jquery.min.js')}}"></script>
       <script
-  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-  crossorigin="anonymous"></script>
+              src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+              integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+              crossorigin="anonymous"></script>
       <script src="{{asset('bower_components/popper.js/dist/umd/popper.min.js')}}"></script>
       <script src="{{asset('bower_components/moment/moment.js')}}"></script>
       <script src="{{asset('bower_components/select2/dist/js/select2.full.min.js')}}"></script>
