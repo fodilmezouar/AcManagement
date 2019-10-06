@@ -4,7 +4,7 @@
 <div class="all-wrapper menu-side with-pattern">
       <div class="auth-box-w">
         <div class="logo-w">
-          <a href="index.html"><img alt="" src="img/logo-big.png"></a>
+          <a href="index.html"><img alt="" src="img/logo-big.png" style="width: 190px;"></a>
         </div>
         <h4 class="auth-header">
           Login
