@@ -115,16 +115,7 @@
                             </div>
                             <ul>
                               <li>
-                                <a href="#"><i class="os-icon os-icon-ui-49"></i><span>Edit Record</span></a>
-                              </li>
-                              <li>
-                                <a href="#"><i class="os-icon os-icon-grid-10"></i><span>Duplicate Item</span></a>
-                              </li>
-                              <li>
-                                <a href="#" class="removeItems" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-15"></i><span>Remove Item</span></a>
-                              </li>
-                              <li>
-                                <a href="#"><i class="os-icon os-icon-ui-44"></i><span>Archive Project</span></a>
+                                <a href="#" class="removeItems" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-15"></i><span>Remove Items</span></a>
                               </li>
                             </ul>
                           </div>

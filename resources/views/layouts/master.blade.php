@@ -12,7 +12,7 @@
   <link href="{{asset('img/logo.jpg')}}" rel="shortcut icon">
   <link href="apple-touch-icon.png" rel="apple-touch-icon">
   <link href="{{asset('icon_fonts_assets/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet">
-
+  
   <link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500" rel="stylesheet" type="text/css">
   <link href="{{asset('icon_fonts_assets/feather/style.css')}}" rel="stylesheet">
   <link href="{{asset('bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet">
@@ -28,6 +28,7 @@
 
 
   <link href="{{asset('bower_components/dragula.js/dist/dragula.min.css')}}" rel="stylesheet">
+  <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 
 
 </head>
@@ -289,78 +290,7 @@
         -------------------->
         <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
           <i class="os-icon os-icon-mail-14"></i>
-          <div class="new-messages-count">
-            12
-          </div>
           <div class="os-dropdown light message-list">
-            <ul>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
-                  </div>
-                  <span>Gestion Préliminaire</span></a>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="{{url('promotions')}}">Promotions</a>
-                  </li>
-                </ul>
-                <div class="message-content">
-                  <h6 class="message-from">
-                    John Mayers
-                  </h6>
-                  <h6 class="message-title">
-                    Account Update
-                  </h6>
-                </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar2.jpg')}}">
-                  </div>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      Phil Jones
-                    </h6>
-                    <h6 class="message-title">
-                      Secutiry Updates
-                    </h6>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar3.jpg')}}">
-                  </div>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      Bekky Simpson
-                    </h6>
-                    <h6 class="message-title">
-                      Vacation Rentals
-                    </h6>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar4.jpg')}}">
-                  </div>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      Alice Priskon
-                    </h6>
-                    <h6 class="message-title">
-                      Payment Confirmation
-                    </h6>
-                  </div>
-                </a>
-              </li>
-            </ul>
           </div>
         </div>
         <!--------------------
@@ -376,16 +306,7 @@
             </div>
             <ul>
               <li>
-                <a href="users_profile_small.html"><i class="os-icon os-icon-ui-49"></i><span>Profile Settings</span></a>
-              </li>
-              <li>
-                <a href="users_profile_small.html"><i class="os-icon os-icon-grid-10"></i><span>Billing Info</span></a>
-              </li>
-              <li>
-                <a href="users_profile_small.html"><i class="os-icon os-icon-ui-44"></i><span>My Invoices</span></a>
-              </li>
-              <li>
-                <a href="users_profile_small.html"><i class="os-icon os-icon-ui-15"></i><span>Cancel Account</span></a>
+                  <a href="/configuration"><i class="os-icon os-icon-ui-46"></i><span>Configuration</span></a>
               </li>
             </ul>
           </div>
@@ -397,75 +318,11 @@
             -------------------->
         <div class="messages-notifications os-dropdown-trigger os-dropdown-position-right">
           <i class="os-icon os-icon-zap"></i>
-          <div class="new-messages-count">
-            4
-          </div>
           <div class="os-dropdown light message-list">
             <div class="icon-w">
               <i class="os-icon os-icon-zap"></i>
             </div>
-            <ul>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('/uploads/photo/'.Auth::user()->photo)}}">
-                  </div>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      John Mayers
-                    </h6>
-                    <h6 class="message-title">
-                      Account Update
-                    </h6>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar3.jpg')}}">
-                  </div>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      Phil Jones
-                    </h6>
-                    <h6 class="message-title">
-                      Secutiry Updates
-                    </h6>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar3.jpg')}}">
-                  </div>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      Bekky Simpson
-                    </h6>
-                    <h6 class="message-title">
-                      Vacation Rentals
-                    </h6>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="#">
-                  <div class="user-avatar-w">
-                    <img alt="" src="{{asset('img/avatar4.jpg')}}">
-                  </div>
-                  <div class="message-content">
-                    <h6 class="message-from">
-                      Alice Priskon
-                    </h6>
-                    <h6 class="message-title">
-                      Payment Confirmation
-                    </h6>
-                  </div>
-                </a>
-              </li>
-            </ul>
+            
           </div>
         </div>
         <!--------------------
@@ -477,17 +334,19 @@
       </div>
 
       <ul class="main-menu">
+        @if(stristr(Auth::user()->role,'1'))
         <li class="sub-header">
           <span>Home</span>
         </li>
         <li class="selected has-sub-menu {{ $active ==  'home' ? 'active':'' }}">
           <a href="{{url('/home')}}">
             <div class="icon-w">
-              <div class="os-icon os-icon-layout"></div>
+              <i class="fa fa-home"></i>
             </div>
             <span>Home</span>
           </a>
         </li>
+        @endif
         <li class="sub-header">
           <span>Gestion Préliminaire</span>
         </li>
@@ -503,7 +362,7 @@
           <li class="selected has-sub-menu {{ $active ==  'Enseignants' ? 'active':''}}">
             <a href="{{url('enseignant')}}">
               <div class="icon-w">
-                <div class="os-icon os-icon-layout"></div>
+                <i class="fa fa-graduation-cap "></i>
               </div>
               <span>Enseignants</span>
             </a>
@@ -569,7 +428,8 @@
           <li class="selected has-sub-menu {{ $active ==  'Calendrier' ? 'active':''}}">
             <a href="{{url('calendrier/'.Auth::user()->id)}}">
               <div class="icon-w">
-                <div class="os-icon os-icon-layout"></div>
+                <i class="fa fa-calendar" aria-hidden="true"></i>
+
               </div>
               <span>Mon Calendrier</span>
             </a>
@@ -579,7 +439,7 @@
           <li class="selected has-sub-menu {{ $active ==  'mesModules' ? 'active':''}}">
             <a href="{{url('mesModules/'.Auth::user()->id)}}">
               <div class="icon-w">
-                <div class="os-icon os-icon-layout"></div>
+                <i class="fa fa-arrow-right"></i>
               </div>
               <span>Mes Affectations</span>
             </a>
@@ -589,7 +449,7 @@
           <li class="selected has-sub-menu {{ $active ==  'Justificatif' ? 'active':''}}">
             <a href="{{url('mesModules/justifier/'.Auth::user()->id)}}">
               <div class="icon-w">
-                <div class="os-icon os-icon-layout"></div>
+                <i class="fa fa-file"></i>
               </div>
               <span>Joindre Justificatif</span>
             </a>
@@ -608,20 +468,19 @@
         @endif
 
         @if(stristr(Auth::user()->role,'3'))
-          <li class="sub-menu">
-            <span>Gestion corrections</span>
-          </li>
+          <li class="sub-header">
+          <span>Gestion Correction</span>
+        </li>
           <li class="selected has-sub-menu {{ $active ==  'corr' ? 'active':''}}">
             <a href="{{url('mesModules/corr/'.Auth::user()->id)}}">
               <div class="icon-w">
-                <div class="os-icon os-icon-layout"></div>
+                <i class="fa fa-sticky-note"></i>
               </div>
               <span>mes paquets</span>
             </a>
           </li>
         @endif
-        @if(stristr(Auth::user()->role,'4'))
-          <li class="sub-header" style="border-top: 1px solid rgba(0, 0, 0, 0.05);margin-top: 5em;">
+          <li class="sub-header" style="border-top: 1px solid rgba(0, 0, 0, 0.05);margin-top: 10em;">
           <li class="selected has-sub-menu {{ $active ==  'configuration' ? 'active':''}}">
             <a href="{{url('configuration')}}">
               <div class="icon-w">
@@ -631,7 +490,6 @@
             </a>
           </li>
           </li>
-        @endif
 
 
 
@@ -664,7 +522,7 @@
               <ul>
                 @foreach(Auth::user()->notifications() as $notif)
                   <li>
-                    <a href="{{$notif->url}}">
+                    <a href="{{$notif->url}}" class="notifs" id="{{$notif->id}}">
                       <div class="user-avatar-w">
                         <img alt="" src="{{asset('/uploads/photo/'.$notif->getSender()->photo)}}">
                       </div>
@@ -695,16 +553,7 @@
               </div>
               <ul>
                 <li>
-                  <a href="users_profile_small.html"><i class="os-icon os-icon-ui-49"></i><span>Profile Settings</span></a>
-                </li>
-                <li>
-                  <a href="users_profile_small.html"><i class="os-icon os-icon-grid-10"></i><span>Billing Info</span></a>
-                </li>
-                <li>
-                  <a href="users_profile_small.html"><i class="os-icon os-icon-ui-44"></i><span>My Invoices</span></a>
-                </li>
-                <li>
-                  <a href="users_profile_small.html"><i class="os-icon os-icon-ui-15"></i><span>Cancel Account</span></a>
+                  <a href="/configuration"><i class="os-icon os-icon-ui-46"></i><span>Configuration</span></a>
                 </li>
               </ul>
             </div>
@@ -715,160 +564,16 @@
           <!--------------------
               START - Color Scheme Toggler
               -------------------->
-          <div class="floated-colors-btn second-floated-btn">
+          <!--<div class="floated-colors-btn second-floated-btn">
             <div class="os-toggler-w">
               <div class="os-toggler-i">
                 <div class="os-toggler-pill"></div>
               </div>
             </div>
             <span>Dark </span><span>Colors</span>
-          </div>
+          </div>-->
           <!--------------------
           END - Color Scheme Toggler
-          --------------------><!--------------------
-              START - Demo Customizer
-              -------------------->
-          <div class="floated-customizer-btn third-floated-btn">
-            <div class="icon-w">
-              <i class="os-icon os-icon-ui-46"></i>
-            </div>
-            <span>Customizer</span>
-          </div>
-          <div class="floated-customizer-panel">
-            <div class="fcp-content">
-              <div class="close-customizer-btn">
-                <i class="os-icon os-icon-x"></i>
-              </div>
-              <div class="fcp-group">
-                <div class="fcp-group-header">
-                  Menu Settings
-                </div>
-                <div class="fcp-group-contents">
-                  <div class="fcp-field">
-                    <label for="">Menu Position</label><select class="menu-position-selector">
-                      <option value="left">
-                        Left
-                      </option>
-                      <option value="right">
-                        Right
-                      </option>
-                      <option value="top">
-                        Top
-                      </option>
-                    </select>
-                  </div>
-                  <div class="fcp-field">
-                    <label for="">Menu Style</label><select class="menu-layout-selector">
-                      <option value="compact">
-                        Compact
-                      </option>
-                      <option value="full">
-                        Full
-                      </option>
-                      <option value="mini">
-                        Mini
-                      </option>
-                    </select>
-                  </div>
-                  <div class="fcp-field with-image-selector-w">
-                    <label for="">With Image</label><select class="with-image-selector">
-                      <option value="yes">
-                        Yes
-                      </option>
-                      <option value="no">
-                        No
-                      </option>
-                    </select>
-                  </div>
-                  <div class="fcp-field">
-                    <label for="">Menu Color</label>
-                    <div class="fcp-colors menu-color-selector">
-                      <div class="color-selector menu-color-selector color-bright selected"></div>
-                      <div class="color-selector menu-color-selector color-dark"></div>
-                      <div class="color-selector menu-color-selector color-light"></div>
-                      <div class="color-selector menu-color-selector color-transparent"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="fcp-group">
-                <div class="fcp-group-header">
-                  Sub Menu
-                </div>
-                <div class="fcp-group-contents">
-                  <div class="fcp-field">
-                    <label for="">Sub Menu Style</label><select class="sub-menu-style-selector">
-                      <option value="flyout">
-                        Flyout
-                      </option>
-                      <option value="inside">
-                        Inside/Click
-                      </option>
-                      <option value="over">
-                        Over
-                      </option>
-                    </select>
-                  </div>
-                  <div class="fcp-field">
-                    <label for="">Sub Menu Color</label>
-                    <div class="fcp-colors">
-                      <div class="color-selector sub-menu-color-selector color-bright selected"></div>
-                      <div class="color-selector sub-menu-color-selector color-dark"></div>
-                      <div class="color-selector sub-menu-color-selector color-light"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="fcp-group">
-                <div class="fcp-group-header">
-                  Other Settings
-                </div>
-                <div class="fcp-group-contents">
-                  <div class="fcp-field">
-                    <label for="">Full Screen?</label><select class="full-screen-selector">
-                      <option value="yes">
-                        Yes
-                      </option>
-                      <option value="no">
-                        No
-                      </option>
-                    </select>
-                  </div>
-                  <div class="fcp-field">
-                    <label for="">Show Top Bar</label><select class="top-bar-visibility-selector">
-                      <option value="yes">
-                        Yes
-                      </option>
-                      <option value="no">
-                        No
-                      </option>
-                    </select>
-                  </div>
-                  <div class="fcp-field">
-                    <label for="">Above Menu?</label><select class="top-bar-above-menu-selector">
-                      <option value="yes">
-                        Yes
-                      </option>
-                      <option value="no">
-                        No
-                      </option>
-                    </select>
-                  </div>
-                  <div class="fcp-field">
-                    <label for="">Top Bar Color</label>
-                    <div class="fcp-colors">
-                      <div class="color-selector top-bar-color-selector color-bright selected"></div>
-                      <div class="color-selector top-bar-color-selector color-dark"></div>
-                      <div class="color-selector top-bar-color-selector color-light"></div>
-                      <div class="color-selector top-bar-color-selector color-transparent"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!--------------------
-          END - Demo Customizer
           -------------------->
           <!--------------------
               START - User avatar and menu in secondary top menu
@@ -903,17 +608,8 @@
                 </div>
                 <ul>
                   <li>
-                    <a href="apps_email.html"><i class="os-icon os-icon-mail-01"></i><span>Incoming Mail</span></a>
-                  </li>
-                  <li>
-                    <a href="users_profile_big.html"><i class="os-icon os-icon-user-male-circle2"></i><span>Profile Details</span></a>
-                  </li>
-                  <li>
-                    <a href="users_profile_small.html"><i class="os-icon os-icon-coins-4"></i><span>Billing Details</span></a>
-                  </li>
-                  <li>
-                    <a href="#"><i class="os-icon os-icon-others-43"></i><span>Notifications</span></a>
-                  </li>
+                  <a href="/configuration"><i class="os-icon os-icon-ui-46"></i><span>Configuration</span></a>
+                </li>
                   <li>
                     <a href="/logout"><i class="os-icon os-icon-signs-11"></i><span>Logout</span></a>
                   </li>
@@ -955,6 +651,7 @@
       <script src="{{asset('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
       <script src="{{asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
       <script src="{{asset('bower_components/perfect-scrollbar/js/perfect-scrollbar.jquery.min.js')}}"></script>
+      <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
       <script src="{{asset('bower_components/tether/dist/js/tether.min.js')}}"></script>
       <script src="{{asset('bower_components/slick-carousel/slick/slick.min.js')}}"></script>
       <script src="{{asset('bower_components/bootstrap/js/dist/util.js')}}"></script>
@@ -971,6 +668,7 @@
       <script src="{{asset('js/dataTables.bootstrap4.min.js')}}"></script>
       <script src="{{asset('js/demo_customizer.js?version=4.4.0')}}"></script>
       <script src="{{asset('js/main.js?version=4.4.0')}}"></script>
+      <script src="{{asset('js/jquery.table2excel.js')}}"></script>
 @yield('scripts')
 </body>
 </html>

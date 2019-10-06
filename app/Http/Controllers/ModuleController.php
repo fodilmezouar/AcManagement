@@ -112,7 +112,7 @@ class ModuleController extends Controller
             return view('gAbs.modulesEns')->with(['modules'=>$modules,'notifications'=>$notifications,'cpt'=>$cpt]);
     }
     public function modulesCharge($idEns){
-           Notification::where("id_receiver","=",Auth::id())->where('type','=',1)->where('est_lit','=',0)->update(['est_lit'=>1]);
+           //Notification::where("id_receiver","=",Auth::id())->where('type','=',1)->where('est_lit','=',0)->update(['est_lit'=>1]);
            
             $modules = Module::where('enseignant_id','=',$idEns)->get();
             return view('gPrel.moduleEns')->with(['modules'=>$modules]);

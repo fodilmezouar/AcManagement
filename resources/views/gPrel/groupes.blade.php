@@ -93,7 +93,7 @@
                             <div class="value" id="libelleModule">
                               {{$module->libelle}}
                             </div>
-                            <div class="trending trending-down-basic" id="affOption">
+                            <div class="trending trending-down-basic" id="affOption{{$module->id}}">
                               
                                  @if($module->enseignant_id)
                                    <span style="color:green;">affecté</span>

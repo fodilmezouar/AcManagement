@@ -254,10 +254,9 @@ $("#formModulesAtt").on('submit',function(e) {
                   dataType: 'json',
                   success:function(response) {
                     //$('#attModal').modal('hide');
-                    $('.blockModule[role="'+moduleId+'"] #affOption').html('<span style="color:green;">affecté</span>');
                     $('#attModuleModal').modal('hide');
                     alertM('#messSuccessBody',' Module Affecté');
-                    $('#affOption').html('<span style="color:green;">affecté</span>');
+                    $('#affOption'+moduleId).html('<span style="color:green;">affecté</span>');
                   }
               });
    }

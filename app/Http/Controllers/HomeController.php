@@ -26,7 +26,9 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        $promoId = $request->input('promoId');
+        $user = User::find(Auth::id());
+        if(strpos($user->role, '1') !== false)
+        {$promoId = $request->input('promoId');
         $promos = Promotion::all();
         $promosCourant = $promos->get(0);
         if($promoId)
@@ -39,6 +41,15 @@ class HomeController extends Controller
                $cpt++;
              }
            }
-        return view('home')->with(["promos"=>$promos,"promosCourant"=>$promosCourant,'admins'=>$admins,'notifications'=>$notifications,'cpt'=>$cpt]);
+        return view('home')->with(["promos"=>$promos,"promosCourant"=>$promosCourant,'admins'=>$admins,'notifications'=>$notifications,'cpt'=>$cpt]);}
+        else if(strpos($user->role, '4') !== false){
+            return  redirect('/promotions/');
+        }
+        else if(strpos($user->role, '2') !== false){
+            return  redirect('/mesModulesCharge/'.Auth::id());
+        }
+        else{
+            return  redirect('/calendrier/'.Auth::id());
+        }
     }
 }

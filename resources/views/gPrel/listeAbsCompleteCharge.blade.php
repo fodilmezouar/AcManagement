@@ -84,11 +84,11 @@
                                      {
                                       $instance = $instances->get($i);
                                       if(! $instance->hasAbsence($student->id,$instance->id))
-                                        echo '<i class="fa fa-check"></i>';
+                                        echo '<span class="checked"><i class="fa fa-check"></i></span>';
                                       else if($instance->hasAbsence($student->id,$instance->id)->justification_id)
                                         echo '<i class="fa fa-times"></i> J';
                                       else
-                                        {echo '<i class="fa fa-times"></i>';$k++;}
+                                        {echo '<span class="notChecked"><i class="fa fa-times"></i></span>';$k++;}
                                      }
                                  ?>
                            </td>
@@ -111,7 +111,7 @@
               </div><!--------------------
               START - Chat Popup Box
               -------------------->
-              <div class="floated-chat-btn" data-target="#validerListe" data-toggle="modal" id="zombro">
+              <div class="floated-chat-btn" id="exportListe">
                 <i class="icon-feather-download"></i>
               </div> 
               <!--------------------

@@ -9,11 +9,21 @@ use App\Groupe;
 use App\Seance;
 use App\Affectation;
 use App\Promotion;
+use App\Notification;
 use Auth;
 use DB;
 
 class AffectationController extends Controller
 {
+    public function lireNotif(Request $request){
+      $notif = Notification::find($request->input("notifId"));
+      $notif->est_lit = 1;
+      $notif->save();
+      $valid['success'] = array('success' => false, 'messages' => array());
+        $valid['success'] = true;
+        $valid['messages'] = "success";
+        return response()->json($valid);
+    }
     public function validAffect(Request $request){
         $dataAffect = $request->input('affect');
         $grpId = $dataAffect['grpId'];
@@ -29,6 +39,17 @@ class AffectationController extends Controller
         $affectNew->tp = $tp;
         $affectNew->date_affectation = date('Y-m-d');
         $affectNew->save();
+        $notif = new Notification();
+      $notif->id_sender = Auth::id();
+      $notif->id_receiver = $ensId;
+      if($td)
+       $notif->message = "New Seance Td";
+      else
+        $notif->message = "New Seance Tp";
+      $notif->date_notif = date("Y-m-d");
+      $notif->type = 1;
+      $notif->url = "http://127.0.0.1:8001/calendrier/".$ensId;
+      $notif->save();
         $valid['success'] = array('success' => false, 'messages' => array());
         $valid['success'] = true;
         $valid['messages'] = "success";
