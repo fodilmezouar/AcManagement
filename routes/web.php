@@ -18,6 +18,8 @@ Route::get('/',function(){
 Route::get('event', function () {
     return view("test");
 });
+/** clear groupe affectations */
+Route::post("/groupes/flush","GroupeController@flush");
 /* ---- Gestion Prel ----- */
     /*--- Promotions --- */
 Route::get('configuration','FiliereController@setConfig');
