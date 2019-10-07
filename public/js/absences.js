@@ -1,3 +1,18 @@
+$("#exportListe").click(function(){
+  $('.checked').html('P');
+  $(".notChecked").html('A');
+  $("#dataTable1").table2excel({
+    exclude:".noExl",
+    name:"Worksheet Name",
+    filename:"SomeFile",//do not include extension
+    fileext:".xls", // file extension
+    preserveColors:true
+
+  });
+  $('.checked').html('<i class="fa fa-check"></i>');
+  $('.notChecked').html('<i class="fa fa-times"></i>');
+});
+
 $('#liste').on('submit',function(e){
 	e.preventDefault();
 	$.ajaxSetup({

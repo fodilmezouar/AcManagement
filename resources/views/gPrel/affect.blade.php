@@ -17,44 +17,19 @@
                           <i class="os-icon os-icon-hamburger-menu-1"></i>
                         </div>
                       </div>
-                      <div class="pipeline-body row">
-                          @foreach($assistants as $assistant)
-                      <div class="col-lg-3 copiable" id="{{$assistant->id}}">
-                        <div class="pipeline-item">
-                          <div class="pi-body">
-                            <div class="avatar">
-                              <img alt="" src="{{asset('/uploads/photo/'.$assistant->photo)}}">
-                            </div>
-                            <div class="pi-info">
-                              <div class="h6 pi-name">
-                                {{$assistant->name}} {{$assistant->prenom}}
-                              </div>
-                              <div class="pi-sub">
-                                Enseignant
-                              </div>
-                            </div>
-                          </div>
-                          <div class="pi-foot">
-                            <div class="tags">
-                                <span class="tag TD">TD</span> <input type="checkbox" role="TD" class="inp"/> <span class="tag TP">TP</span> <input class="inp" role="TP" type="checkbox"/>
-                            </div>
-                          </div>
-                        </div>
-                        </div>
-                        @endforeach
-                    </div>
-                    <br><br>
+                    <br>
+
               <div class="pipelines-w">
                 <div class="row" id="containerGroupes">
-                    @foreach($groupes as $groupe)
-                  <div class="col-lg-3 col-xxl-3 groupesClass" id="{{$groupe->id}}">
+
+                  <div class="col-lg-3 col-xxl-3">
                     <!--------------------
                     START - Pipeline
                     -------------------->
                     <div class="pipeline white lined-primary">
                       <div class="pipeline-header">
                         <h5 class="pipeline-name">
-                          {{$groupe->libelle}}
+                          Enseignants
                         </h5>
                         <div class="pipeline-settings os-dropdown-trigger">
                           <i class="os-icon os-icon-hamburger-menu-1"></i>
@@ -74,6 +49,73 @@
                               </li>
                               <li>
                                 <a href="#"><i class="os-icon os-icon-ui-44"></i><span>Archive Project</span></a>
+                              </li>
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      <div class="pipeline-body">
+                         <div class="input-search-w">
+                    <input class="form-control rounded bright" placeholder="Search team members..." type="search" id="searchEns">
+                  </div>
+                  <br>
+                     <?php $i = 0;  ?>
+                        @foreach($assistants as $assistant)
+                        <?php
+                         $i++; 
+                         $affich = "";
+                         if($i == 4)
+                           $affich = "display:none;";
+                        ?>
+
+                        <div class="pipeline-item copiable searchable" style="{{$affich}}" id="{{$assistant->id}}" role="{{$assistant->name.' '.$assistant->prenom}}">
+                          <div class="pi-body">
+                            <div class="avatar">
+                              <img alt="" src="{{asset('/uploads/photo/'.$assistant->photo)}}">
+                            </div>
+                            <div class="pi-info">
+                              <div class="h6 pi-name">
+                                {{$assistant->name}} {{$assistant->prenom}}
+                              </div>
+                              <div class="pi-sub">
+                                Enseignant
+                              </div>
+                            </div>
+                          </div>
+                          <div class="pi-foot">
+                            <div class="tags">
+                                <span class="tag TD">TD</span> <input type="checkbox" role="TD" class="inp"/> <span class="tag TP">TP</span> <input class="inp" role="TP" type="checkbox"/>
+                            </div>
+                          </div>
+                        </div>
+                        @endforeach
+                      </div>
+                    </div>
+                    <!--------------------
+                    END - Pipeline
+                    -------------------->
+                  </div>
+                  <div class="col-lg-1 col-xxl-1"></div>
+                    @foreach($groupes as $groupe)
+                  <div class="col-lg-3 col-xxl-3 groupesClass" id="{{$groupe->id}}">
+                    <!--------------------
+                    START - Pipeline
+                    -------------------->
+                    <div class="pipeline white lined-primary">
+                      <div class="pipeline-header">
+                        <h5 class="pipeline-name">
+                          {{$groupe->libelle}}
+                        </h5>
+                        <div class="pipeline-settings os-dropdown-trigger">
+                          <i class="os-icon os-icon-hamburger-menu-1"></i>
+                          <div class="os-dropdown">
+                            <div class="icon-w">
+                              <i class="os-icon os-icon-ui-46"></i>
+                            </div>
+                            <ul>
+                              <li>
+                                <a href="#" class="removeItems" role="{{$groupe->id}}"><i class="os-icon os-icon-ui-15"></i><span>Remove Items</span></a>
                               </li>
                             </ul>
                           </div>
@@ -107,6 +149,7 @@
                             </div>
                           </div>
                         </div>
+
                         @endforeach
                       </div>
                     </div>
@@ -115,6 +158,7 @@
                     -------------------->
                   </div>
                   @endforeach
+                  
                   </div>
                 </div>
               </div><!--------------------
@@ -335,5 +379,6 @@
               -------------------->
             </div>
           </div>
+          
           @endsection
         

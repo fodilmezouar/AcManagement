@@ -33,6 +33,65 @@ Main javascript functions to init most of the elements
 // ------------------------------------
 // HELPER FUNCTIONS TO TEST FOR SPECIFIC DISPLAY SIZE (RESPONSIVE HELPERS)
 // ------------------------------------
+//toggling events darkness mode
+$('#sombre').change(function() {
+  if (!$(this).prop('checked') && $('body').hasClass('color-scheme-dark')) {
+      $('.menu-w').removeClass('color-scheme-dark').addClass('color-scheme-light').removeClass('selected-menu-color-bright').addClass('selected-menu-color-light');
+      $(this).find('.os-toggler-w').removeClass('on');
+    } else {
+      $('.menu-w, .top-bar').removeClass(function (index, className) {
+        return (className.match(/(^|\s)color-scheme-\S+/g) || []).join(' ');
+      });
+      $('.menu-w').removeClass(function (index, className) {
+        return (className.match(/(^|\s)color-style-\S+/g) || []).join(' ');
+      });
+      $('.menu-w').addClass('color-scheme-dark').addClass('color-style-transparent').removeClass('selected-menu-color-light').addClass('selected-menu-color-bright');
+      $('.top-bar').addClass('color-scheme-transparent');
+      $(this).find('.os-toggler-w').addClass('on');
+    }
+    $('body').toggleClass('color-scheme-dark');
+    return false;
+});
+$('.notifs').on('click',function(e){
+   var notifId = $(this).attr('id');
+   $.ajaxSetup({
+            headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           } 
+          });
+   $.ajax({
+                  url : "/notifs/lire",
+                  type: "POST",
+                  data: {
+                    "notifId":notifId,
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                           //document.location.reload();
+                  }
+              });
+});
+//clear groupes 
+$(".removeItems").on('click',function(e){
+   e.preventDefault();
+   var groupeId = $(this).attr('role');
+   $.ajaxSetup({
+            headers: {
+          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+           } 
+          });
+   $.ajax({
+                  url : "/groupes/flush",
+                  type: "POST",
+                  data: {
+                    "groupeId":groupeId,
+                  },
+                  dataType: 'json',
+                  success:function(response) {
+                           document.location.reload();
+                  }
+              });
+});
 var nvScs= [];
 function is_display_type(display_type) {
   return $('.display-type').css('content') == display_type || $('.display-type').css('content') == '"' + display_type + '"';
@@ -40,7 +99,30 @@ function is_display_type(display_type) {
 function not_display_type(display_type) {
   return $('.display-type').css('content') != display_type && $('.display-type').css('content') != '"' + display_type + '"';
 }
-
+$("#searchEns").bind("keyup", function(e) {
+         var val = $('#searchEns').val();
+         if(val == "")
+            val = " ";
+         if(val.length >= 3)
+           {
+            $('.searchable:not([role*="'+val+'"])').css('display','none');
+            $('.searchable[role*="'+val+'"]').each(function(i){
+                  if(i<=2)
+                   $(this).show();
+              });
+           }
+          else if(val == " ")
+            {
+              $('.searchable[role*="'+val+'"]').each(function(i){
+                 if(i <= 2)
+                   $(this).show();
+                 else
+                   $(this).css('display','none');
+              });
+              //$('.searchable[role*="'+val+'"]').show();
+            }
+         //console.log($(".searchable[role~='"+val+"']"));
+});
 // Initiate on click and on hover sub menu activation logic
 function os_init_sub_menus() {
 
@@ -1144,7 +1226,7 @@ $(function () {
     // INIT DRAG AND DROP FOR PIPELINE ITEMS
     var dragulaObj = dragula($('.pipeline-body').toArray(), {
       copy: function (el, source) {
-        if(el.classList.length == 2)
+        if(el.classList.length == 3)
          copied = true;
         else
          copied = false;

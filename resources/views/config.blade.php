@@ -29,6 +29,7 @@
                   </div>
 
                   <!-- promotions -->
+                  @if(stristr(Auth::user()->role,'4'))
                   <div class="row" id="contentPromos">
                      <div class="col-md-6" style="border-right:  1px solid rgba(0, 0, 0, 0.05);">
                          <label>Filiere</label>
@@ -38,6 +39,17 @@
                      </div> 
                      <div class="icon-w col-md-1" id="changeFiliere" style="font-size: 1rem;">
                       <i class="fa fa-pencil" aria-hidden="true"></i>
+                    </div>
+                   </div>
+                   <br>
+                   @endif
+                   
+                   <div class="row">
+                    <div class="col-md-6">
+                         <label>Mode Sombre</label>
+                    </div>
+                    <div class="col-md-6">
+                         <input type="checkbox" id="sombre"  data-toggle="toggle" data-width="100">
                     </div>
                    </div>
                    <!-- promotions -->

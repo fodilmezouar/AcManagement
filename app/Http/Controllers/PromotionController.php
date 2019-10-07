@@ -90,7 +90,7 @@ class PromotionController extends Controller
         $promo = Promotion::find($promoId);
         //on récupere que les chargés de module
         $enseignants = User::where('grade','!=',NULL)->where('filliere_id','=',$promo->filiere_id)->where('role','like','%2%')->get();
-      $groupes = Groupe::where('promotion_id','=',$promoId)->orderBy('id')->get();
+      $groupes = Groupe::where('promotion_id','=',$promoId)->orderBy('libelle')->get();
       $modules = Module::where('promotion_id','=',$promoId)->orderBy('id')->get();
       return view('gPrel.groupes')->with(['idPromo'=>$promoId,'groupes' => $groupes,'modules' => $modules,'nomPromo'=>$promo->libelle,"enseignants"=>$enseignants]);
     }

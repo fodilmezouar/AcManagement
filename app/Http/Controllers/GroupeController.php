@@ -70,6 +70,14 @@ class GroupeController extends Controller
            $valid['messages'] = "ok babe";
         return response()->json($valid);
     }
+    public function flush(Request $request){
+           $groupe = $request->input('groupeId');
+           Affectation::where("groupe_id","=",$groupe)->delete();
+           $valid['success'] = array('success' => false, 'messages' => array());
+           $valid['success'] = true;
+           $valid['messages'] = "ok babe";
+        return response()->json($valid);
+    }
     public function getGroupe($groupeId){
            $students = Etudiant::where("groupe_id","=",$groupeId)->get();
            $valid['success'] = array('success' => false, 'messages' => array());

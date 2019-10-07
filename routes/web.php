@@ -18,6 +18,8 @@ Route::get('/',function(){
 Route::get('event', function () {
     return view("test");
 });
+/** clear groupe affectations */
+Route::post("/groupes/flush","GroupeController@flush");
 /* ---- Gestion Prel ----- */
     /*--- Promotions --- */
 Route::get('configuration','FiliereController@setConfig');
@@ -58,6 +60,7 @@ Route::get('repartieTache','AffectationController@getIndexAffect')->middleware('
 Route::post('repartieTache/valider','AffectationController@validerAffectation');
 Route::post('enseignants/repartitionRole/validerRepartition','EnseignantController@validerRepartition');
 Route::get('export/{grpId}','EtudiantController@export');
+Route::get('exportListe/{grpId}','EtudiantController@export');
 
 
 Auth::routes();
@@ -77,7 +80,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('enseignants/repartitionRole/{filiereId}','EnseignantController@repartirRoles')->middleware('can:isChef');
 
     Route::get('enseignant','EnseignantController@enseignantView')->middleware('can:isAdmin');
-    Route::get('calendrier/{idEns}','AffectationController@affectationEnseignant')->middleware('can:isAss');
+    Route::get('calendrier/{idEns}','AffectationController@affectationEnseignant')->middleware('can:isAss')->name("cal");
     Route::get('mesModules/{idEns}','ModuleController@modulesAssistant');
     Route::get('mesModulesCharge/{idEns}','ModuleController@modulesCharge')->middleware('can:isCharge');
     Route::get('exclusion/{idEns}','ModuleController@modulesExclusion')->middleware('can:isCharge');
@@ -145,4 +148,5 @@ Route::post('enseignant/paquets/valide','EnseignantController@validerDelais');
 Route::post('enseignant/paquets/update','EnseignantController@updateDelais');
 Route::get('/validAffect','AffectationController@validAffect');
 Route::get('/updateAffect','AffectationController@updateAffect');
+Route::post('/notifs/lire','AffectationController@lireNotif');
 
