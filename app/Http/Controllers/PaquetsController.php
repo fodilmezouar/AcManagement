@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exams;
 use App\Http\Requests\CsvImportRequest;
 use App\Module;
 use Illuminate\Http\Request;
@@ -90,7 +91,8 @@ class PaquetsController extends Controller
     }
     public function getCopies($idPaquet){
         $paquet = Paquets::find($idPaquet);
-        $promo = Module::find($paquet->exam_id);
+        $exam = Exams::find($paquet->exam_id);
+        $promo = Module::find($exam->module_id);
         $copies = Copies::where('paquetId','=',$idPaquet)->get();
         return view('gPrel.paquet')->with(['copies'=>$copies,'nomPaquet'=>$paquet->libelle,'nomPromo'=>$promo->libelle,'idPromo'=>$promo->id]);
     }

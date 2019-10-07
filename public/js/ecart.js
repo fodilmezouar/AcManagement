@@ -9,8 +9,8 @@ $("#formValider").on('submit',function(e) {
     var delais =$('#delais').val();
     var ecart =$('#ecart').val();
     $.ajax({
-        url : "valide",
-        type: "POST",
+        url : "/validerr",
+        type: "post",
         data: {
             "examId":promoId,
             "ecart":ecart,

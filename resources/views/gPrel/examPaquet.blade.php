@@ -58,7 +58,7 @@
                                             @foreach($copies as $copie)
                                                 <?php
 
-                                                    if (abs($copie->notePre1-$copie->notePre2)<$ecart){
+                                                    if (abs($copie->notePre1-$copie->notePre2)<=$ecart){
                                                             $cor3="";
                                                             $warning="";
                                                     }else{
@@ -71,7 +71,6 @@
 
                                                 ?>
                                                 <tr role="row" style="{{$warning}}" >
-                                                    {{$warning}}
                                                     <td>{{$copie->codeCopie}}</td>
                                                     <td>{{$copie->notePre1}}</td>
                                                     <td>{{$copie->notePre2}}</td>

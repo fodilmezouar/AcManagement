@@ -44,7 +44,7 @@ Route::get('promotions/modules/attModule/{idModule}','ModuleController@attacherM
 Route::post('valide/attachement','ModuleController@validerAttachement');
 
 Route::get('getEnseignant','EnseignantController@getEnseignant');
-Route::get('enseignant/createEnseignant','EnseignantController@createEnseignant');
+Route::post('enseignant/createEnseignant','EnseignantController@createEnseignant');
 Route::get('getInformationEnseignant/{id}','EnseignantController@getInfoEns');
 Route::post('deleteEnseignant','EnseignantController@deleteEnseignant');
 Route::post('enseignant/editEnseignant/{id}','EnseignantController@editEnseignant');
@@ -144,7 +144,7 @@ Route::post('exams/suppExam','ExamsController@suppExam');
 Route::post('exams/editExam','ExamsController@editExam');
 Route::get('ens/paquets/liste/{idPaquet}','EnseignantController@getCopies');
 Route::post('ens/paquets/liste/valide','EnseignantController@validerAff');
-Route::post('enseignant/paquets/valide','EnseignantController@validerDelais');
+Route::post('validerr','EnseignantController@validerDelais');
 Route::post('enseignant/paquets/update','EnseignantController@updateDelais');
 Route::get('/validAffect','AffectationController@validAffect');
 Route::get('/updateAffect','AffectationController@updateAffect');

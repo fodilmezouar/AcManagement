@@ -80,7 +80,7 @@ $(function () {
             formData.append('filiereId',filiereId)
             $.ajax({
                 url: "enseignant/createEnseignant",
-                type: 'GET',
+                type: 'POST',
                 processData: false,
                 contentType: false,
                 data: formData,

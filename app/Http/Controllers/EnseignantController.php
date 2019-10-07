@@ -225,7 +225,8 @@ class EnseignantController extends Controller
 
         $userId = Auth::id();
         $paquet = Paquets::find($idPaquet);
-        $promo = Module::find($paquet->exam_id);
+        $exam = Exams::find($paquet->exam_id);
+        $promo = Module::find($exam->module_id);
         $ecart = Corr_aff::where('exam_id','=',$paquet->exam_id)->get()->first()->ecartNote;
         $users = User::where('grade','!=',"")->where('id','!=',$userId)->get();
         $correct = Corrections::where('paquet_id','=',$idPaquet)->pluck('correcteur')->toArray();

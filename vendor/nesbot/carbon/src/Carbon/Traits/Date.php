@@ -12,12 +12,17 @@ namespace Carbon\Traits;
 
 use BadMethodCallException;
 use Carbon\CarbonInterface;
+use Carbon\CarbonPeriod;
 use Carbon\CarbonTimeZone;
+use Carbon\Exceptions\BadUnitException;
 use Closure;
+use DateInterval;
+use DatePeriod;
 use DateTime;
 use DateTimeInterface;
 use InvalidArgumentException;
 use ReflectionException;
+use RuntimeException;
 
 /**
  * A simple API extension for DateTime.
@@ -101,35 +106,35 @@ use ReflectionException;
  * @method        bool           isThursday()                                                                        Checks if the instance day is thursday.
  * @method        bool           isFriday()                                                                          Checks if the instance day is friday.
  * @method        bool           isSaturday()                                                                        Checks if the instance day is saturday.
- * @method        bool           isSameYear(\DateTimeInterface $date = null)                                         Checks if the given date is in the same year as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameYear(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)              Checks if the given date is in the same year as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentYear()                                                                     Checks if the instance is in the same year as the current moment.
  * @method        bool           isNextYear()                                                                        Checks if the instance is in the same year as the current moment next year.
  * @method        bool           isLastYear()                                                                        Checks if the instance is in the same year as the current moment last year.
- * @method        bool           isSameWeek(\DateTimeInterface $date = null)                                         Checks if the given date is in the same week as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameWeek(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)              Checks if the given date is in the same week as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentWeek()                                                                     Checks if the instance is in the same week as the current moment.
  * @method        bool           isNextWeek()                                                                        Checks if the instance is in the same week as the current moment next week.
  * @method        bool           isLastWeek()                                                                        Checks if the instance is in the same week as the current moment last week.
- * @method        bool           isSameDay(\DateTimeInterface $date = null)                                          Checks if the given date is in the same day as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameDay(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)               Checks if the given date is in the same day as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentDay()                                                                      Checks if the instance is in the same day as the current moment.
  * @method        bool           isNextDay()                                                                         Checks if the instance is in the same day as the current moment next day.
  * @method        bool           isLastDay()                                                                         Checks if the instance is in the same day as the current moment last day.
- * @method        bool           isSameHour(\DateTimeInterface $date = null)                                         Checks if the given date is in the same hour as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameHour(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)              Checks if the given date is in the same hour as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentHour()                                                                     Checks if the instance is in the same hour as the current moment.
  * @method        bool           isNextHour()                                                                        Checks if the instance is in the same hour as the current moment next hour.
  * @method        bool           isLastHour()                                                                        Checks if the instance is in the same hour as the current moment last hour.
- * @method        bool           isSameMinute(\DateTimeInterface $date = null)                                       Checks if the given date is in the same minute as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameMinute(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)            Checks if the given date is in the same minute as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentMinute()                                                                   Checks if the instance is in the same minute as the current moment.
  * @method        bool           isNextMinute()                                                                      Checks if the instance is in the same minute as the current moment next minute.
  * @method        bool           isLastMinute()                                                                      Checks if the instance is in the same minute as the current moment last minute.
- * @method        bool           isSameSecond(\DateTimeInterface $date = null)                                       Checks if the given date is in the same second as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameSecond(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)            Checks if the given date is in the same second as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentSecond()                                                                   Checks if the instance is in the same second as the current moment.
  * @method        bool           isNextSecond()                                                                      Checks if the instance is in the same second as the current moment next second.
  * @method        bool           isLastSecond()                                                                      Checks if the instance is in the same second as the current moment last second.
- * @method        bool           isSameMicro(\DateTimeInterface $date = null)                                        Checks if the given date is in the same microsecond as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameMicro(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)             Checks if the given date is in the same microsecond as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentMicro()                                                                    Checks if the instance is in the same microsecond as the current moment.
  * @method        bool           isNextMicro()                                                                       Checks if the instance is in the same microsecond as the current moment next microsecond.
  * @method        bool           isLastMicro()                                                                       Checks if the instance is in the same microsecond as the current moment last microsecond.
- * @method        bool           isSameMicrosecond(\DateTimeInterface $date = null)                                  Checks if the given date is in the same microsecond as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameMicrosecond(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)       Checks if the given date is in the same microsecond as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentMicrosecond()                                                              Checks if the instance is in the same microsecond as the current moment.
  * @method        bool           isNextMicrosecond()                                                                 Checks if the instance is in the same microsecond as the current moment next microsecond.
  * @method        bool           isLastMicrosecond()                                                                 Checks if the instance is in the same microsecond as the current moment last microsecond.
@@ -139,15 +144,15 @@ use ReflectionException;
  * @method        bool           isCurrentQuarter()                                                                  Checks if the instance is in the same quarter as the current moment.
  * @method        bool           isNextQuarter()                                                                     Checks if the instance is in the same quarter as the current moment next quarter.
  * @method        bool           isLastQuarter()                                                                     Checks if the instance is in the same quarter as the current moment last quarter.
- * @method        bool           isSameDecade(\DateTimeInterface $date = null)                                       Checks if the given date is in the same decade as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameDecade(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)            Checks if the given date is in the same decade as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentDecade()                                                                   Checks if the instance is in the same decade as the current moment.
  * @method        bool           isNextDecade()                                                                      Checks if the instance is in the same decade as the current moment next decade.
  * @method        bool           isLastDecade()                                                                      Checks if the instance is in the same decade as the current moment last decade.
- * @method        bool           isSameCentury(\DateTimeInterface $date = null)                                      Checks if the given date is in the same century as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameCentury(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)           Checks if the given date is in the same century as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentCentury()                                                                  Checks if the instance is in the same century as the current moment.
  * @method        bool           isNextCentury()                                                                     Checks if the instance is in the same century as the current moment next century.
  * @method        bool           isLastCentury()                                                                     Checks if the instance is in the same century as the current moment last century.
- * @method        bool           isSameMillennium(\DateTimeInterface $date = null)                                   Checks if the given date is in the same millennium as the instance. If null passed, compare to now (with the same timezone).
+ * @method        bool           isSameMillennium(\Carbon\Carbon|\DateTimeInterface|string|null $date = null)        Checks if the given date is in the same millennium as the instance. If null passed, compare to now (with the same timezone).
  * @method        bool           isCurrentMillennium()                                                               Checks if the instance is in the same millennium as the current moment.
  * @method        bool           isNextMillennium()                                                                  Checks if the instance is in the same millennium as the current moment next millennium.
  * @method        bool           isLastMillennium()                                                                  Checks if the instance is in the same millennium as the current moment last millennium.
@@ -355,62 +360,77 @@ use ReflectionException;
  * @method        $this          addRealMicro()                                                                      Add one microsecond to the instance (using timestamp).
  * @method        $this          subRealMicros(int $value = 1)                                                       Sub microseconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealMicro()                                                                      Sub one microsecond to the instance (using timestamp).
+ * @method        CarbonPeriod   microsUntil($endDate = null, int $factor = 1)                                       Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each microsecond or every X microseconds if a factor is given.
  * @method        $this          addRealMicroseconds(int $value = 1)                                                 Add microseconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealMicrosecond()                                                                Add one microsecond to the instance (using timestamp).
  * @method        $this          subRealMicroseconds(int $value = 1)                                                 Sub microseconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealMicrosecond()                                                                Sub one microsecond to the instance (using timestamp).
+ * @method        CarbonPeriod   microsecondsUntil($endDate = null, int $factor = 1)                                 Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each microsecond or every X microseconds if a factor is given.
  * @method        $this          addRealMillis(int $value = 1)                                                       Add milliseconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealMilli()                                                                      Add one millisecond to the instance (using timestamp).
  * @method        $this          subRealMillis(int $value = 1)                                                       Sub milliseconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealMilli()                                                                      Sub one millisecond to the instance (using timestamp).
+ * @method        CarbonPeriod   millisUntil($endDate = null, int $factor = 1)                                       Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each millisecond or every X milliseconds if a factor is given.
  * @method        $this          addRealMilliseconds(int $value = 1)                                                 Add milliseconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealMillisecond()                                                                Add one millisecond to the instance (using timestamp).
  * @method        $this          subRealMilliseconds(int $value = 1)                                                 Sub milliseconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealMillisecond()                                                                Sub one millisecond to the instance (using timestamp).
+ * @method        CarbonPeriod   millisecondsUntil($endDate = null, int $factor = 1)                                 Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each millisecond or every X milliseconds if a factor is given.
  * @method        $this          addRealSeconds(int $value = 1)                                                      Add seconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealSecond()                                                                     Add one second to the instance (using timestamp).
  * @method        $this          subRealSeconds(int $value = 1)                                                      Sub seconds (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealSecond()                                                                     Sub one second to the instance (using timestamp).
+ * @method        CarbonPeriod   secondsUntil($endDate = null, int $factor = 1)                                      Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each second or every X seconds if a factor is given.
  * @method        $this          addRealMinutes(int $value = 1)                                                      Add minutes (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealMinute()                                                                     Add one minute to the instance (using timestamp).
  * @method        $this          subRealMinutes(int $value = 1)                                                      Sub minutes (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealMinute()                                                                     Sub one minute to the instance (using timestamp).
+ * @method        CarbonPeriod   minutesUntil($endDate = null, int $factor = 1)                                      Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each minute or every X minutes if a factor is given.
  * @method        $this          addRealHours(int $value = 1)                                                        Add hours (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealHour()                                                                       Add one hour to the instance (using timestamp).
  * @method        $this          subRealHours(int $value = 1)                                                        Sub hours (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealHour()                                                                       Sub one hour to the instance (using timestamp).
+ * @method        CarbonPeriod   hoursUntil($endDate = null, int $factor = 1)                                        Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each hour or every X hours if a factor is given.
  * @method        $this          addRealDays(int $value = 1)                                                         Add days (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealDay()                                                                        Add one day to the instance (using timestamp).
  * @method        $this          subRealDays(int $value = 1)                                                         Sub days (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealDay()                                                                        Sub one day to the instance (using timestamp).
+ * @method        CarbonPeriod   daysUntil($endDate = null, int $factor = 1)                                         Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each day or every X days if a factor is given.
  * @method        $this          addRealWeeks(int $value = 1)                                                        Add weeks (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealWeek()                                                                       Add one week to the instance (using timestamp).
  * @method        $this          subRealWeeks(int $value = 1)                                                        Sub weeks (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealWeek()                                                                       Sub one week to the instance (using timestamp).
+ * @method        CarbonPeriod   weeksUntil($endDate = null, int $factor = 1)                                        Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each week or every X weeks if a factor is given.
  * @method        $this          addRealMonths(int $value = 1)                                                       Add months (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealMonth()                                                                      Add one month to the instance (using timestamp).
  * @method        $this          subRealMonths(int $value = 1)                                                       Sub months (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealMonth()                                                                      Sub one month to the instance (using timestamp).
+ * @method        CarbonPeriod   monthsUntil($endDate = null, int $factor = 1)                                       Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each month or every X months if a factor is given.
  * @method        $this          addRealQuarters(int $value = 1)                                                     Add quarters (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealQuarter()                                                                    Add one quarter to the instance (using timestamp).
  * @method        $this          subRealQuarters(int $value = 1)                                                     Sub quarters (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealQuarter()                                                                    Sub one quarter to the instance (using timestamp).
+ * @method        CarbonPeriod   quartersUntil($endDate = null, int $factor = 1)                                     Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each quarter or every X quarters if a factor is given.
  * @method        $this          addRealYears(int $value = 1)                                                        Add years (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealYear()                                                                       Add one year to the instance (using timestamp).
  * @method        $this          subRealYears(int $value = 1)                                                        Sub years (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealYear()                                                                       Sub one year to the instance (using timestamp).
+ * @method        CarbonPeriod   yearsUntil($endDate = null, int $factor = 1)                                        Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each year or every X years if a factor is given.
  * @method        $this          addRealDecades(int $value = 1)                                                      Add decades (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealDecade()                                                                     Add one decade to the instance (using timestamp).
  * @method        $this          subRealDecades(int $value = 1)                                                      Sub decades (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealDecade()                                                                     Sub one decade to the instance (using timestamp).
+ * @method        CarbonPeriod   decadesUntil($endDate = null, int $factor = 1)                                      Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each decade or every X decades if a factor is given.
  * @method        $this          addRealCenturies(int $value = 1)                                                    Add centuries (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealCentury()                                                                    Add one century to the instance (using timestamp).
  * @method        $this          subRealCenturies(int $value = 1)                                                    Sub centuries (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealCentury()                                                                    Sub one century to the instance (using timestamp).
+ * @method        CarbonPeriod   centuriesUntil($endDate = null, int $factor = 1)                                    Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each century or every X centuries if a factor is given.
  * @method        $this          addRealMillennia(int $value = 1)                                                    Add millennia (the $value count passed in) to the instance (using timestamp).
  * @method        $this          addRealMillennium()                                                                 Add one millennium to the instance (using timestamp).
  * @method        $this          subRealMillennia(int $value = 1)                                                    Sub millennia (the $value count passed in) to the instance (using timestamp).
  * @method        $this          subRealMillennium()                                                                 Sub one millennium to the instance (using timestamp).
+ * @method        CarbonPeriod   millenniaUntil($endDate = null, int $factor = 1)                                    Return an iterable period from current date to given end (string, DateTime or Carbon instance) for each millennium or every X millennia if a factor is given.
  * @method        $this          roundYear(float $precision = 1, string $function = "round")                         Round the current instance year with given precision using the given function.
  * @method        $this          roundYears(float $precision = 1, string $function = "round")                        Round the current instance year with given precision using the given function.
  * @method        $this          floorYear(float $precision = 1)                                                     Truncate the current instance year with given precision.
@@ -609,6 +629,7 @@ trait Date
     {
         /** @var CarbonTimeZone $timezone */
         $timezone = CarbonTimeZone::instance($object);
+
         if ($timezone && is_int($originalObject ?: $object)) {
             $timezone = $timezone->toRegionTimeZone($this);
         }
@@ -654,7 +675,7 @@ trait Date
     /**
      * Get a copy of the instance.
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function copy()
     {
@@ -666,7 +687,7 @@ trait Date
      *
      * Get a copy of the instance.
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function clone()
     {
@@ -676,7 +697,7 @@ trait Date
     /**
      * Returns a present instance in the same timezone.
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function nowWithSameTz()
     {
@@ -712,7 +733,7 @@ trait Date
      *
      * @param \Carbon\Carbon|\DateTimeInterface|string|null $date
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     protected function resolveCarbon($date = null)
     {
@@ -727,6 +748,27 @@ trait Date
         static::expectDateTime($date, ['null', 'string']);
 
         return $date instanceof self ? $date : static::instance($date);
+    }
+
+    /**
+     * Return the Carbon instance passed through, a now instance in the same timezone
+     * if null given or parse the input if string given.
+     *
+     * @param \Carbon\Carbon|\Carbon\CarbonPeriod|\Carbon\CarbonInterval|\DateInterval|\DatePeriod|\DateTimeInterface|string|null $date
+     *
+     * @return static
+     */
+    public function carbonize($date = null)
+    {
+        if ($date instanceof DateInterval) {
+            return $this->copy()->add($date);
+        }
+
+        if ($date instanceof DatePeriod || $date instanceof CarbonPeriod) {
+            $date = $date->getStartDate();
+        }
+
+        return $this->resolveCarbon($date);
     }
 
     ///////////////////////////////////////////////////////////////////
@@ -1034,14 +1076,15 @@ trait Date
     public function set($name, $value = null)
     {
         if ($this->isImmutable()) {
-            throw new \RuntimeException(sprintf(
-                '%s class is immutable.', static::class
+            throw new RuntimeException(sprintf(
+                '%s class is immutable.',
+                static::class
             ));
         }
 
         if (is_array($name)) {
-            foreach ($name as $_name => $value) {
-                $this->set($_name, $value);
+            foreach ($name as $key => $value) {
+                $this->set($key, $value);
             }
 
             return $this;
@@ -1057,15 +1100,19 @@ trait Date
                 if (substr($name, 0, 5) === 'milli') {
                     $value *= 1000;
                 }
+
                 while ($value < 0) {
                     $this->subSecond();
                     $value += static::MICROSECONDS_PER_SECOND;
                 }
+
                 while ($value >= static::MICROSECONDS_PER_SECOND) {
                     $this->addSecond();
                     $value -= static::MICROSECONDS_PER_SECOND;
                 }
+
                 $this->modify($this->rawFormat('H:i:s.').str_pad((string) round($value), 6, '0', STR_PAD_LEFT));
+
                 break;
 
             case 'year':
@@ -1077,42 +1124,56 @@ trait Date
                 [$year, $month, $day, $hour, $minute, $second] = explode('-', $this->rawFormat('Y-n-j-G-i-s'));
                 $$name = $value;
                 $this->setDateTime($year, $month, $day, $hour, $minute, $second);
+
                 break;
 
             case 'week':
-                return $this->week($value);
+                $this->week($value);
+
+                break;
 
             case 'isoWeek':
-                return $this->isoWeek($value);
+                $this->isoWeek($value);
+
+                break;
 
             case 'weekYear':
-                return $this->weekYear($value);
+                $this->weekYear($value);
+
+                break;
 
             case 'isoWeekYear':
-                return $this->isoWeekYear($value);
+                $this->isoWeekYear($value);
+
+                break;
 
             case 'dayOfYear':
                 return $this->addDays($value - $this->dayOfYear);
 
             case 'timestamp':
                 parent::setTimestamp((int) $value);
+
                 break;
 
             case 'offset':
                 $this->setTimezone(static::safeCreateDateTimeZone($value / static::SECONDS_PER_MINUTE / static::MINUTES_PER_HOUR));
+
                 break;
 
             case 'offsetMinutes':
                 $this->setTimezone(static::safeCreateDateTimeZone($value / static::MINUTES_PER_HOUR));
+
                 break;
 
             case 'offsetHours':
                 $this->setTimezone(static::safeCreateDateTimeZone($value));
+
                 break;
 
             case 'timezone':
             case 'tz':
                 $this->setTimezone($value);
+
                 break;
 
             default:
@@ -1221,7 +1282,7 @@ trait Date
      *
      * @param int|null $value new value for day of year if using as setter.
      *
-     * @return static|CarbonInterface|int
+     * @return static|int
      */
     public function dayOfYear($value = null)
     {
@@ -1235,7 +1296,7 @@ trait Date
      *
      * @param int|null $value new value for weekday if using as setter.
      *
-     * @return static|CarbonInterface|int
+     * @return static|int
      */
     public function weekday($value = null)
     {
@@ -1249,7 +1310,7 @@ trait Date
      *
      * @param int|null $value new value for weekday if using as setter.
      *
-     * @return static|CarbonInterface|int
+     * @return static|int
      */
     public function isoWeekday($value = null)
     {
@@ -1265,13 +1326,13 @@ trait Date
      * @param int    $value        new value for the input unit
      * @param string $overflowUnit unit name to not overflow
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function setUnitNoOverflow($valueUnit, $value, $overflowUnit)
     {
         try {
             $original = $this->copy();
-            /** @var CarbonInterface $date */
+            /** @var static $date */
             $date = $this->$valueUnit($value);
             $end = $original->copy()->endOf($overflowUnit);
             $start = $original->copy()->startOf($overflowUnit);
@@ -1294,7 +1355,7 @@ trait Date
      * @param int    $value        amount to add to the input unit
      * @param string $overflowUnit unit name to not overflow
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function addUnitNoOverflow($valueUnit, $value, $overflowUnit)
     {
@@ -1308,7 +1369,7 @@ trait Date
      * @param int    $value        amount to subtract to the input unit
      * @param string $overflowUnit unit name to not overflow
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function subUnitNoOverflow($valueUnit, $value, $overflowUnit)
     {
@@ -1320,7 +1381,7 @@ trait Date
      *
      * @param int|null $offset
      *
-     * @return int|static|CarbonInterface
+     * @return int|static
      */
     public function utcOffset(int $offset = null)
     {
@@ -1329,6 +1390,38 @@ trait Date
         }
 
         return $this->setTimezone(static::safeCreateDateTimeZone($offset / static::MINUTES_PER_HOUR));
+    }
+
+    /**
+     * Set the date with gregorian year, month and day numbers.
+     *
+     * @see https://php.net/manual/en/datetime.setdate.php
+     *
+     * @param int $year
+     * @param int $month
+     * @param int $day
+     *
+     * @return static
+     */
+    public function setDate($year, $month, $day)
+    {
+        return parent::setDate((int) $year, (int) $month, (int) $day);
+    }
+
+    /**
+     * Set a date according to the ISO 8601 standard - using weeks and day offsets rather than specific dates.
+     *
+     * @see https://php.net/manual/en/datetime.setisodate.php
+     *
+     * @param int $year
+     * @param int $week
+     * @param int $day
+     *
+     * @return static
+     */
+    public function setISODate($year, $week, $day = 1)
+    {
+        return parent::setISODate((int) $year, (int) $week, (int) $day);
     }
 
     /**
@@ -1342,11 +1435,42 @@ trait Date
      * @param int $second
      * @param int $microseconds
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function setDateTime($year, $month, $day, $hour, $minute, $second = 0, $microseconds = 0)
     {
-        return $this->setDate((int) $year, (int) $month, (int) $day)->setTime((int) $hour, (int) $minute, (int) $second, (int) $microseconds);
+        return $this->setDate($year, $month, $day)->setTime((int) $hour, (int) $minute, (int) $second, (int) $microseconds);
+    }
+
+    /**
+     * Resets the current time of the DateTime object to a different time.
+     *
+     * @see https://php.net/manual/en/datetime.settime.php
+     *
+     * @param int $hour
+     * @param int $minute
+     * @param int $second
+     * @param int $microseconds
+     *
+     * @return static
+     */
+    public function setTime($hour, $minute, $second = 0, $microseconds = 0)
+    {
+        return parent::setTime((int) $hour, (int) $minute, (int) $second, (int) $microseconds);
+    }
+
+    /**
+     * Sets the date and time based on an Unix timestamp.
+     *
+     * @see https://php.net/manual/en/datetime.settimestamp.php
+     *
+     * @param int $unixtimestamp
+     *
+     * @return static
+     */
+    public function setTimestamp($unixtimestamp)
+    {
+        return parent::setTimestamp((int) $unixtimestamp);
     }
 
     /**
@@ -1354,7 +1478,7 @@ trait Date
      *
      * @param string $time
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function setTimeFromTimeString($time)
     {
@@ -1370,7 +1494,7 @@ trait Date
      *
      * @param \DateTimeZone|string $value
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function timezone($value)
     {
@@ -1382,7 +1506,7 @@ trait Date
      *
      * @param \DateTimeZone|string $value
      *
-     * @return CarbonInterface|string
+     * @return static|string
      */
     public function tz($value = null)
     {
@@ -1398,7 +1522,7 @@ trait Date
      *
      * @param \DateTimeZone|string $value
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function setTimezone($value)
     {
@@ -1416,7 +1540,7 @@ trait Date
      *
      * @param \DateTimeZone|string $value
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function shiftTimezone($value)
     {
@@ -1429,7 +1553,7 @@ trait Date
     /**
      * Set the instance's timezone to UTC.
      *
-     * @return static|CarbonInterface
+     * @return static
      */
     public function utc()
     {
@@ -1888,7 +2012,7 @@ trait Date
     }
 
     /**
-     * Returns the alternative number if available in the current locale.
+     * Returns the alternative number for a given date property if available in the current locale.
      *
      * @param string $key date property
      *
@@ -1896,46 +2020,7 @@ trait Date
      */
     public function getAltNumber(string $key): string
     {
-        $number = strlen($key) > 1 ? $this->$key : $this->rawFormat('h');
-        $translateKey = "alt_numbers.$number";
-        $symbol = $this->translate($translateKey);
-
-        if ($symbol !== $translateKey) {
-            return $symbol;
-        }
-
-        if ($number > 99 && $this->translate('alt_numbers.99') !== 'alt_numbers.99') {
-            $start = '';
-            foreach ([10000, 1000, 100] as $exp) {
-                $key = "alt_numbers_pow.$exp";
-                if ($number >= $exp && $number < $exp * 10 && ($pow = $this->translate($key)) !== $key) {
-                    $unit = floor($number / $exp);
-                    $number -= $unit * $exp;
-                    $start .= ($unit > 1 ? $this->translate("alt_numbers.$unit") : '').$pow;
-                }
-            }
-            $result = '';
-            while ($number) {
-                $chunk = $number % 100;
-                $result = $this->translate("alt_numbers.$chunk").$result;
-                $number = floor($number / 100);
-            }
-
-            return "$start$result";
-        }
-
-        if ($number > 9 && $this->translate('alt_numbers.9') !== 'alt_numbers.9') {
-            $result = '';
-            while ($number) {
-                $chunk = $number % 10;
-                $result = $this->translate("alt_numbers.$chunk").$result;
-                $number = floor($number / 10);
-            }
-
-            return $result;
-        }
-
-        return $number;
+        return $this->translateNumber(strlen($key) > 1 ? $this->$key : $this->rawFormat('h'));
     }
 
     /**
@@ -2198,11 +2283,15 @@ trait Date
 
     protected static function executeStaticCallable($macro, ...$parameters)
     {
-        if ($macro instanceof Closure) {
-            return call_user_func_array(Closure::bind($macro, null, get_called_class()), $parameters);
-        }
+        return static::bindMacroContext(null, function () use (&$macro, &$parameters) {
+            if ($macro instanceof Closure) {
+                $boundMacro = @Closure::bind($macro, null, static::class);
 
-        return call_user_func_array($macro, $parameters);
+                return call_user_func_array($boundMacro ?: $macro, $parameters);
+            }
+
+            return call_user_func_array($macro, $parameters);
+        });
     }
 
     /**
@@ -2227,7 +2316,9 @@ trait Date
             }
             if (static::isStrictModeEnabled()) {
                 throw new BadMethodCallException(sprintf(
-                    'Method %s::%s does not exist.', static::class, $method
+                    'Method %s::%s does not exist.',
+                    static::class,
+                    $method
                 ));
             }
 
@@ -2315,7 +2406,9 @@ trait Date
     protected function executeCallable($macro, ...$parameters)
     {
         if ($macro instanceof Closure) {
-            return call_user_func_array($macro->bindTo($this, static::class), $parameters);
+            $boundMacro = @$macro->bindTo($this, static::class) ?: @$macro->bindTo(null, static::class);
+
+            return call_user_func_array($boundMacro ?: $macro, $parameters);
         }
 
         return call_user_func_array($macro, $parameters);
@@ -2360,11 +2453,13 @@ trait Date
         ];
         $sizePattern = implode('|', array_keys($diffSizes));
         $syntaxPattern = implode('|', array_keys($diffSyntaxModes));
+
         if (preg_match("/^(?<size>$sizePattern)(?<syntax>$syntaxPattern)DiffForHumans$/", $method, $match)) {
             $dates = array_filter($parameters, function ($parameter) {
                 return $parameter instanceof DateTimeInterface;
             });
             $other = null;
+
             if (count($dates)) {
                 $key = key($dates);
                 $other = current($dates);
@@ -2375,19 +2470,24 @@ trait Date
         }
 
         $action = substr($method, 0, 4);
+
         if ($action !== 'ceil') {
             $action = substr($method, 0, 5);
         }
+
         if (in_array($action, ['round', 'floor', 'ceil'])) {
             return $this->{$action.'Unit'}(substr($method, strlen($action)), ...$parameters);
         }
 
         $unit = rtrim($method, 's');
+
         if (substr($unit, 0, 2) === 'is') {
             $word = substr($unit, 2);
+
             if (in_array($word, static::$days)) {
                 return $this->isDayOfWeek($word);
             }
+
             switch ($word) {
                 // @call is Check if the current instance has UTC timezone. (Both isUtc and isUTC cases are valid.)
                 case 'Utc':
@@ -2407,6 +2507,7 @@ trait Date
 
         $action = substr($unit, 0, 3);
         $overflow = null;
+
         if ($action === 'set') {
             $unit = strtolower(substr($unit, 3));
         }
@@ -2417,6 +2518,7 @@ trait Date
 
         if ($action === 'add' || $action === 'sub') {
             $unit = substr($unit, 3);
+
             if (substr($unit, 0, 4) === 'Real') {
                 $unit = static::singularUnit(substr($unit, 4));
 
@@ -2427,6 +2529,7 @@ trait Date
                 $unit = $match[1];
                 $overflow = $match[2] === 'With';
             }
+
             $unit = static::singularUnit($unit);
         }
 
@@ -2453,7 +2556,7 @@ trait Date
         if ($sixFirstLetters === 'isSame') {
             try {
                 return $this->isSameUnit(strtolower(substr($unit, 6)), ...$parameters);
-            } catch (InvalidArgumentException $exception) {
+            } catch (BadUnitException $exception) {
                 // Try next
             }
         }
@@ -2461,28 +2564,41 @@ trait Date
         if (substr($unit, 0, 9) === 'isCurrent') {
             try {
                 return $this->isCurrentUnit(strtolower(substr($unit, 9)));
-            } catch (InvalidArgumentException | BadMethodCallException $exception) {
+            } catch (BadUnitException | BadMethodCallException $exception) {
                 // Try macros
             }
         }
 
-        if (!static::hasMacro($method)) {
-            foreach ([$this->localGenericMacros ?: [], static::getGenericMacros()] as $list) {
-                foreach ($list as $callback) {
-                    try {
-                        return $this->executeCallable($callback, $method, ...$parameters);
-                    } catch (BadMethodCallException $exception) {
-                        continue;
-                    }
-                }
-            }
-            if ($this->localStrictModeEnabled ?? static::isStrictModeEnabled()) {
-                throw new BadMethodCallException("Method $method does not exist.");
-            }
+        if (substr($method, -5) === 'Until') {
+            try {
+                $unit = static::singularUnit(substr($method, 0, -5));
 
-            return null;
+                return $this->range($parameters[0] ?? $this, $parameters[1] ?? 1, $unit);
+            } catch (InvalidArgumentException $exception) {
+                // Try next
+            }
         }
 
-        return $this->executeCallable(($this->localMacros ?? [])[$method] ?? static::$globalMacros[$method], ...$parameters);
+        return static::bindMacroContext($this, function () use (&$method, &$parameters) {
+            if (!static::hasMacro($method)) {
+                foreach ([$this->localGenericMacros ?: [], static::getGenericMacros()] as $list) {
+                    foreach ($list as $callback) {
+                        try {
+                            return $this->executeCallable($callback, $method, ...$parameters);
+                        } catch (BadMethodCallException $exception) {
+                            continue;
+                        }
+                    }
+                }
+
+                if ($this->localStrictModeEnabled ?? static::isStrictModeEnabled()) {
+                    throw new BadMethodCallException("Method $method does not exist.");
+                }
+
+                return null;
+            }
+
+            return $this->executeCallable(($this->localMacros ?? [])[$method] ?? static::$globalMacros[$method], ...$parameters);
+        });
     }
 }
