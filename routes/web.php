@@ -103,7 +103,7 @@ Route::group( ['middleware' => 'auth' ], function()
     Route::get('enseignant/paquets/{examId}/{moduleId}','EnseignantController@getPaquets');
     Route::get('mesModulesCharge','ExamsController@modulesCharge');
     Route::get('mesModulesCharge/exam/{id}','ExamsController@getExamEns');
-    Route::get('enseignant/paquets/getInformationEcart/{id}','EnseignantController@getInfoEcart');
+    Route::get('getInformationEcart/{id}','EnseignantController@getInfoEcart');
 
     Route::get("affectations/{moduleId}","EnseignantController@affectGroupes");
 
@@ -145,7 +145,7 @@ Route::post('exams/editExam','ExamsController@editExam');
 Route::get('ens/paquets/liste/{idPaquet}','EnseignantController@getCopies');
 Route::post('ens/paquets/liste/valide','EnseignantController@validerAff');
 Route::post('validerr','EnseignantController@validerDelais');
-Route::post('enseignant/paquets/update','EnseignantController@updateDelais');
+Route::post('updaterr','EnseignantController@updateDelais');
 Route::get('/validAffect','AffectationController@validAffect');
 Route::get('/updateAffect','AffectationController@updateAffect');
 Route::post('/notifs/lire','AffectationController@lireNotif');

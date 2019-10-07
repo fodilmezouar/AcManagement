@@ -27,7 +27,7 @@ function editEcart(exam_id){
 
 
     $('#body-editEcart').attr('role',exam_id);
-    $.getJSON('getInformationEcart/'+exam_id, function (data) {
+    $.getJSON('/getInformationEcart/'+exam_id, function (data) {
         // Iterate the groups first.
         var delai= data.data[0][0];
         // refTmp=ref;
@@ -50,7 +50,7 @@ $("#EditformValider").on('submit',function(e) {
     var delais =$('#Editdelais').val();
     var ecart =$('#Editecart').val();
     $.ajax({
-        url : "update",
+        url : "/updaterr",
         type: "POST",
         data: {
             "examId":exam_id,
